@@ -572,16 +572,19 @@ export const deleteContactFormEntry = async (id) => {
   }
 };
 
-// Get Job Opening data
-export const fetchJobOpenings = async () => {
+export const fetchJobOpenings = async (role) => {
   try {
-    const response = await axios.get("http://192.168.1.5:5000/jobOpenings");
+   
+    const response = await axios.get(`${BASE_URL}/jobOpenings`, {
+      params: { role }, // Pass role as query parameter
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching job openings:", error);
-    throw error; // Re-throw the error so it can be handled by the component
+    throw error;
   }
 };
+
 
 // Get Job roles data
 export const fetchJobRoles = async () => {
@@ -611,8 +614,12 @@ export const updateJobOpening = async (id, updatedJob) => {
 // Add Job Opening data
 export const addJobOpening = async () => {
   try {
-    const response = await axios.post(`${BASE_URL}/jobOpenings`);
-    return response.data;  // Assuming your API returns data in response
+    const response = await axios.post(`${BASE_URL}/jobOpenings`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // Ensure correct content type for FormData
+      },
+    });
+    return response.data; // Assuming your API returns data in response
   } catch (error) {
     console.error('Error fetching job openings:', error);
     throw error;  // Propagate the error back to the component
@@ -625,6 +632,14 @@ export const addJobOpening = async () => {
 export const deleteJobOpening = async (jobId) => {
   try {
     const response = await axios.delete(`${BASE_URL}/jobOpenings/${jobId}`);
+    return response.data; // Assuming the API returns data upon successful deletion
+  } catch (error) {
+    throw new Error("Error deleting job opening:", error);
+  }
+};
+export const deleteJobRole = async (roleId) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/jobRoles/${roleId}`);
     return response.data; // Assuming the API returns data upon successful deletion
   } catch (error) {
     throw new Error("Error deleting job opening:", error);
