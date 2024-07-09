@@ -17,7 +17,7 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     if (username === "admin" && password === "admin") {
-      localStorage.setItem("username", username); // Store username in localStorage
+      localStorage.setItem("username", username); 
       onLogin();
     } else {
       alert("Invalid credentials");

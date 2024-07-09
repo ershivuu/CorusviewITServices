@@ -1,11 +1,4 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
-.our-customers {
+/* .our-customers {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -58,7 +51,6 @@
   line-height: 1;
 }
 @media screen and (max-width: 320px) {
-  /* Styles for smaller smartphones */
 }
 
 @media screen and (min-width: 321px) and (max-width: 480px) {
@@ -69,16 +61,4 @@
     text-align: center;
     font-size: 40px;
   }
-}
-
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  /* Styles for tablets */
-}
-
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-  /* Styles for small desktops and tablets in landscape */
-}
-
-@media screen and (min-width: 1025px) and (max-width: 1440px) {
-  /* Styles for larger desktops and laptops */
-}
+} */

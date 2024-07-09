@@ -17,8 +17,9 @@
   width: 526px;
   min-height: 375px;
   background: url("../../../assets/images/slider-bg.png");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   padding: 30px 50px 30px 50px;
 }
 @-webkit-keyframes rotateslider {
@@ -50,6 +51,7 @@
   }
 }
 .carousel-item {
+  padding-inline: 10px;
   text-align: center;
   color: white;
   font-family: "Poppins", sans-serif;
@@ -59,12 +61,13 @@
 }
 
 .about-client img {
-  width: 50px;
-  height: 50px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
 }
 .client-details p:nth-child(1) {
   color: black;
+  margin: 0;
   font-weight: 700;
   margin: 0;
 }
@@ -99,6 +102,14 @@
   .custom-heading-mobile {
     display: block;
   }
+  .carousel-item {
+    font-size: 12px;
+  }
+
+  .about-client img {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 @media screen and (min-width: 321px) and (max-width: 480px) {
@@ -115,10 +126,17 @@
   .custom-heading-mobile {
     display: block;
   }
+  .carousel-item {
+    font-size: 12px;
+  }
+
+  .about-client img {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  /* Styles for tablets */
   .custom-heading p {
     text-align: center;
     font-size: 40px !important;
@@ -141,9 +159,9 @@
 }
 .carousel-control-next {
   right: 0;
-  top: 50%;
+  top: 35%;
 }
 .carousel-control-prev {
   right: 0;
-  top: 50%;
+  top: 35%;
 }
