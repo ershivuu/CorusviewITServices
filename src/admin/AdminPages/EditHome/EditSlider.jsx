@@ -94,9 +94,9 @@ function EditSlider() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     // Apply character limit if applicable
-    if (name === "description" && value.length > 300) {
+    if (name === "description" && value.length > 220) {
       setShowErrorNotification(true);
-      setErrorNotificationMessage("Description cannot exceed 300 characters.");
+      setErrorNotificationMessage("Description cannot exceed 220 characters.");
       return;
     } else if (name === "designation" && value.length > 10) {
       setShowErrorNotification(true);
@@ -235,8 +235,8 @@ function EditSlider() {
         >
           Add Testimonial
         </Button>
-        <TableContainer style={{marginTop:"10px"}} component={Paper} >
-          <Table>
+        <TableContainer style={{marginTop:"10px",maxHeight: "500px", overflow: "auto"}} component={Paper} >
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>

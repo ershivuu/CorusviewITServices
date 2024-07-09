@@ -6,6 +6,7 @@ import {
   getPositions,
 } from "../FrontendServices/Services";
 import "./JobOpenings.css";
+
 import {
   Grid,
   Dialog,
@@ -20,7 +21,7 @@ import {
   FormControl,
   Box,
 } from "@mui/material";
-
+import Notification from "../../Notification/Notification";
 function JobOpenings({ openDialog, setOpenDialog }) {
   const [jobOpenings, setJobOpenings] = useState([]);
   const [roles, setRoles] = useState([]);
@@ -39,6 +40,12 @@ function JobOpenings({ openDialog, setOpenDialog }) {
     drop_cv: null,
   });
   const [fileName, setFileName] = useState(""); // State to store selected file name
+
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "info",
+  });
 
   const getJobRoles = async () => {
     const data = await getRoles();
@@ -105,15 +112,43 @@ function JobOpenings({ openDialog, setOpenDialog }) {
   };
 
   const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type !== "application/pdf") {
+      setNotification({
+        open: true,
+        message: "Only PDF files are allowed",
+        severity: "error",
+      });
+      setFormData({
+        ...formData,
+        drop_cv: null,
+      });
+      setFileName(""); // Clear file name
+      return;
+    }
     setFormData({
       ...formData,
-      drop_cv: e.target.files[0],
+      drop_cv: file,
     });
-    setFileName(e.target.files[0].name); // Set selected file name
+    setFileName(file.name); // Set selected file name
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      !formData.name ||
+      !formData.surname ||
+      !formData.email ||
+      !formData.contact ||
+      !formData.drop_cv
+    ) {
+      setNotification({
+        open: true,
+        message: "This field is required",
+        severity: "error",
+      });
+      return;
+    }
 
     const formDataToSubmit = new FormData();
     formDataToSubmit.append("name", formData.name);
@@ -129,10 +164,24 @@ function JobOpenings({ openDialog, setOpenDialog }) {
     try {
       const response = await addApplicants(formDataToSubmit);
       console.log("Form submitted successfully:", response);
+      setNotification({
+        open: true,
+        message: response.message,
+        severity: "success",
+      });
       handleClose();
     } catch (error) {
       console.error("Error submitting form:", error);
+      setNotification({
+        open: true,
+        message: error.response?.data?.message,
+        severity: "error",
+      });
     }
+  };
+
+  const handleNotificationClose = () => {
+    setNotification({ ...notification, open: false });
   };
 
   return (
@@ -328,6 +377,9 @@ function JobOpenings({ openDialog, setOpenDialog }) {
                   }}
                   placeholder="Select your CV file"
                 />
+                  <p style={{ color: "gray", fontSize: "0.8rem" }}>
+                  Only PDF files are allowed.
+                </p>
               </Grid>
             </Grid>
 
@@ -335,13 +387,19 @@ function JobOpenings({ openDialog, setOpenDialog }) {
               <Button onClick={handleClose} color="primary">
                 Cancel
               </Button>
-              <Button type="submit" color="primary">
+              <Button onClick={handleSubmit} type="submit" color="primary">
                 Submit
               </Button>
             </DialogActions>
           </Box>
         </DialogContent>
       </Dialog>
+      <Notification
+        open={notification.open}
+        handleClose={handleNotificationClose}
+        alertMessage={notification.message}
+        alertSeverity={notification.severity}
+      />
     </>
   );
 }
