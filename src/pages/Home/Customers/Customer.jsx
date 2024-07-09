@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { getCustomers } from "../../FrontendServices/Services";
 import "./Customer.css";
-import client from "../../../assets/images/jazz.jpg";
 
 function Customer() {
   const ref = useRef(null);
@@ -67,10 +66,8 @@ function Customer() {
                         alt={testimonial.img_originalname}
                       />
                       <div className="client-details">
-                        
-                       <p>{testimonial.name}</p>
+                        <p>{testimonial.name}</p>
                         <p>{testimonial.designation}</p>
-                       
                       </div>
                     </div>
                   </div>
