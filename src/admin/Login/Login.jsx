@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
+// src/Login/Login.js
+import React, { useState } from "react";
 import "./Login.css";
-
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Login({ onLogin }) {
-  const [username, setUsername] = useState(
-    localStorage.getItem("username") || ""
-  );
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
