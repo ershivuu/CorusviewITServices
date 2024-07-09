@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// src/Dashboard/Dashboard.js
+import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Dashboard.css";
@@ -29,7 +30,6 @@ function Dashboard({ onLogout }) {
             padding: 0,
           }}
         >
-          {" "}
           <div className="admin-header fixed-top">
             <div>
               <img className="admin-logo" src={logo} alt="" />
@@ -59,9 +59,6 @@ function Dashboard({ onLogout }) {
               maxWidth: "17%",
               flexShrink: 0,
               textAlign: "left",
-              // overflowY: "auto",
-              // overflowX: "hidden",
-              //   position:"fixed"
             }}
           >
             <Sidebar />
