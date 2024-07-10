@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { getHeaderData } from "../../pages/FrontendServices/Services";
+import {
+  getHeaderData,
+  getOurServicesHeading,
+} from "../../pages/FrontendServices/Services";
 import "./Nav.css";
-import logo from "../../assets/logos/corusview-logo (1).png";
+import logo from "../../assets/logos/corusview-logo.png";
 import hamburger from "../../assets/logos/hamburger.png";
 
 function Nav() {
@@ -10,7 +13,7 @@ function Nav() {
     header_color1: "#ffff",
     header_color2: "#ffff",
   });
-
+  const [services, setServices] = useState([]);
   useEffect(() => {
     const fetchHeaderData = async () => {
       try {
@@ -22,6 +25,18 @@ function Nav() {
     };
 
     fetchHeaderData();
+  }, []);
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const data = await getOurServicesHeading();
+        setServices(data);
+      } catch (error) {
+        console.error("Error fetching service headings:", error);
+      }
+    };
+
+    fetchServices();
   }, []);
   return (
     <>
@@ -63,9 +78,33 @@ function Nav() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services" className="navigations">
-                      Services
-                    </Link>
+                    <div class="service-dropdown">
+                      <button>Services</button>
+                      <div class="service-dropdown-content">
+                        {services.map((service) => (
+                          <Link
+                            key={service.id}
+                            to={`/our-services/${service.id}`}
+                          >
+                            {service.heading}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                    {/* <div className="services-list-mobile">
+                      <p className="navigations">Services</p>
+                      <div className="services-list-mobile mobile-list">
+                        {services.map((service) => (
+                          <Link
+                            className="navigations"
+                            key={service.id}
+                            to={`/our-services/${service.id}`}
+                          >
+                            {service.heading}
+                          </Link>
+                        ))}
+                      </div>
+                    </div> */}
                   </li>
                   <li>
                     <Link to="/carrer" className="navigations">

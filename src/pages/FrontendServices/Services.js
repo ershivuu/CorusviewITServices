@@ -10,6 +10,24 @@ export const getHomeServices = async () => {
     throw error;
   }
 };
+export const getOurServicesHeading = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/getOurServicesHeading`);
+    return response.data; // Assuming API returns JSON data
+  } catch (error) {
+    console.error("Error fetching services heading:", error);
+    throw error; // Throw error for handling in component
+  }
+};
+export const getServiceById = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/getServicesPageData/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching service by ID", error);
+    return null;
+  }
+};
 
 export const getHomeHeading = async () => {
   try {
@@ -203,7 +221,7 @@ export const addApplicants = async (data) => {
   }
 };
 
-// get positions 
+// get positions
 export const getPositions = async (data) => {
   try {
     const response = await axios.get(`${API_URL}/jobPositions`, data);

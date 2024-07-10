@@ -17,6 +17,7 @@ function Techno() {
   const [servicesData, setServicesData] = useState([]);
   const [listData, setListData] = useState([]);
   const [selectedComponent, setSelectedComponent] = useState();
+
   const showComponent = (componentName) => {
     setSelectedComponent(componentName);
   };
@@ -105,16 +106,7 @@ function Techno() {
 
       <div className="dev-process">
         <p>Our Software Development Process</p>
-        <div
-          ref={ref}
-          variants={{
-            hidden: { opacity: 0, x: 1000 },
-            visible: { opacity: 1, x: 0 },
-          }}
-          initial="hidden"
-          animate={controls}
-          transition={{ duration: 0.5, delay: "0.5" }}
-        >
+        <div>
           <img src={devprocess} />
         </div>
       </div>

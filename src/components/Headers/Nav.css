@@ -67,6 +67,62 @@ details div {
   font-size: 20px;
   font-weight: 500;
 }
+
+.service-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.service-dropdown button {
+  color: grey !important;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.service-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 250px;
+  text-transform: capitalize;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  border-radius: 20px;
+}
+
+.service-dropdown-content a {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.service-dropdown-content a:hover {
+  background-color: #f3f9e9;
+}
+
+.service-dropdown:hover .service-dropdown-content {
+  display: block;
+}
+.services-list-mobile {
+  display: none;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  flex-direction: column !important;
+  gap: 10px;
+}
+.mobile-list {
+  margin-top: -20px;
+  margin-left: 20px;
+}
+
 @media screen and (max-width: 320px) {
   /* Styles for smaller smartphones */
   .header-child {
@@ -86,6 +142,12 @@ details div {
   }
   .header-child {
     margin-inline: 10px;
+  }
+  /* .service-dropdown {
+    display: none;
+  } */
+  .services-list-mobile {
+    display: block;
   }
 }
 

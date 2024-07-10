@@ -19,7 +19,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  CircularProgress, // Added CircularProgress for loading indicator
+  CircularProgress,
 } from "@mui/material";
 import {
   fetchAllSolutions,
@@ -28,7 +28,7 @@ import {
   addSolution,
   fetchOnlyOurServiceHead,
 } from "../../AdminServices";
-import Notification from "../../../Notification/Notification";
+import Notification from "../../../Notification/Notification"; // Replace with actual path
 
 function EditServiceSolution() {
   const [solutions, setSolutions] = useState([]);
@@ -43,24 +43,27 @@ function EditServiceSolution() {
   const [selectedService, setSelectedService] = useState("");
   const [ourServicesHeadings, setOurServicesHeadings] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   // Notification state
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
-  const [notificationSeverity, setNotificationSeverity] = useState("success");
-
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [notificationSeverity, setNotificationSeverity] = useState("info");
 
   const fetchData = async () => {
     try {
       const solutionsData = await fetchAllSolutions();
-      console.log("Fetched solutions:", solutionsData.data); // Log fetched data
       setSolutions(solutionsData.data);
-      setLoading(false); // Set loading to false after data is fetched
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching solutions:", error);
-      setError(error); // Set error state
-      setLoading(false); // Set loading to false on error
+      setError(error);
+      setLoading(false);
+      showNotification(
+        "Failed to fetch solutions. Please try again later.",
+        "error"
+      );
     }
   };
 
@@ -68,13 +71,20 @@ function EditServiceSolution() {
     try {
       const data = await fetchOnlyOurServiceHead();
       setOurServicesHeadings(data);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error fetching our service headings:", error);
+      showNotification(
+        "Failed to fetch service headings. Please try again later.",
+        "error"
+      );
+    }
   };
 
   useEffect(() => {
     fetchData();
     fetchOurServiceHeadings();
   }, []);
+
   const handleEditClick = (solution) => {
     setSelectedSolution(solution);
     setEditedHeading(solution.solutions_inner_heading);
@@ -92,7 +102,7 @@ function EditServiceSolution() {
   const handleSaveChanges = async () => {
     try {
       const updatedData = {
-        service_id: selectedSolution.service_id, // Add service_id to the updated data
+        service_id: selectedSolution.service_id,
         solutions_inner_heading: editedHeading,
         solutions_inner_content: editedContent,
       };
@@ -100,14 +110,15 @@ function EditServiceSolution() {
         selectedSolution.solutions_id,
         updatedData
       );
-      await fetchData(); // Refresh the solutions list after successful update
+      await fetchData();
       handleCloseEditDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("Solution updated successfully.", "success");
     } catch (error) {
       console.error("Error updating solution:", error);
-      // Handle error as needed
-      handleNotification("Error updating solution", "error");
+      showNotification(
+        "Failed to update solution. Please try again later.",
+        "error"
+      );
     }
   };
 
@@ -119,14 +130,15 @@ function EditServiceSolution() {
   const handleConfirmDelete = async () => {
     try {
       const response = await deleteSolution(selectedSolution.solutions_id);
-      await fetchData(); // Refresh the solutions list after successful deletion
+      await fetchData();
       handleCloseDeleteDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("Solution deleted successfully.", "success");
     } catch (error) {
       console.error("Error deleting solution:", error);
-      // Handle error as needed
-      handleNotification(error.message, "error");
+      showNotification(
+        "Failed to delete solution. Please try again later.",
+        "error"
+      );
     }
   };
 
@@ -141,21 +153,31 @@ function EditServiceSolution() {
 
   const handleSaveNewSolution = async () => {
     try {
+      if (!selectedService) {
+        showNotification("Please select a service heading.", "error");
+        return;
+      }
+      if (!newHeading.trim() || !newContent.trim()) {
+        showNotification("Please fill in all fields.", "error");
+        return;
+      }
+
       const newSolution = {
         solutions_inner_heading: newHeading,
         solutions_inner_content: newContent,
-        our_services_heading: selectedService.heading, // Assuming selectedService contains the correct heading
-        service_id: selectedService.id, // Add service_id to the new solution data
+        our_services_heading: selectedService.heading,
+        service_id: selectedService.id,
       };
       const response = await addSolution(newSolution);
-      await fetchData(); // Refresh the solutions list after successful addition
+      await fetchData();
       handleCloseAddDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("New solution added successfully.", "success");
     } catch (error) {
       console.error("Error adding solution:", error);
-      // Handle error as needed
-      handleNotification(error.message, "error");
+      showNotification(
+        "Failed to add new solution. Please try again later.",
+        "error"
+      );
     }
   };
 
@@ -163,9 +185,10 @@ function EditServiceSolution() {
     setOpenAddDialog(false);
     setNewHeading("");
     setNewContent("");
+    setSelectedService("");
   };
 
-  const handleNotification = (message, severity) => {
+  const showNotification = (message, severity) => {
     setNotificationMessage(message);
     setNotificationSeverity(severity);
     setOpenNotification(true);
@@ -175,7 +198,7 @@ function EditServiceSolution() {
     setOpenNotification(false);
   };
 
-  // Show loading indicator if data is still loading
+  // Render loading indicator while fetching data
   if (loading) {
     return (
       <Box
@@ -191,7 +214,7 @@ function EditServiceSolution() {
     );
   }
 
-  // Show error message if there was an error fetching data
+  // Render error message if data fetch fails
   if (error) {
     return (
       <Typography variant="body1" style={{ padding: "20px" }}>
@@ -214,7 +237,6 @@ function EditServiceSolution() {
       >
         Add New Solution
       </Button>
-      {/* Table of Solutions */}
       <TableContainer
         component={Paper}
         style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
@@ -231,34 +253,31 @@ function EditServiceSolution() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {solutions &&
-              solutions.map((solution) => (
-                <TableRow key={solution.solutions_id}>
-                  <TableCell>{solution.solutions_id}</TableCell>
-                  <TableCell>{solution.our_services_heading}</TableCell>
-
-                  <TableCell>{solution.solutions_inner_heading}</TableCell>
-                  <TableCell>{solution.solutions_inner_content}</TableCell>
-                  <TableCell>
-                    <Button onClick={() => handleEditClick(solution)}>
-                      Edit
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      color="error"
-                      onClick={() => handleDeleteClick(solution)}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+            {solutions.map((solution) => (
+              <TableRow key={solution.solutions_id}>
+                <TableCell>{solution.solutions_id}</TableCell>
+                <TableCell>{solution.our_services_heading}</TableCell>
+                <TableCell>{solution.solutions_inner_heading}</TableCell>
+                <TableCell>{solution.solutions_inner_content}</TableCell>
+                <TableCell>
+                  <Button onClick={() => handleEditClick(solution)}>
+                    Edit
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    color="error"
+                    onClick={() => handleDeleteClick(solution)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
 
-      {/* Edit Dialog */}
       <Dialog open={openEditDialog} onClose={handleCloseEditDialog}>
         <DialogTitle>Edit Solution</DialogTitle>
         <DialogContent>
@@ -288,7 +307,6 @@ function EditServiceSolution() {
         </DialogActions>
       </Dialog>
 
-      {/* Delete Confirmation Dialog */}
       <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
         <DialogTitle>Delete Solution</DialogTitle>
         <DialogContent>
@@ -302,7 +320,6 @@ function EditServiceSolution() {
         </DialogActions>
       </Dialog>
 
-      {/* Add Dialog */}
       <Dialog open={openAddDialog} onClose={handleCloseAddDialog}>
         <DialogTitle>Add New Solution</DialogTitle>
         <DialogContent>
@@ -347,12 +364,11 @@ function EditServiceSolution() {
         </DialogActions>
       </Dialog>
 
-      {/* Notification */}
       <Notification
         open={openNotification}
-        onClose={handleCloseNotification}
-        severity={notificationSeverity}
-        message={notificationMessage}
+        handleClose={handleCloseNotification}
+        alertMessage={notificationMessage}
+        alertSeverity={notificationSeverity}
       />
     </Box>
   );
