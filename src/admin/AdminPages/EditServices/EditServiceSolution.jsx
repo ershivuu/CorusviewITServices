@@ -14,7 +14,8 @@ import {
   DialogContent,
   DialogActions,
   Box,
-  Typography
+  Typography,
+  CircularProgress, // Added CircularProgress for loading indicator
 } from "@mui/material";
 import {
   fetchAllSolutions,
@@ -31,7 +32,7 @@ function EditServiceSolution() {
   const [editedHeading, setEditedHeading] = useState("");
   const [editedContent, setEditedContent] = useState("");
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [openAddDialog, setOpenAddDialog] = useState(false); // Added state for the add dialog
+  const [openAddDialog, setOpenAddDialog] = useState(false);
   const [newHeading, setNewHeading] = useState("");
   const [newContent, setNewContent] = useState("");
 
@@ -40,24 +41,31 @@ function EditServiceSolution() {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
+
+
 
   const fetchData = async () => {
     try {
       const solutionsData = await fetchAllSolutions();
-      setSolutions(solutionsData);
+      console.log("Fetched solutions:", solutionsData.data); // Log fetched data
+      setSolutions(solutionsData.data);
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error fetching solutions:", error);
-      // Handle errors as needed
+      setError(error); // Set error state
+      setLoading(false); // Set loading to false on error
     }
   };
-
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleEditClick = (solution) => {
     setSelectedSolution(solution);
-    setEditedHeading(solution.inner_heading);
-    setEditedContent(solution.inner_content);
+    setEditedHeading(solution.solutions_inner_heading);
+    setEditedContent(solution.solutions_inner_content);
     setOpenEditDialog(true);
   };
 
@@ -71,10 +79,13 @@ function EditServiceSolution() {
   const handleSaveChanges = async () => {
     try {
       const updatedData = {
-        inner_heading: editedHeading,
-        inner_content: editedContent,
+        solutions_inner_heading: editedHeading,
+        solutions_inner_content: editedContent,
       };
-      const response = await updateSolution(selectedSolution.id, updatedData);
+      const response = await updateSolution(
+        selectedSolution.solutions_id,
+        updatedData
+      );
       await fetchData(); // Refresh the solutions list after successful update
       handleCloseEditDialog();
       // Show success notification
@@ -93,7 +104,7 @@ function EditServiceSolution() {
 
   const handleConfirmDelete = async () => {
     try {
-      const response = await deleteSolution(selectedSolution.id);
+      const response = await deleteSolution(selectedSolution.solutions_id);
       await fetchData(); // Refresh the solutions list after successful deletion
       handleCloseDeleteDialog();
       // Show success notification
@@ -117,8 +128,9 @@ function EditServiceSolution() {
   const handleSaveNewSolution = async () => {
     try {
       const newSolution = {
-        inner_heading: newHeading,
-        inner_content: newContent,
+        solutions_inner_heading: newHeading,
+        solutions_inner_content: newContent,
+        our_services_heading: "Placeholder", // Adjust as per your requirement
       };
       const response = await addSolution(newSolution);
       await fetchData(); // Refresh the solutions list after successful addition
@@ -148,25 +160,55 @@ function EditServiceSolution() {
     setOpenNotification(false);
   };
 
+  // Show loading indicator if data is still loading
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  // Show error message if there was an error fetching data
+  if (error) {
+    return (
+      <Typography variant="body1" style={{ padding: "20px" }}>
+        Error fetching solutions. Please try again later.
+      </Typography>
+    );
+  }
+
+  // Render solutions table if solutions array is defined and not empty
   return (
     <Box>
-   <Typography variant="h5" component="h5">
-      Edit Service Solution
-    </Typography>
+      <Typography variant="h5" component="h5">
+        Edit Service Solution
+      </Typography>
       <Button
         onClick={handleAddClick}
         variant="contained"
         color="primary"
-        style={{ marginTop: "1rem" ,marginTrim:"10px"}}
+        style={{ marginTop: "1rem" }}
       >
         Add New Solution
       </Button>
       {/* Table of Solutions */}
-      <TableContainer component={Paper} style={{marginTop:"10px",maxHeight: "500px", overflow: "auto"}}>
+      <TableContainer
+        component={Paper}
+        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
+              <TableCell>Our Services Heading</TableCell>
               <TableCell>Inner Heading</TableCell>
               <TableCell>Inner Content</TableCell>
               <TableCell>Edit</TableCell>
@@ -174,23 +216,29 @@ function EditServiceSolution() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {solutions.map((solution,index) => (
-              <TableRow key={solution.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{solution.inner_heading}</TableCell>
-                <TableCell>{solution.inner_content}</TableCell>
-                <TableCell>
-                  <Button onClick={() => handleEditClick(solution)}>
-                    Edit
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button color="error" onClick={() => handleDeleteClick(solution)}>
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+            {solutions &&
+              solutions.map((solution) => (
+                <TableRow key={solution.solutions_id}>
+                  <TableCell>{solution.solutions_id}</TableCell>
+                  <TableCell>{solution.our_services_heading}</TableCell>
+
+                  <TableCell>{solution.solutions_inner_heading}</TableCell>
+                  <TableCell>{solution.solutions_inner_content}</TableCell>
+                  <TableCell>
+                    <Button onClick={() => handleEditClick(solution)}>
+                      Edit
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      color="error"
+                      onClick={() => handleDeleteClick(solution)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -219,12 +267,8 @@ function EditServiceSolution() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseEditDialog}>Cancel</Button>
-          <Button
-            onClick={handleSaveChanges}
-           
-            color="primary"
-          >
-            Save 
+          <Button onClick={handleSaveChanges} color="primary">
+            Save
           </Button>
         </DialogActions>
       </Dialog>
@@ -237,11 +281,7 @@ function EditServiceSolution() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDeleteDialog}>Cancel</Button>
-          <Button
-            onClick={handleConfirmDelete}
-          
-            color="error"
-          >
+          <Button onClick={handleConfirmDelete} color="error">
             Delete
           </Button>
         </DialogActions>
@@ -271,12 +311,8 @@ function EditServiceSolution() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAddDialog}>Cancel</Button>
-          <Button
-            onClick={handleSaveNewSolution}
-          
-            color="primary"
-          >
-            Add Solution
+          <Button onClick={handleSaveNewSolution} color="primary">
+            Save
           </Button>
         </DialogActions>
       </Dialog>
@@ -284,9 +320,9 @@ function EditServiceSolution() {
       {/* Notification */}
       <Notification
         open={openNotification}
-        handleClose={handleCloseNotification}
-        alertMessage={notificationMessage}
-        alertSeverity={notificationSeverity}
+        onClose={handleCloseNotification}
+        severity={notificationSeverity}
+        message={notificationMessage}
       />
     </Box>
   );

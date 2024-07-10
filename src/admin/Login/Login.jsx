@@ -3,11 +3,16 @@ import React, { useState } from "react";
 import "./Login.css";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Notification from "../../Notification/Notification";
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false); // State for notification open
+  const [alertMessage, setAlertMessage] = useState(""); // State for alert message
+  const [alertSeverity, setAlertSeverity] = useState("info"); // State for alert severity
+
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -20,8 +25,14 @@ function Login({ onLogin }) {
       localStorage.setItem("username", username); 
       onLogin();
     } else {
-      alert("Invalid credentials");
+      setAlertMessage("Invalid credentials");
+      setAlertSeverity("error");
+      setNotificationOpen(true);
     }
+  };
+
+  const handleCloseNotification = () => {
+    setNotificationOpen(false);
   };
 
   return (
@@ -69,6 +80,12 @@ function Login({ onLogin }) {
           <p>Design & Developed By CorusView</p>
         </div>
       </div>
+      <Notification
+        open={notificationOpen}
+        handleClose={handleCloseNotification}
+        alertMessage={alertMessage}
+        alertSeverity={alertSeverity}
+      />
     </>
   );
 }
