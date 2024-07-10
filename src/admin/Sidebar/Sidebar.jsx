@@ -115,9 +115,9 @@ function Sidebar({ isOpen }) {
                   activeDropdown === "services" ? "active" : ""
                 }`}
               >
-                <Link to="/admin/editservicehead" onClick={handleLinkClick}>
+                {/* <Link to="/admin/editservicehead" onClick={handleLinkClick}>
                   Edit Heading
-                </Link>
+                </Link> */}
 
                 <Link to="/admin/editserviceproblems" onClick={handleLinkClick}>
                   Edit Problems

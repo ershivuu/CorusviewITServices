@@ -59,7 +59,7 @@ export const addServiceData = async (formData) => {
 // Delete Services data
 export const deleteServiceData = async (id) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/our_services/${id}`);
+    const response = await axios.delete(`${BASE_URL}/deleteServiceData/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(`Failed to delete service: ${error.message}`);
@@ -222,9 +222,12 @@ export const fetchServicesHead = async () => {
 };
 
 // Put  Service Head Data
-export const updateServicesHead = async (detailsId,updatedData) => {
+export const updateServicesHead = async (detailsId, updatedData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/services_details/${detailsId}`, updatedData);
+    const response = await axios.put(
+      `${BASE_URL}/services_details/${detailsId}`,
+      updatedData
+    );
     return response.data;
   } catch (error) {
     throw new Error(`Failed to update services head data: ${error.message}`);
@@ -241,8 +244,8 @@ export const fetchOnlyOurServiceHead = async () => {
     throw new Error(`Failed to fetch services headings: ${error.message}`);
   }
 };
-  
-// add services head data 
+
+// add services head data
 export const addServicesHead = async (newData) => {
   try {
     const response = await axios.post(`${BASE_URL}/services_details`, newData);
@@ -289,7 +292,7 @@ export const fetchProblems = async () => {
     const response = await axios.get(`${BASE_URL}/problems`);
     return response.data; // Assuming API returns an array of problems
   } catch (error) {
-    throw Error('Error fetching problems'); // Handle errors in your component
+    throw Error("Error fetching problems"); // Handle errors in your component
   }
 };
 
@@ -781,11 +784,11 @@ export const getApplicants = async (role) => {
 export const getExportApplicants = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/export/applicants`, {
-      responseType: 'blob' // important to handle the file response
+      responseType: "blob", // important to handle the file response
     });
     return response.data;
   } catch (error) {
-    console.error('Error exporting applicants:', error);
+    console.error("Error exporting applicants:", error);
     throw error;
   }
 };
@@ -793,11 +796,12 @@ export const getExportApplicants = async () => {
 // delete apply now form data
 export const deleteApplicants = async (applicantId) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/applicants/${applicantId}`);
+    const response = await axios.delete(
+      `${BASE_URL}/applicants/${applicantId}`
+    );
     return response.data;
   } catch (error) {
-    console.error('Error deleting applicant:', error);
+    console.error("Error deleting applicant:", error);
     throw error;
   }
 };
-
