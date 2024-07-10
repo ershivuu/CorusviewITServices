@@ -9,11 +9,12 @@ function OurServices() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const controls = useAnimation();
+
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
     }
-  }, [isInView]);
+  }, [isInView, controls]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +24,17 @@ function OurServices() {
 
     fetchData();
   }, []);
+
+  const handleReadMoreClick = (service) => {
+    console.log(service.id, "?????");
+  };
+  const truncateText = (text, wordLimit) => {
+    const words = text.split(" ");
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(" ") + "...";
+    }
+    return text;
+  };
   return (
     <div className="container">
       <motion.div
@@ -31,14 +43,14 @@ function OurServices() {
           visible: { opacity: 1, x: 0 },
         }}
         initial="hidden"
-        animate="visible"
+        animate={controls}
         transition={{ duration: 1, delay: 0.5 }}
       >
         <p className="services-heading">Our Services</p>
       </motion.div>
       <div>
         <div className="accordion accordion-flush" id="accordionFlushExample">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <div className="accordion-item" key={service.id}>
               <h2 className="accordion-header">
                 <button
@@ -65,9 +77,9 @@ function OurServices() {
                 data-bs-parent="#accordionFlushExample"
               >
                 <div className="accordion-body">
-                  <p>{service.content}</p>
-                  <button>
-                    <Link to="/services" target="_top">
+                  <p>{truncateText(service.content, 20)}</p>
+                  <button onClick={() => handleReadMoreClick(service)}>
+                    <Link to={`/our-services/${service.id}`} target="_top">
                       Read More...
                     </Link>
                   </button>
@@ -80,4 +92,5 @@ function OurServices() {
     </div>
   );
 }
+
 export default OurServices;
