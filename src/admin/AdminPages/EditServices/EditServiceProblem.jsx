@@ -29,7 +29,7 @@ import {
   addProblem,
   fetchOnlyOurServiceHead,
 } from "../../AdminServices"; // Adjust path as per your project structure
-import Notification from "../../../Notification/Notification"; // Adjust path as per your project structure
+import Notification from "../../../Notification/Notification";
 
 function EditServiceProblem() {
   const [problems, setProblems] = useState([]);
@@ -44,10 +44,7 @@ function EditServiceProblem() {
   const [ourServicesHeadings, setOurServicesHeadings] = useState([]);
   const [selectedService, setSelectedService] = useState("");
 
-  // Notification state
-  const [openNotification, setOpenNotification] = useState(false);
-  const [notificationMessage, setNotificationMessage] = useState("");
-  const [notificationSeverity, setNotificationSeverity] = useState("success");
+
 
   const fetchData = async () => {
     try {
@@ -117,30 +114,26 @@ function EditServiceProblem() {
         selectedProblem.problems_id,
         updatedData
       );
-      // Refresh the problems list after successful update
+  
       await fetchData();
       handleCloseEditDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+
     } catch (error) {
       console.error("Error updating problem:", error);
-      // Handle error as needed
-      handleNotification(error.message, "error");
+
     }
   };
 
   const handleConfirmDelete = async () => {
     try {
       const response = await deleteProblem(selectedProblem.problems_id);
-      // Refresh the problems list after successful deletion
+
       await fetchData();
       handleCloseDeleteDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+   
     } catch (error) {
       console.error("Error deleting problem:", error);
-      // Handle error as needed
-      handleNotification("Error deleting problem", "error");
+
     }
   };
 
@@ -155,28 +148,21 @@ function EditServiceProblem() {
       // Refresh the problems list after successful addition
       await fetchData();
       handleCloseAddDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+
     } catch (error) {
       console.error("Error adding problem:", error);
       // Handle error as needed
-      handleNotification(error.message, "error");
+
     }
   };
 
-  const handleNotification = (message, severity) => {
-    setNotificationMessage(message);
-    setNotificationSeverity(severity);
-    setOpenNotification(true);
-  };
 
-  const handleCloseNotification = () => {
-    setOpenNotification(false);
-  };
+
+
 
   return (
     <>
-      <Box>
+    
         <Typography variant="h5" component="h5">
           Edit Service Problem
         </Typography>
@@ -186,7 +172,7 @@ function EditServiceProblem() {
           variant="contained"
           color="primary"
           onClick={handleAddClick}
-          style={{ marginBottom: "1rem" }}
+          style={{ marginTop: "10px" }}
         >
           Add Problem
         </Button>
@@ -322,13 +308,9 @@ function EditServiceProblem() {
         </Dialog>
 
         {/* Notification */}
-      </Box>
-      <Notification
-        open={openNotification}
-        handleClose={handleCloseNotification}
-        severity={notificationSeverity}
-        message={notificationMessage}
-      />
+    
+     
+     
     </>
   );
 }

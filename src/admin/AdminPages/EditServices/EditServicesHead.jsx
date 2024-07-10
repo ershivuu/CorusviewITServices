@@ -206,7 +206,8 @@ const handleAdd = async () => {
         Edit Service Head
       </Typography>
 
-      <Button variant="outlined" onClick={handleAddOpen} style={{ marginBottom: '10px' }}>
+      <Button    variant="contained"
+          color="primary" onClick={handleAddOpen} style={{ marginBottom: '10px' }}>
         Add Service
       </Button>
 

@@ -24,10 +24,10 @@ import {
   updateWhatYouGetService,
   deleteWhatYouGetService,
   addWhatYouGetService,
-  fetchOurServiceHeadings,
+
   fetchOnlyOurServiceHead,
-} from "../../AdminServices"; // Adjust the import path as per your project structure
-import Notification from "../../../Notification/Notification"; // Adjust the import path as per your project structure
+} from "../../AdminServices"; 
+import Notification from "../../../Notification/Notification";
 
 function EditWhatYouGet() {
   const [services, setServices] = useState([]);
@@ -194,7 +194,7 @@ function EditWhatYouGet() {
         onClick={handleAddClick}
         variant="contained"
         color="primary"
-        style={{ marginBottom: "1rem", marginTop: "10px" }}
+        style={{  marginTop: "10px" }}
       >
         Add Service
       </Button>
@@ -310,7 +310,6 @@ function EditWhatYouGet() {
         </DialogActions>
       </Dialog>
 
-      {/* Notification */}
       <Notification
         open={openNotification}
         onClose={handleCloseNotification}

@@ -15,6 +15,10 @@ import {
   DialogActions,
   Box,
   Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
   CircularProgress, // Added CircularProgress for loading indicator
 } from "@mui/material";
 import {
@@ -22,8 +26,9 @@ import {
   updateSolution,
   deleteSolution,
   addSolution,
+  fetchOnlyOurServiceHead,
 } from "../../AdminServices";
-import Notification from "../../../Notification/Notification"; // Adjust path as per your project structure
+import Notification from "../../../Notification/Notification";
 
 function EditServiceSolution() {
   const [solutions, setSolutions] = useState([]);
@@ -35,6 +40,8 @@ function EditServiceSolution() {
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [newHeading, setNewHeading] = useState("");
   const [newContent, setNewContent] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+  const [ourServicesHeadings, setOurServicesHeadings] = useState([]);
 
   // Notification state
   const [openNotification, setOpenNotification] = useState(false);
@@ -43,8 +50,6 @@ function EditServiceSolution() {
 
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
-
-
 
   const fetchData = async () => {
     try {
@@ -58,9 +63,17 @@ function EditServiceSolution() {
       setLoading(false); // Set loading to false on error
     }
   };
-  
+
+  const fetchOurServiceHeadings = async () => {
+    try {
+      const data = await fetchOnlyOurServiceHead();
+      setOurServicesHeadings(data);
+    } catch (error) {}
+  };
+
   useEffect(() => {
     fetchData();
+    fetchOurServiceHeadings();
   }, []);
   const handleEditClick = (solution) => {
     setSelectedSolution(solution);
@@ -79,6 +92,7 @@ function EditServiceSolution() {
   const handleSaveChanges = async () => {
     try {
       const updatedData = {
+        service_id: selectedSolution.service_id, // Add service_id to the updated data
         solutions_inner_heading: editedHeading,
         solutions_inner_content: editedContent,
       };
@@ -130,7 +144,8 @@ function EditServiceSolution() {
       const newSolution = {
         solutions_inner_heading: newHeading,
         solutions_inner_content: newContent,
-        our_services_heading: "Placeholder", // Adjust as per your requirement
+        our_services_heading: selectedService.heading, // Assuming selectedService contains the correct heading
+        service_id: selectedService.id, // Add service_id to the new solution data
       };
       const response = await addSolution(newSolution);
       await fetchData(); // Refresh the solutions list after successful addition
@@ -195,7 +210,7 @@ function EditServiceSolution() {
         onClick={handleAddClick}
         variant="contained"
         color="primary"
-        style={{ marginTop: "1rem" }}
+        style={{ marginTop: "10px" }}
       >
         Add New Solution
       </Button>
@@ -291,6 +306,21 @@ function EditServiceSolution() {
       <Dialog open={openAddDialog} onClose={handleCloseAddDialog}>
         <DialogTitle>Add New Solution</DialogTitle>
         <DialogContent>
+          <FormControl fullWidth>
+            <InputLabel>Select Our Service Heading</InputLabel>
+            <Select
+              value={selectedService}
+              onChange={(e) => setSelectedService(e.target.value)}
+              fullWidth
+              name="selectedOurService"
+            >
+              {ourServicesHeadings.map((service) => (
+                <MenuItem key={service.id} value={service}>
+                  {service.heading}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             autoFocus
             margin="dense"
