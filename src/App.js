@@ -8,7 +8,6 @@ import Carrer from "./pages/Carrer/Carrer";
 import Contact from "./pages/Contact/Contact";
 
 import Techno from "./pages/Softwaredev/Techno";
-import Test from "./pages/Test/Test";
 import Products from "./pages/Products/Products";
 import AdminPanel from "./admin/AdminPanel/AdminPanel";
 
@@ -39,7 +38,6 @@ import AddJobRole from "./admin/AdminPages/EditCarrer/AddJobRole";
 import RecentworkHead from "./admin/AdminPages/EditHome/RecentworkHead";
 import NoPage from "./pages/NotFound/NoPage";
 import AllServiceDetails from "./pages/Home/AllServices/AllServiceDetails";
-
 import ApplyNow from "./admin/AdminPages/ApplyNow/ApplyNow";
 function App() {
   return (
@@ -144,10 +142,7 @@ function App() {
         <Route path="contact" element={<Contact />}></Route>
         <Route path="services" element={<Techno />}></Route>
         <Route path="our-services/:id" element={<AllServiceDetails />}></Route>
-
-        <Route path="test" element={<Test />}></Route>
         <Route path="our-products" element={<Products />}></Route>
-        <Route path="test" element={<Test />}></Route>
       </Routes>
     </Main>
   );
