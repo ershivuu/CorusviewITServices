@@ -24,7 +24,7 @@ import {
   updateWhatYouGetService,
   deleteWhatYouGetService,
   addWhatYouGetService,
-  fetchOurServiceHeadings,
+
   fetchOnlyOurServiceHead,
 } from "../../AdminServices"; // Adjust the import path as per your project structure
 import Notification from "../../../Notification/Notification"; // Adjust the import path as per your project structure
@@ -325,11 +325,11 @@ function EditWhatYouGet() {
 
       {/* Notification */}
       <Notification
-        open={openNotification}
-        onClose={handleCloseNotification}
-        message={notificationMessage}
-        severity={notificationSeverity}
-      />
+          open={openNotification}
+          handleClose={handleCloseNotification}
+          alertMessage={notificationMessage}
+          alertSeverity={notificationSeverity}
+        />
     </div>
   );
 }

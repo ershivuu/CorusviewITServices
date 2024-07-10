@@ -1,5 +1,3 @@
-// EditServiceProblem.js
-
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -29,25 +27,26 @@ import {
   addProblem,
   fetchOnlyOurServiceHead,
 } from "../../AdminServices"; // Adjust path as per your project structure
+
 import Notification from "../../../Notification/Notification"; // Adjust path as per your project structure
 
 function EditServiceProblem() {
   const [problems, setProblems] = useState([]);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [openAddDialog, setOpenAddDialog] = useState(false); // State for add dialog
+  const [openAddDialog, setOpenAddDialog] = useState(false);
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [editedHeading, setEditedHeading] = useState("");
   const [editedContent, setEditedContent] = useState("");
-  const [newHeading, setNewHeading] = useState(""); // State for new problem heading
-  const [newContent, setNewContent] = useState(""); // State for new problem content
+  const [newHeading, setNewHeading] = useState("");
+  const [newContent, setNewContent] = useState("");
   const [ourServicesHeadings, setOurServicesHeadings] = useState([]);
   const [selectedService, setSelectedService] = useState("");
 
   // Notification state
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
-  const [notificationSeverity, setNotificationSeverity] = useState("success");
+  const [notificationSeverity, setNotificationSeverity] = useState("info");
 
   const fetchData = async () => {
     try {
@@ -55,7 +54,7 @@ function EditServiceProblem() {
       setProblems(problemsData);
     } catch (error) {
       console.error("Error fetching data:", error);
-      // Handle errors as needed, e.g., display error message or retry fetch
+      showNotification("Failed to fetch problems.", "error");
     }
   };
 
@@ -63,13 +62,11 @@ function EditServiceProblem() {
     try {
       const data = await fetchOnlyOurServiceHead();
       setOurServicesHeadings(data);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error fetching service headings:", error);
+      showNotification("Failed to fetch service headings.", "error");
+    }
   };
-
-  useEffect(() => {
-    fetchData();
-    fetchOurServiceHeadings();
-  }, []);
 
   const handleEditClick = (problem) => {
     setSelectedProblem(problem);
@@ -108,7 +105,7 @@ function EditServiceProblem() {
   const handleSaveChanges = async () => {
     try {
       const updatedData = {
-        service_id: selectedProblem.service_id, // Assuming service_id is part of selectedProblem
+        service_id: selectedProblem.service_id,
         our_services_heading: selectedProblem.our_services_heading,
         problems_inner_heading: editedHeading,
         problems_inner_content: editedContent,
@@ -117,30 +114,24 @@ function EditServiceProblem() {
         selectedProblem.problems_id,
         updatedData
       );
-      // Refresh the problems list after successful update
       await fetchData();
       handleCloseEditDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("Problem updated successfully.", "success");
     } catch (error) {
       console.error("Error updating problem:", error);
-      // Handle error as needed
-      handleNotification(error.message, "error");
+      showNotification("Failed to update problem.", "error");
     }
   };
 
   const handleConfirmDelete = async () => {
     try {
       const response = await deleteProblem(selectedProblem.problems_id);
-      // Refresh the problems list after successful deletion
       await fetchData();
       handleCloseDeleteDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("Problem deleted successfully.", "success");
     } catch (error) {
       console.error("Error deleting problem:", error);
-      // Handle error as needed
-      handleNotification("Error deleting problem", "error");
+      showNotification("Failed to delete problem.", "error");
     }
   };
 
@@ -152,19 +143,16 @@ function EditServiceProblem() {
         service_id: selectedService.id,
       };
       const response = await addProblem(newProblem);
-      // Refresh the problems list after successful addition
       await fetchData();
       handleCloseAddDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("Problem added successfully.", "success");
     } catch (error) {
       console.error("Error adding problem:", error);
-      // Handle error as needed
-      handleNotification(error.message, "error");
+      showNotification("Failed to add problem.", "error");
     }
   };
 
-  const handleNotification = (message, severity) => {
+  const showNotification = (message, severity) => {
     setNotificationMessage(message);
     setNotificationSeverity(severity);
     setOpenNotification(true);
@@ -173,6 +161,11 @@ function EditServiceProblem() {
   const handleCloseNotification = () => {
     setOpenNotification(false);
   };
+
+  useEffect(() => {
+    fetchData();
+    fetchOurServiceHeadings();
+  }, []);
 
   return (
     <>
@@ -308,10 +301,13 @@ function EditServiceProblem() {
           </DialogActions>
         </Dialog>
 
+        {/* Delete Confirmation Dialog */}
         <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
           <DialogTitle>Delete Problem</DialogTitle>
           <DialogContent>
-            <p>Are you sure you want to delete this problem?</p>
+            <Typography>
+              Are you sure you want to delete this problem?
+            </Typography>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseDeleteDialog}>Cancel</Button>
@@ -321,14 +317,14 @@ function EditServiceProblem() {
           </DialogActions>
         </Dialog>
 
-        {/* Notification */}
+        {/* Notification Component */}
+        <Notification
+          open={openNotification}
+          handleClose={handleCloseNotification}
+          alertMessage={notificationMessage}
+          alertSeverity={notificationSeverity}
+        />
       </Box>
-      <Notification
-        open={openNotification}
-        handleClose={handleCloseNotification}
-        severity={notificationSeverity}
-        message={notificationMessage}
-      />
     </>
   );
 }
