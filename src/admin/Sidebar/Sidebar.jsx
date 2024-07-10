@@ -24,8 +24,7 @@ function Sidebar({ isOpen }) {
         <div className="side-bar">
           <div className={`custom-sidebar ${isOpen ? "open" : ""}`}>
             <ul>
-
-            <li>
+              <li>
                 <button
                   className="dropdown-btn"
                   onClick={() => handleDropdown("editheader")}
@@ -45,7 +44,7 @@ function Sidebar({ isOpen }) {
                   </Link>
                 </div>
               </li>
-        
+
               <button
                 className="dropdown-btn"
                 onClick={() => handleDropdown("home")}
@@ -119,12 +118,7 @@ function Sidebar({ isOpen }) {
                 <Link to="/admin/editservicehead" onClick={handleLinkClick}>
                   Edit Heading
                 </Link>
-                <Link to="/admin/editproblemhead" onClick={handleLinkClick}>
-                  Edit Problem Head
-                </Link>
-                <Link to="/admin/editsolutionhead" onClick={handleLinkClick}>
-                  Edit Solution Head
-                </Link>
+
                 <Link to="/admin/editserviceproblems" onClick={handleLinkClick}>
                   Edit Problems
                 </Link>
@@ -211,7 +205,6 @@ function Sidebar({ isOpen }) {
                 </Link>
               </div>
 
-          
               <li>
                 <button
                   className="dropdown-btn"

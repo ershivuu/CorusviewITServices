@@ -22,8 +22,8 @@ import EditAboutValue from "./admin/AdminPages/EditAbout/EditAboutValue";
 import EditServicesHead from "./admin/AdminPages/EditServices/EditServicesHead";
 import EditServiceProblem from "./admin/AdminPages/EditServices/EditServiceProblem";
 import EditServiceSolution from "./admin/AdminPages/EditServices/EditServiceSolution";
-import EditProblemHead from "./admin/AdminPages/EditServices/EditProblemHead";
-import EditSolutionHead from "./admin/AdminPages/EditServices/EditSolutionHead";
+
+
 import EditWhatYouGet from "./admin/AdminPages/EditServices/EditWhatYouGet";
 import EditContactUs from "./admin/AdminPages/EditContact/EditContactUs";
 import EditContactForm from "./admin/AdminPages/EditContact/EditContactForm";
@@ -71,11 +71,7 @@ function App() {
             path="editservicehead"
             element={<EditServicesHead />}
           ></Route>
-          <Route
-            exact
-            path="editproblemhead"
-            element={<EditProblemHead />}
-          ></Route>
+        
           <Route
             exact
             path="editserviceproblems"
@@ -86,11 +82,7 @@ function App() {
             path="editservicesolution"
             element={<EditServiceSolution />}
           ></Route>
-          <Route
-            exact
-            path="editsolutionhead"
-            element={<EditSolutionHead />}
-          ></Route>
+          
           <Route
             exact
             path="editwhatyouget"

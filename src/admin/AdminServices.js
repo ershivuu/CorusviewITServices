@@ -214,7 +214,7 @@ export const updateOurValuesById = async (id, updatedData) => {
 // Get Service Head Data
 export const fetchServicesHead = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/servicesHead`);
+    const response = await axios.get(`${BASE_URL}/services_details`);
     return response.data; // Assuming API returns an object with services_heading and services_content
   } catch (error) {
     throw new Error(`Failed to fetch Services Head data: ${error.message}`);
@@ -222,12 +222,33 @@ export const fetchServicesHead = async () => {
 };
 
 // Put  Service Head Data
-export const updateServicesHead = async (updatedData) => {
+export const updateServicesHead = async (detailsId,updatedData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/servicesHead`, updatedData);
+    const response = await axios.put(`${BASE_URL}/services_details/${detailsId}`, updatedData);
     return response.data;
   } catch (error) {
     throw new Error(`Failed to update services head data: ${error.message}`);
+  }
+};
+
+// get only our  services heading
+
+export const fetchOnlyOurServiceHead = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getOurServicesHeading`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to fetch services headings: ${error.message}`);
+  }
+};
+  
+// add services head data 
+export const addServicesHead = async (newData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/services_details`, newData);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to add services details: ${error.message}`);
   }
 };
 
@@ -253,13 +274,22 @@ export const updateProblemHead = async (updatedHeading) => {
 
 // Get Service  all Problem Data
 
+// export const fetchProblems = async () => {
+//   try {
+//     const response = await axios.get(`${BASE_URL}/problems`);
+//     return response.data.problems; // Assuming problems array is directly under 'problems' key in API response
+//   } catch (error) {
+//     console.error("Error fetching problems:", error);
+//     throw error; // You can handle errors as needed in your application
+//   }
+// };
+
 export const fetchProblems = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/problems`);
-    return response.data.problems; // Assuming problems array is directly under 'problems' key in API response
+    return response.data; // Assuming API returns an array of problems
   } catch (error) {
-    console.error("Error fetching problems:", error);
-    throw error; // You can handle errors as needed in your application
+    throw Error('Error fetching problems'); // Handle errors in your component
   }
 };
 
@@ -322,7 +352,7 @@ export const updateSolutionHeading = async (newHeading) => {
 export const fetchAllSolutions = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/solutions`);
-    return response.data.solutions; // Return only the 'solutions' array from the response
+    return response; // Return only the 'solutions' array from the response
   } catch (error) {
     throw new Error("Error fetching solutions: " + error.message);
   }
