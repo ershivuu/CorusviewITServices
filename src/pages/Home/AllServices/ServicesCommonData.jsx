@@ -14,7 +14,7 @@ function ServicesCommonData() {
       <div className="dev-process">
         <p>Our Process</p>
         <div>
-          <img src={devprocess} />
+          <img src={devprocess} loading="lazy" />
         </div>
       </div>
       <div className="tools">
@@ -104,35 +104,39 @@ function ServicesCommonData() {
 
           <div className="tool-pc-view">
             <div className="pc-view-box-1">
-              <img src={framework} alt="" />
+              <img src={framework} alt="frameworks" loading="lazy" />
             </div>
             <div className="pc-view-box-1 pc-view-flex-box">
               <div className="pc-view-box-1">
-                <img src={language} alt="" />
+                <img src={language} alt="programming language" loading="lazy" />
               </div>
               <div className="pc-view-box-1">
-                <img src={cloud} alt="" />
+                <img src={cloud} alt="cloud services" loading="lazy" />
               </div>
             </div>
             <div className="pc-view-box-1">
               <div className="pc-view-box-1">
-                <img src={dbms} alt="" />
+                <img src={dbms} alt="dbms" loading="lazy" />
               </div>
             </div>
             <div className="pc-view-box-1 pc-view-flex-box">
               <div className="pc-view-box-1">
-                <img src={web} alt="" />
+                <img src={web} alt="Web Developement" loading="lazy" />
               </div>
               <div className="pc-view-box-1">
-                <img src={mobile} alt="" />
+                <img src={mobile} alt="Mobile Developement" loading="lazy" />
               </div>
             </div>
             <div className="pc-view-box-1 pc-view-flex-box">
               <div className="pc-view-box-1">
-                <img src={UIUX} alt="" />
+                <img src={UIUX} alt="UIUX Design" loading="lazy" />
               </div>
               <div className="pc-view-box-1">
-                <img src={DigitalMarketing} alt="" />
+                <img
+                  src={DigitalMarketing}
+                  alt="DigitalMarketing"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

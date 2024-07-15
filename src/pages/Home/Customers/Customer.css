@@ -22,34 +22,7 @@
   background-repeat: no-repeat;
   padding: 30px 50px 30px 50px;
 }
-@-webkit-keyframes rotateslider {
-  0% {
-    -webkit-transform: skewY(45deg);
-    transform: skewY(45deg);
-  }
-  25% {
-    -webkit-transform: skewY(15deg);
-    transform: skewY(15deg);
-  }
-  50% {
-    -webkit-transform: skewY(0deg);
-    transform: skewY(0deg);
-  }
-}
-@keyframes rotateslider {
-  0% {
-    -webkit-transform: skewY(45deg);
-    transform: skewY(45deg);
-  }
-  25% {
-    -webkit-transform: skewY(15deg);
-    transform: skewY(15deg);
-  }
-  50% {
-    -webkit-transform: skewY(0deg);
-    transform: skewY(0deg);
-  }
-}
+
 .carousel-item {
   padding-inline: 10px;
   text-align: center;
@@ -61,11 +34,17 @@
 }
 
 .about-client img {
-  width: 90px;
-  height: 90px;
+  width: inherit;
+  height: inherit;
+  /* object-fit: contain; */
   border-radius: 50%;
 }
-
+.our-client-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin: auto;
+}
 .client-details p:nth-child(1) {
   color: black;
   margin: 0;

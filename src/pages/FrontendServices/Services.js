@@ -31,7 +31,7 @@ export const getServiceById = async (id) => {
 
 export const getHomeHeading = async () => {
   try {
-    const response = await axios.get(`${API_URL}/main_table`);
+    const response = await axios.get(`${API_URL}/HomePage`);
     return response.data;
   } catch (error) {
     console.error("Error fetching main table data:", error);

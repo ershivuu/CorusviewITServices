@@ -46,7 +46,8 @@ function Products() {
                 src={product.video_link}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
+                allowFullScreen
+                loading="lazy"
               ></iframe>
             </div>
           </div>

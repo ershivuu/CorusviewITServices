@@ -47,6 +47,7 @@ function OurServices() {
                   <img
                     src={service.icon_img}
                     alt={service.icon_img_originalname}
+                    loading="lazy"
                   />
                   <p>
                     <span>{service.heading}</span>

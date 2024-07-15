@@ -56,6 +56,7 @@ function Customer() {
                         <img
                           src={testimonial.img}
                           alt={testimonial.img_originalname}
+                          loading="lazy"
                         />
                       </div>
 

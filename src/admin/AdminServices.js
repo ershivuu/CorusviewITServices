@@ -5,7 +5,7 @@ const BASE_URL = API_URL;
 // Get Home Heading data
 export const fetchMainTableData = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/main_table`);
+    const response = await axios.get(`${BASE_URL}/HomePage`);
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -16,7 +16,7 @@ export const fetchMainTableData = async () => {
 // put Home Heading data
 export const updateMainTableData = async (id, newData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/main_table`, newData);
+    const response = await axios.put(`${BASE_URL}/HomePage`, newData);
     return response.data;
   } catch (error) {
     throw error;

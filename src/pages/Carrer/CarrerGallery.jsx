@@ -31,6 +31,7 @@ function CarrerGallery() {
                   <img
                     src={Object.values(img)[0].url}
                     alt={Object.values(img)[0].originalname}
+                    loading="lazy"
                   />
                 </div>
               ))}

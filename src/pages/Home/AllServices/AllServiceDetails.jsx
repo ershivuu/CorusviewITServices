@@ -9,7 +9,6 @@ import ServicesCommonData from "./ServicesCommonData";
 import "./AllServiceDetails.css";
 function AllServiceDetails() {
   const { id } = useParams();
-  console.log(id, "ID received in AllServiceDetails");
 
   const [service, setService] = useState(null);
 
