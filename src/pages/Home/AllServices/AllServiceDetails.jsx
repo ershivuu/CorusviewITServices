@@ -82,7 +82,11 @@ const ProblemsComponent = ({ problems }) => {
           </div>
           <div className="probs">
             <p>{problem.problems_inner_heading}</p>
-            <p>{problem.problems_inner_content}</p>
+            {problem.problems_inner_content
+              ? problem.problems_inner_content
+                  .split("\n")
+                  .map((paragraph, index) => <p key={index}>{paragraph}</p>)
+              : null}
           </div>
         </div>
       ))}
@@ -101,7 +105,11 @@ const SolutionsComponent = ({ solutions }) => {
           </div>
           <div className="probs">
             <p>{solution.solutions_inner_heading}</p>
-            <p>{solution.solutions_inner_content}</p>
+            {solution.solutions_inner_content
+              ? solution.solutions_inner_content
+                  .split("\n")
+                  .map((paragraph, index) => <p key={index}>{paragraph}</p>)
+              : null}
           </div>
         </div>
       ))}

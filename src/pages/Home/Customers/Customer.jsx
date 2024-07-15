@@ -1,17 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
 import { getCustomers } from "../../FrontendServices/Services";
 import "./Customer.css";
 
 function Customer() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView]);
   const [testimonials, setTestimonials] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -61,10 +52,13 @@ function Customer() {
                   <div>
                     <p>{testimonial.description}</p>
                     <div className="about-client">
-                      <img
-                        src={testimonial.img}
-                        alt={testimonial.img_originalname}
-                      />
+                      <div className="our-client-img">
+                        <img
+                          src={testimonial.img}
+                          alt={testimonial.img_originalname}
+                        />
+                      </div>
+
                       <div className="client-details">
                         <p>{testimonial.name}</p>
                         <p>{testimonial.designation}</p>

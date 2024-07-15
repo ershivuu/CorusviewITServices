@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { getHomeHeading } from "../FrontendServices/Services";
 import "./Home.css";
 import Customer from "./Customers/Customer";
@@ -14,14 +13,6 @@ import RecentWork from "./RecentWork";
 
 function Home() {
   const [mainTableData, setMainTableData] = useState(null);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +46,7 @@ function Home() {
           <img src={vector2} alt="" />
         </div>
 
-        <div className="abt-com-flex" ref={ref}>
+        <div className="abt-com-flex">
           <div>
             <p>About Us</p>
           </div>

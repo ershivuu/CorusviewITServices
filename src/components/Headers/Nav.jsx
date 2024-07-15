@@ -78,9 +78,9 @@ function Nav() {
                     </Link>
                   </li>
                   <li>
-                    <div class="service-dropdown">
+                    <div className="service-dropdown">
                       <button>Services</button>
-                      <div class="service-dropdown-content">
+                      <div className="service-dropdown-content">
                         {services.map((service) => (
                           <Link
                             key={service.id}

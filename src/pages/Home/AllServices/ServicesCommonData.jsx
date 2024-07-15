@@ -6,6 +6,8 @@ import cloud from "../../../assets/images/cloud.png";
 import dbms from "../../../assets/images/dbms.png";
 import web from "../../../assets/images/web.png";
 import mobile from "../../../assets/images/mobile.png";
+import UIUX from "../../../assets/images/UIUX.png";
+import DigitalMarketing from "../../../assets/images/digitalmarketing.png";
 function ServicesCommonData() {
   return (
     <>
@@ -78,6 +80,26 @@ function ServicesCommonData() {
               <p>JavaScript</p>
               <p>Xamarin</p>
             </div>
+            <div className="mobile-box-1">
+              <p>UI/UX</p>
+              <p>Figma</p>
+              <p>Framer</p>
+              <p>Adobe XD</p>
+              <p>Principle</p>
+              <p>Wireframe</p>
+              <p>InVision</p>
+              <p>Animation</p>
+              <p>UX Law's</p>
+            </div>
+            <div className="mobile-box-1">
+              <p>DIGITAL MARKETING</p>
+              <p>Ahrefs</p>
+              <p>Google Analytics</p>
+              <p>SEMrush</p>
+              <p>Buffer</p>
+              <p>HubSpot</p>
+              <p>Sprout Social</p>
+            </div>
           </div>
 
           <div className="tool-pc-view">
@@ -103,6 +125,14 @@ function ServicesCommonData() {
               </div>
               <div className="pc-view-box-1">
                 <img src={mobile} alt="" />
+              </div>
+            </div>
+            <div className="pc-view-box-1 pc-view-flex-box">
+              <div className="pc-view-box-1">
+                <img src={UIUX} alt="" />
+              </div>
+              <div className="pc-view-box-1">
+                <img src={DigitalMarketing} alt="" />
               </div>
             </div>
           </div>

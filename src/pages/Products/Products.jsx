@@ -33,7 +33,10 @@ function Products() {
               <p>{product.heading}</p>
             </div>
             <div className="product-content">
-              <p>{product.content}</p>
+              {/* <p>{product.content}</p> */}
+              {product.content.split("\n").map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
           </div>
           <div className="prod-vector">

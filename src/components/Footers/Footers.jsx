@@ -8,6 +8,7 @@ import locationlogo from "../../assets/logos/location.png";
 import email from "../../assets/logos/mail.png";
 import phone from "../../assets/logos/phone-call.png";
 import { getFooterData } from "../../pages/FrontendServices/Services";
+import { Link } from "react-router-dom";
 
 function Footers() {
   const [footerData, setFooterData] = useState(null);
@@ -111,7 +112,9 @@ function Footers() {
         <div className="footer-2 set-footer">
           <p>@Corusview 2024 All rights reserved </p>
           <p>Terms & Conditions Applied </p>
-          <p>Privacy policy</p>
+          <Link to="/privacy-policy">
+            <p>Privacy policy</p>
+          </Link>
         </div>
       </div>
     </>

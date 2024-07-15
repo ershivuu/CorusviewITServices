@@ -165,16 +165,16 @@ function EditWhatYouGet() {
   };
 
   const handleEditedHeadingChange = (e) => {
-    if (e.target.value.length >= 30) {
-      handleNotification("Cannot update with more than 30 characters", "error");
+    if (e.target.value.length >= 50) {
+      handleNotification("Cannot update with more than 50 characters", "error");
     } else {
       setEditedHeading(e.target.value);
     }
   };
 
   const handleNewHeadingChange = (e) => {
-    if (e.target.value.length >= 30) {
-      handleNotification("Cannot insert more than 30 characters", "error");
+    if (e.target.value.length >= 50) {
+      handleNotification("Cannot insert more than 50 characters", "error");
     } else {
       setNewHeading(e.target.value);
     }
@@ -243,10 +243,10 @@ function EditWhatYouGet() {
             fullWidth
             value={editedHeading}
             onChange={handleEditedHeadingChange}
-            inputProps={{ maxLength: 30 }}
-            error={editedHeading.length > 30}
+            inputProps={{ maxLength: 50 }}
+            error={editedHeading.length > 50}
             helperText={
-              editedHeading.length > 30 ? "Cannot exceed 30 characters" : ""
+              editedHeading.length > 50 ? "Cannot exceed 50 characters" : ""
             }
           />
         </DialogContent>
@@ -255,7 +255,7 @@ function EditWhatYouGet() {
           <Button
             onClick={handleUpdate}
             color="primary"
-            disabled={editedHeading.length > 30}
+            disabled={editedHeading.length > 50}
           >
             Save
           </Button>
@@ -288,10 +288,10 @@ function EditWhatYouGet() {
             fullWidth
             value={newHeading}
             onChange={(e) => setNewHeading(e.target.value)}
-            inputProps={{ maxLength: 30 }}
-            error={newHeading.length > 30}
+            inputProps={{ maxLength: 50 }}
+            error={newHeading.length > 50}
             helperText={
-              newHeading.length > 30 ? "Cannot exceed 30 characters" : ""
+              newHeading.length > 50 ? "Cannot exceed 50 characters" : ""
             }
           />
         </DialogContent>
@@ -300,7 +300,7 @@ function EditWhatYouGet() {
           <Button
             onClick={handleAddService}
             color="primary"
-            disabled={newHeading.length > 30 || !selectedService}
+            disabled={newHeading.length > 50 || !selectedService}
           >
             Add
           </Button>

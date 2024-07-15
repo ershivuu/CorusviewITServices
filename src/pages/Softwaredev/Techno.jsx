@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+
 import {
   getServicePageHeading,
   getServicesWYG,
@@ -34,9 +34,6 @@ function Techno() {
       componentToShow = <Problems />;
       break;
   }
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
 
   const getHeading = async () => {
     try {
@@ -59,12 +56,6 @@ function Techno() {
     getHeading();
     getList();
   }, []);
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView]);
   if (!servicesData) {
     return <p>Loading...</p>;
   }

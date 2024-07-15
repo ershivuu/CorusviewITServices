@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+
 import { getProblems } from "../FrontendServices/Services";
 import closebtn from "../../assets/logos/close.png";
 
 function Problems() {
   const [problemsData, setProblemsData] = useState([]);
   const [heading, setHeading] = useState("");
-  const ref = useInView({ triggerOnce: true });
-  const controls = useAnimation();
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -22,13 +20,6 @@ function Problems() {
     fetchProblems();
   }, []);
 
-  useEffect(() => {
-    if (ref.inView && problemsData) {
-      // Ensure problemsData is not null before accessing problems
-      controls.start("visible");
-    }
-  }, [ref.inView, controls, problemsData]);
-
   return (
     <>
       <div className="problem-body">
@@ -38,17 +29,7 @@ function Problems() {
 
         {problemsData && problemsData.problems ? (
           problemsData.problems.map((problem) => (
-            <div
-              className="proble-cards"
-              key={problem.id}
-              variants={{
-                hidden: { opacity: 0, scale: 0 },
-                visible: { opacity: 1, scale: 1 },
-              }}
-              initial="hidden"
-              animate={controls}
-              transition={{ duration: 0.5 }}
-            >
+            <div className="proble-cards" key={problem.id}>
               <div className="cross-btn">
                 <img src={closebtn} alt="" />
               </div>

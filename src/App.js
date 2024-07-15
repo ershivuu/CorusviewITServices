@@ -1,16 +1,16 @@
-import logo from "./logo.svg";
-import "./App.css";
 import React from "react";
 import { BrowserRouter as Main, Route, Routes } from "react-router-dom";
-import About from "./pages/About/About";
+// other imports
+import NoPage from "./pages/NotFound/NoPage";
 import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import AllServiceDetails from "./pages/Home/AllServices/AllServiceDetails";
 import Carrer from "./pages/Carrer/Carrer";
 import Contact from "./pages/Contact/Contact";
-
-import Techno from "./pages/Softwaredev/Techno";
 import Products from "./pages/Products/Products";
+import Techno from "./pages/Softwaredev/Techno";
+// Admin Page Imports
 import AdminPanel from "./admin/AdminPanel/AdminPanel";
-
 import EditServices from "./admin/AdminPages/EditHome/EditServices";
 import EditSlider from "./admin/AdminPages/EditHome/EditSlider";
 import EditRecentWork from "./admin/AdminPages/EditHome/EditRecentWork";
@@ -21,7 +21,6 @@ import EditAboutValue from "./admin/AdminPages/EditAbout/EditAboutValue";
 import EditServicesHead from "./admin/AdminPages/EditServices/EditServicesHead";
 import EditServiceProblem from "./admin/AdminPages/EditServices/EditServiceProblem";
 import EditServiceSolution from "./admin/AdminPages/EditServices/EditServiceSolution";
-
 
 import EditWhatYouGet from "./admin/AdminPages/EditServices/EditWhatYouGet";
 import EditContactUs from "./admin/AdminPages/EditContact/EditContactUs";
@@ -36,14 +35,13 @@ import EditFooter from "./admin/AdminPages/EditFooter/EditFooter";
 import EditProductsForm from "./admin/AdminPages/EditProducts/EditProductsForm";
 import AddJobRole from "./admin/AdminPages/EditCarrer/AddJobRole";
 import RecentworkHead from "./admin/AdminPages/EditHome/RecentworkHead";
-import NoPage from "./pages/NotFound/NoPage";
-import AllServiceDetails from "./pages/Home/AllServices/AllServiceDetails";
+import Policy from "./pages/PolicyPage/Policy";
 import ApplyNow from "./admin/AdminPages/ApplyNow/ApplyNow";
 function App() {
   return (
     <Main>
-      {/* <Nav></Nav> */}
       <Routes>
+        {/* Admin Routes */}
         <Route path="admin" element={<AdminPanel />}>
           <Route exact path="editheading" element={<EditHeading />}></Route>
           <Route exact path="editaboutus" element={<EditAboutUs />}></Route>
@@ -70,7 +68,7 @@ function App() {
             path="editservicehead"
             element={<EditServicesHead />}
           ></Route>
-        
+
           <Route
             exact
             path="editserviceproblems"
@@ -81,7 +79,7 @@ function App() {
             path="editservicesolution"
             element={<EditServiceSolution />}
           ></Route>
-          
+
           <Route
             exact
             path="editwhatyouget"
@@ -126,15 +124,19 @@ function App() {
           ></Route>
           <Route exact path="applynow" element={<ApplyNow />}></Route>
         </Route>
+        {/* Admin Routes */}
+
+        {/* Other Pages Routes */}
         <Route exact path="*" element={<NoPage />}></Route>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="home" element={<Home />}></Route>
         <Route path="about" element={<About />}></Route>
         <Route path="carrer" element={<Carrer />}></Route>
         <Route path="contact" element={<Contact />}></Route>
-        <Route path="services" element={<Techno />}></Route>
         <Route path="our-services/:id" element={<AllServiceDetails />}></Route>
         <Route path="our-products" element={<Products />}></Route>
+        <Route path="privacy-policy" element={<Policy />}></Route>
+        {/* Other Pages Routes */}
       </Routes>
     </Main>
   );

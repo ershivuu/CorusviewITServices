@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+
 import "./Tools.css";
 import framework from "../../assets/images/framework.png";
 import language from "../../assets/images/language.png";
@@ -10,13 +10,7 @@ import mobile from "../../assets/images/mobile.png";
 
 function Tools() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView]);
+
   return (
     <>
       <div className="tools">
@@ -85,89 +79,29 @@ function Tools() {
           </div>
 
           <div className="tool-pc-view" ref={ref}>
-            <motion.div
-              ref={ref}
-              className="pc-view-box-1"
-              variants={{
-                hidden: { opacity: 0, scale: 0 },
-                visible: { opacity: 1, scale: 1 },
-              }}
-              initial="hidden"
-              animate={controls}
-              transition={{ duration: 0.5, delay: "0.5" }}
-            >
+            <div ref={ref} className="pc-view-box-1">
               <img src={framework} alt="" />
-            </motion.div>
+            </div>
             <div className="pc-view-box-1 pc-view-flex-box">
-              <motion.div
-                ref={ref}
-                className="pc-view-box-1"
-                variants={{
-                  hidden: { opacity: 0, scale: 0 },
-                  visible: { opacity: 1, scale: 1 },
-                }}
-                initial="hidden"
-                animate={controls}
-                transition={{ duration: 0.5, delay: "1" }}
-              >
+              <div ref={ref} className="pc-view-box-1">
                 <img src={language} alt="" />
-              </motion.div>
-              <motion.div
-                ref={ref}
-                className="pc-view-box-1"
-                variants={{
-                  hidden: { opacity: 0, scale: 0 },
-                  visible: { opacity: 1, scale: 1 },
-                }}
-                initial="hidden"
-                animate={controls}
-                transition={{ duration: 0.5, delay: "1" }}
-              >
+              </div>
+              <div ref={ref} className="pc-view-box-1">
                 <img src={cloud} alt="" />
-              </motion.div>
+              </div>
             </div>
             <div className="pc-view-box-1">
-              <motion.div
-                ref={ref}
-                className="pc-view-box-1"
-                variants={{
-                  hidden: { opacity: 0, scale: 0 },
-                  visible: { opacity: 1, scale: 1 },
-                }}
-                initial="hidden"
-                animate={controls}
-                transition={{ duration: 0.5, delay: "0.5" }}
-              >
+              <div ref={ref} className="pc-view-box-1">
                 <img src={dbms} alt="" />
-              </motion.div>
+              </div>
             </div>
             <div className="pc-view-box-1 pc-view-flex-box">
-              <motion.div
-                ref={ref}
-                className="pc-view-box-1"
-                variants={{
-                  hidden: { opacity: 0, scale: 0 },
-                  visible: { opacity: 1, scale: 1 },
-                }}
-                initial="hidden"
-                animate={controls}
-                transition={{ duration: 0.5, delay: "1" }}
-              >
+              <div ref={ref} className="pc-view-box-1">
                 <img src={web} alt="" />
-              </motion.div>
-              <motion.div
-                ref={ref}
-                className="pc-view-box-1"
-                variants={{
-                  hidden: { opacity: 0, scale: 0 },
-                  visible: { opacity: 1, scale: 1 },
-                }}
-                initial="hidden"
-                animate={controls}
-                transition={{ duration: 0.5, delay: "1" }}
-              >
+              </div>
+              <div ref={ref} className="pc-view-box-1">
                 <img src={mobile} alt="" />
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

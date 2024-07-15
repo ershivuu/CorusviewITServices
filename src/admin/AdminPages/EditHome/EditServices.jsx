@@ -23,7 +23,7 @@ import Typography from "@mui/material/Typography";
 import Notification from "../../../Notification/Notification"; // Adjust the path as per your project structure
 
 const MAX_HEADING_LENGTH = 25;
-const MAX_CONTENT_LENGTH = 200;
+const MAX_CONTENT_LENGTH = 5000;
 
 function EditServices() {
   const [servicesData, setServicesData] = useState([]);
@@ -343,7 +343,10 @@ function EditServices() {
           />
         )}
 
-        <TableContainer component={Paper} style={{ marginTop: "10px",maxHeight: "500px", overflow: "auto" }}>
+        <TableContainer
+          component={Paper}
+          style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+        >
           <Table stickyHeader>
             <TableHead>
               <TableRow>
@@ -450,6 +453,8 @@ function EditServices() {
               name="content"
               value={newService.content}
               onChange={handleAddChange}
+              multiline
+              rows={4}
               // error={!!contentError}
               // helperText={contentError}
             />
@@ -527,6 +532,8 @@ function EditServices() {
               name="content"
               value={editedService.content}
               onChange={handleEditChange}
+              multiline
+              rows={4}
               // error={!!editContentError}
               // helperText={editContentError}
             />
