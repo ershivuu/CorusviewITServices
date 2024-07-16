@@ -10,6 +10,7 @@ import Footers from "../../components/Footers/Footers";
 import uipos from "../../assets/images/projects/uipos.png";
 import cview from "../../assets/images/projects/cview.png";
 import RecentWork from "./RecentWork";
+import clientA from "../../assets/logos/clients/client.png";
 
 function Home() {
   const [mainTableData, setMainTableData] = useState(null);
@@ -35,7 +36,11 @@ function Home() {
           <span>{mainTableData.heading_1}</span> {mainTableData.heading_2}
         </p>
       </div>
-
+      <div className="our-client-logo">
+        {/* <div>
+          <img src={clientA} alt="" />
+        </div> */}
+      </div>
       <div>
         <OurServices></OurServices>
       </div>

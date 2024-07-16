@@ -1,13 +1,9 @@
-.playfair-display-<uniquifier> {
+.playfair {
   font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
 }
-.poppins-thin-italic {
+.poppins{
   font-family: "Poppins", sans-serif;
-  font-weight: 100;
-  font-style: italic;
+
 }
 @media screen and (max-width: 320px) {
   /* Styles for smaller smartphones */

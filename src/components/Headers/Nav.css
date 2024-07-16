@@ -23,7 +23,43 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+.work-with-us-btn {
+  background-color: white;
+  color: #375350;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 50px;
+  padding-inline: 40px;
+  height: 50px;
+  margin-top: 10px;
+  margin-right: -180px;
+  transition: 0.2s ease;
+}
+.work-with-us-btn span {
+  position: absolute;
+  font-size: 80px;
+  margin-left: 5px;
+  top: 0;
+  margin-top: -20px;
+}
+.work-with-us-btn:hover {
+  background-color: #375350;
+  color: white;
+}
 
+@keyframes dotbtn {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 2;
+  }
+  100% {
+    scale: 1;
+  }
+}
 .header-logo {
   height: 30px;
   width: 200px;
@@ -128,6 +164,9 @@ details div {
   .header-child {
     margin-inline: 10px;
   }
+  .work-with-us-btn {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 321px) and (max-width: 480px) {
@@ -143,11 +182,12 @@ details div {
   .header-child {
     margin-inline: 10px;
   }
-  /* .service-dropdown {
-    display: none;
-  } */
+
   .services-list-mobile {
     display: block;
+  }
+  .work-with-us-btn {
+    display: none;
   }
 }
 
@@ -159,6 +199,9 @@ details div {
   }
   .header-child {
     margin-inline: 10px;
+  }
+  .work-with-us-btn {
+    display: none;
   }
 }
 
@@ -173,6 +216,9 @@ details div {
   }
   .header-child {
     margin-inline: 10px;
+  }
+  .work-with-us-btn {
+    display: none;
   }
 }
 

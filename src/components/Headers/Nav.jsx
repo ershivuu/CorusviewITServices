@@ -53,6 +53,15 @@ function Nav() {
               <img className="header-logo" src={logo} />
             </a>
 
+            <div></div>
+            <div>
+              <Link to="/contact">
+                <button className="work-with-us-btn">
+                  Work with us <span>.</span>
+                </button>
+              </Link>
+            </div>
+
             <div>
               <div className="dropdown">
                 <button

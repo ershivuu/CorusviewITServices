@@ -22,7 +22,23 @@
   background-repeat: no-repeat;
   padding: 30px 50px 30px 50px;
 }
-
+.carousal-with-element {
+  position: relative;
+}
+.slider-vector {
+  position: absolute;
+  z-index: -999;
+  transition: 0.3s ease-in-out;
+  margin-top: -50px;
+  margin-left: -60px;
+}
+.slider-vector img {
+  width: 570px;
+  min-height: 400px;
+}
+.custom-crousol:hover .slider-vector {
+  transform: rotate(15deg);
+}
 .carousel-item {
   padding-inline: 10px;
   text-align: center;
@@ -117,12 +133,18 @@
     width: 50px;
     height: 50px;
   }
+  .slider-vector {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .custom-heading p {
     text-align: center;
     font-size: 40px !important;
+  }
+  .slider-vector {
+    display: none;
   }
 }
 

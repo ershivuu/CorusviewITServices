@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getCustomers } from "../../FrontendServices/Services";
 import "./Customer.css";
+import sliderelement from "../../../assets/images/slider-element.png";
 
 function Customer() {
   const [testimonials, setTestimonials] = useState([]);
@@ -39,7 +40,11 @@ function Customer() {
             What our <br /> Customers <br /> are Saying
           </p>
         </div>
+
         <div className="custom-crousol">
+          <div className="slider-vector">
+            <img src={sliderelement} alt="" />
+          </div>
           <div id="carouselExample" className="carousel slide">
             <div className="carousel-inner">
               {testimonials.map((testimonial, index) => (
