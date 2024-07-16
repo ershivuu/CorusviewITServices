@@ -1,0 +1,39 @@
+.workcard img {
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+}
+.workcard {
+  height: 600px;
+  width: 500px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: black;
+  cursor: grab;
+}
+.main-container {
+  position: relative;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .workcard {
+    height: 300px;
+    width: 240px;
+  }
+  .main-container {
+    height: 40vh;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+  .main-container {
+    height: 80vh;
+  }
+}

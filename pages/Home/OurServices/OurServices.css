@@ -1,0 +1,196 @@
+.services-heading {
+  font-size: 50px;
+  font-weight: 700;
+  font-family: "Playfair Display";
+  color: #04020f;
+  -webkit-animation: grabspace linear;
+  animation: grabspace linear forwards;
+}
+
+.services-sections img {
+  width: 60px;
+}
+.accordion-button p,
+.accordion-body {
+  margin-left: 52%;
+  font-size: 20px;
+}
+.accordion-button img {
+  width: 60px;
+}
+.accordion-button p {
+  font-size: 30px;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.accordion-item {
+  background-color: white !important;
+  border: none;
+  border-bottom: 1px solid black;
+}
+.accordion-item:focus,
+.accordion-button {
+  /* background-color: white !important; */
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.accordion-button {
+  background-color: white !important;
+}
+
+.accordion-button::after {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: var(--bs-accordion-btn-icon-width);
+  height: var(--bs-accordion-btn-icon-width);
+  margin-left: auto;
+  content: "";
+  background-image: url("../../../assets/logos/Icon.png") !important;
+  background-repeat: no-repeat;
+  background-size: var(--bs-accordion-btn-icon-width);
+  -webkit-transition: var(--bs-accordion-btn-icon-transition);
+  -o-transition: var(--bs-accordion-btn-icon-transition);
+  transition: var(--bs-accordion-btn-icon-transition);
+  /* padding-left: 10px; */
+}
+
+.accordion-body button {
+  background-color: transparent;
+  border: 2px solid darkgray;
+  border-radius: 10px;
+  margin-left: 6%;
+}
+.accordion-body button a {
+  text-decoration: none;
+  color: darkgray;
+  padding: 5px 10px 5px 10px;
+}
+.accordion-body p {
+  margin-left: 6%;
+}
+
+@-webkit-keyframes grabspace {
+  0% {
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+    opacity: 0.5;
+  }
+
+  60% {
+    -webkit-transform: translate(0%);
+    transform: translate(0%);
+    opacity: 1;
+  }
+}
+@keyframes grabspace {
+  0% {
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+    opacity: 0.5;
+  }
+
+  60% {
+    -webkit-transform: translate(0%);
+    transform: translate(0%);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes preserve {
+  0% {
+    -webkit-transform: perspective(900px) rotateX(60deg) scale(0.7);
+    transform: perspective(900px) rotateX(60deg) scale(0.7);
+  }
+  40% {
+    -webkit-transform: rotate(0deg) scale(1) translateY(10px);
+    transform: rotate(0deg) scale(1) translateY(10px);
+  }
+}
+@keyframes preserve {
+  0% {
+    -webkit-transform: perspective(900px) rotateX(60deg) scale(0.7);
+    transform: perspective(900px) rotateX(60deg) scale(0.7);
+  }
+  40% {
+    -webkit-transform: rotate(0deg) scale(1) translateY(10px);
+    transform: rotate(0deg) scale(1) translateY(10px);
+  }
+}
+@media screen and (max-width: 320px) {
+  .accordion-button p {
+    margin-left: 8%;
+    font-size: 18px;
+  }
+  .accordion-body {
+    margin-left: 0%;
+  }
+  .services-heading {
+    font-size: 30px;
+  }
+  .accordion-body p,
+  .accordion-body button {
+    margin-left: 0%;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .accordion-body p,
+  .accordion-body button {
+    margin-left: 0%;
+  }
+  .accordion-button p {
+    margin-left: 8%;
+    font-size: 18px;
+  }
+  .services-heading {
+    font-size: 30px;
+    text-align: center;
+    -webkit-animation: none;
+    animation: none;
+  }
+  .accordion-body {
+    margin-left: 0%;
+  }
+  .services-heading {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .accordion-body p,
+  .accordion-body button {
+    margin-left: 0%;
+  }
+  .accordion-button p {
+    margin-left: 8%;
+    font-size: 18px;
+  }
+  .services-heading {
+    font-size: 30px;
+    text-align: center;
+    -webkit-animation: none;
+    animation: none;
+  }
+  .accordion-body {
+    margin-left: 0%;
+  }
+  .services-heading {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Styles for small desktops and tablets in landscape */
+  .accordion-body {
+    margin-left: 0%;
+  }
+  .accordion-button p,
+  .accordion-body {
+    margin-left: 52%;
+    font-size: 20px;
+  }
+  .services-heading {
+    font-size: 40px;
+  }
+}

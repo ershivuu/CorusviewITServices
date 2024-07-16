@@ -1,0 +1,98 @@
+.productpage-heading {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Playfair Display", serif;
+  font-size: 90px;
+  color: var(--heading-color);
+  max-width: 800px;
+  font-weight: 700;
+  margin: auto;
+  line-height: 1;
+}
+.wrapped-content {
+  margin-block: 8%;
+  -webkit-animation: 0.5s slide-top ease-in-out;
+  animation: 0.5s slide-top ease-in-out;
+}
+.product-content {
+  text-align: center;
+  max-width: 1000px;
+  margin: auto;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+.prod-vector {
+  padding-top: 8%;
+  padding-bottom: 8%;
+  margin-block: 2%;
+  background: url("../../assets/images/productpage-vector.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.video-container {
+  max-width: 687px;
+  height: 352px;
+  margin: auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.video-container iframe {
+  height: 352px;
+  width: 100%;
+}
+.product-btns {
+  text-align: center;
+}
+.product-btns button {
+  margin: 10px;
+  background-color: transparent;
+  border: 2px solid var(--heading-color);
+  border-radius: 10px;
+  padding: 16px 50px 16px 50px;
+}
+.color-bnt {
+  background-color: var(--heading-color);
+}
+.first-btn button {
+  background-color: var(--heading-color);
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+.second-btn button {
+  font-family: "Poppins", sans-serif;
+}
+
+@media screen and (max-width: 320px) {
+  .productpage-heading {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* Styles for larger smartphones */
+  .productpage-heading {
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .product-container {
+    padding-inline: 10px;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .product-container {
+    padding-inline: 10px;
+  }
+  .productpage-heading {
+    font-size: 40px;
+  }
+  .product-content {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+}
