@@ -14,7 +14,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import Notification from "../../../Notification/Notification"; // Adjust path as per your file structure
 
@@ -92,9 +92,9 @@ const RecentworkHead = () => {
   return (
     <>
       <Typography variant="h5" component="h5">
-      Edit Recent Work Title
-    </Typography>
-      <TableContainer component={Paper} style={{marginTop:"10px"}}>
+        Edit Recent Work Title
+      </Typography>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table>
           <TableHead>
             <TableRow>
