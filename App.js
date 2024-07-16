@@ -76,8 +76,9 @@ const About = lazy(() => import("./pages/About/About"));
 const Carrer = lazy(() => import("./pages/Carrer/Carrer"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 const Products = lazy(() => import("./pages/Products/Products"));
-const Policy = lazy(() => import("./pages/PolicyPage/Policy"));
 const ApplyNow = lazy(() => import("./admin/AdminPages/ApplyNow/ApplyNow"));
+const Policy = lazy(() => import("./pages/PolicyPage/Policy"));
+
 const AllServiceDetails = lazy(() =>
   import("./pages/Home/AllServices/AllServiceDetails")
 );
