@@ -50,12 +50,12 @@ function Nav() {
             style={{ backgroundColor: headerData.header_color2 }}
           >
             <a href="/">
-              <img className="header-logo" src={logo} />
+              <img className="header-logo" src={logo} alt="corusview IT" />
             </a>
 
             <div></div>
             <div>
-              <Link to="/contact">
+              <Link rel="canonical" to="/contact">
                 <button className="work-with-us-btn">
                   Work with us <span>.</span>
                 </button>
@@ -70,19 +70,19 @@ function Nav() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <img className="hamburger" src={hamburger} />
+                  <img className="hamburger" src={hamburger} alt="hamburger" />
                 </button>
                 <ul
                   className="dropdown-menu"
                   style={{ backgroundColor: headerData.header_color2 }}
                 >
                   <li>
-                    <Link to="/" className="navigations">
+                    <Link rel="canonical" to="/" className="navigations">
                       Home
                     </Link>
                   </li>
                   <li>
-                    <Link to="/about" className="navigations">
+                    <Link rel="canonical" to="/about" className="navigations">
                       About Us
                     </Link>
                   </li>
@@ -92,6 +92,7 @@ function Nav() {
                       <div className="service-dropdown-content">
                         {services.map((service) => (
                           <Link
+                            rel="canonical"
                             key={service.id}
                             to={`/our-services/${service.id}`}
                           >
@@ -104,7 +105,7 @@ function Nav() {
                       <p className="navigations">Services</p>
                       <div className="services-list-mobile mobile-list">
                         {services.map((service) => (
-                          <Link
+                          <Link rel="canonical"
                             className="navigations"
                             key={service.id}
                             to={`/our-services/${service.id}`}
@@ -116,18 +117,22 @@ function Nav() {
                     </div> */}
                   </li>
                   <li>
-                    <Link to="/carrer" className="navigations">
+                    <Link rel="canonical" to="/carrer" className="navigations">
                       Career
                     </Link>
                   </li>
 
                   <li>
-                    <Link to="/contact" className="navigations">
+                    <Link rel="canonical" to="/contact" className="navigations">
                       Contact
                     </Link>
                   </li>
                   <li>
-                    <Link to="/our-products" className="navigations">
+                    <Link
+                      rel="canonical"
+                      to="/our-products"
+                      className="navigations"
+                    >
                       Products
                     </Link>
                   </li>

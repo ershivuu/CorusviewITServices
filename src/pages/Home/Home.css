@@ -41,7 +41,19 @@
   top: 0;
   right: 0;
 }
-
+.our-client-logo img {
+  width: 180px;
+  height: 100px;
+  object-fit: contain;
+}
+.our-client-logo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  margin-block: 10%;
+}
 .abt-com-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -216,6 +228,9 @@
   }
 }
 @media screen and (max-width: 320px) {
+  .our-client-logo {
+    gap: 50px;
+  }
   .home-heading {
     padding: 50px 10px 50px 10px;
     line-height: 1.5;
@@ -259,6 +274,9 @@
 
 @media screen and (min-width: 321px) and (max-width: 767px) {
   /* Styles for larger smartphones */
+  .our-client-logo {
+    gap: 50px;
+  }
   .abt-com-flex {
     text-align: center;
   }

@@ -63,7 +63,7 @@ function OurServices() {
                 <div className="accordion-body">
                   <p>{truncateText(service.content, 20)}</p>
                   <button onClick={() => handleReadMoreClick(service)}>
-                    <Link to={`/our-services/${service.id}`} target="_top">
+                    <Link rel="canonical" to={`/our-services/${service.id}`} target="_top">
                       Read More...
                     </Link>
                   </button>

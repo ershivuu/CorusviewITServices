@@ -117,7 +117,7 @@ function About() {
           </div>
         )}
         <div className="join-us-btn">
-          <Link to="/carrer" target="_top">
+          <Link rel="canonical" to="/carrer" target="_top">
             <button>Join Us</button>
           </Link>
         </div>

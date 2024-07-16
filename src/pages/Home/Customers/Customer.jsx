@@ -43,7 +43,7 @@ function Customer() {
 
         <div className="custom-crousol">
           <div className="slider-vector">
-            <img src={sliderelement} alt="" />
+            <img src={sliderelement} alt="our customer" />
           </div>
           <div id="carouselExample" className="carousel slide">
             <div className="carousel-inner">

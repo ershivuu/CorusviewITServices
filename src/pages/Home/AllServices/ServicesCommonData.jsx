@@ -14,7 +14,7 @@ function ServicesCommonData() {
       <div className="dev-process">
         <p>Our Process</p>
         <div>
-          <img src={devprocess} loading="lazy" />
+          <img src={devprocess} loading="lazy" alt="Developement process"/>
         </div>
       </div>
       <div className="tools">

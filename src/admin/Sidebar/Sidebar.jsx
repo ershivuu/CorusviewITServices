@@ -39,7 +39,7 @@ function Sidebar({ isOpen }) {
                     activeDropdown === "editheader" ? "active" : ""
                   }`}
                 >
-                  <Link to="/admin/editheader" onClick={handleLinkClick}>
+                  <Link rel="canonical" to="/admin/editheader" onClick={handleLinkClick}>
                     Edit Header
                   </Link>
                 </div>
@@ -59,22 +59,22 @@ function Sidebar({ isOpen }) {
                   activeDropdown === "home" ? "active" : ""
                 }`}
               >
-                <Link to="/admin/editheading" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editheading" onClick={handleLinkClick}>
                   Edit Heading
                 </Link>
-                <Link to="/admin/editservices" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editservices" onClick={handleLinkClick}>
                   Edit Services
                 </Link>
-                <Link to="/admin/editaboutus" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editaboutus" onClick={handleLinkClick}>
                   Edit About Us
                 </Link>
-                <Link to="/admin/editslider" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editslider" onClick={handleLinkClick}>
                   Edit Testimonials
                 </Link>
-                <Link to="/admin/editrecentwork" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editrecentwork" onClick={handleLinkClick}>
                   Edit Recent Work
                 </Link>
-                <Link to="/admin/recentworktitle" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/recentworktitle" onClick={handleLinkClick}>
                   Edit Recent Title
                 </Link>
               </div>
@@ -93,10 +93,10 @@ function Sidebar({ isOpen }) {
                   activeDropdown === "about" ? "active" : ""
                 }`}
               >
-                <Link to="/admin/editaboutpage" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editaboutpage" onClick={handleLinkClick}>
                   Edit About Page
                 </Link>
-                <Link to="/admin/editaboutvalue" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editaboutvalue" onClick={handleLinkClick}>
                   Edit About Value
                 </Link>
               </div>
@@ -115,17 +115,17 @@ function Sidebar({ isOpen }) {
                   activeDropdown === "services" ? "active" : ""
                 }`}
               >
-                {/* <Link to="/admin/editservicehead" onClick={handleLinkClick}>
+                {/* <Link rel="canonical" to="/admin/editservicehead" onClick={handleLinkClick}>
                   Edit Heading
                 </Link> */}
 
-                <Link to="/admin/editserviceproblems" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editserviceproblems" onClick={handleLinkClick}>
                   Edit Problems
                 </Link>
-                <Link to="/admin/editservicesolution" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editservicesolution" onClick={handleLinkClick}>
                   Edit Solution
                 </Link>
-                <Link to="/admin/editwhatyouget" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editwhatyouget" onClick={handleLinkClick}>
                   Edit What You'll Get
                 </Link>
               </div>
@@ -144,22 +144,22 @@ function Sidebar({ isOpen }) {
                   activeDropdown === "career" ? "active" : ""
                 }`}
               >
-                <Link to="/admin/editcarrerhead" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editcarrerhead" onClick={handleLinkClick}>
                   Edit Heading
                 </Link>
-                <Link to="/admin/createjobroles" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/createjobroles" onClick={handleLinkClick}>
                   Create Job Role
                 </Link>
-                <Link to="/admin/editcarrerimages" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editcarrerimages" onClick={handleLinkClick}>
                   Edit Gallery
                 </Link>
-                <Link to="/admin/editcarrerrys" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editcarrerrys" onClick={handleLinkClick}>
                   Edit Go Ahead
                 </Link>
-                <Link to="/admin/editcarrerwys" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editcarrerwys" onClick={handleLinkClick}>
                   Edit Career What you see
                 </Link>
-                <Link to="/admin/editjobopening" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editjobopening" onClick={handleLinkClick}>
                   Create Job Opening
                 </Link>
               </div>
@@ -178,10 +178,10 @@ function Sidebar({ isOpen }) {
                   activeDropdown === "contact" ? "active" : ""
                 }`}
               >
-                <Link to="/admin/editcontactus" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editcontactus" onClick={handleLinkClick}>
                   Edit Contact Us
                 </Link>
-                <Link to="/admin/editcontactform" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editcontactform" onClick={handleLinkClick}>
                   Contact Entries
                 </Link>
               </div>
@@ -200,7 +200,7 @@ function Sidebar({ isOpen }) {
                   activeDropdown === "products" ? "active" : ""
                 }`}
               >
-                <Link to="/admin/editproducts" onClick={handleLinkClick}>
+                <Link rel="canonical" to="/admin/editproducts" onClick={handleLinkClick}>
                   Add Products
                 </Link>
               </div>
@@ -220,7 +220,7 @@ function Sidebar({ isOpen }) {
                     activeDropdown === "applynow" ? "active" : ""
                   }`}
                 >
-                  <Link to="/admin/applynow" onClick={handleLinkClick}>
+                  <Link rel="canonical" to="/admin/applynow" onClick={handleLinkClick}>
                     Apply Now
                   </Link>
                 </div>
@@ -240,7 +240,7 @@ function Sidebar({ isOpen }) {
                     activeDropdown === "editfooter" ? "active" : ""
                   }`}
                 >
-                  <Link to="/admin/editfooter" onClick={handleLinkClick}>
+                  <Link rel="canonical" to="/admin/editfooter" onClick={handleLinkClick}>
                     Edit Footer
                   </Link>
                 </div>

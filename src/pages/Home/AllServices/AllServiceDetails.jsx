@@ -61,7 +61,7 @@ function AllServiceDetails() {
           </ul>
         </div>
         <div className="services-vector">
-          <img src={vectorgrp1} alt="" />
+          <img src={vectorgrp1} alt="vectorgrp1" />
         </div>
       </div>
       <ServicesCommonData />
