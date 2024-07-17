@@ -39,17 +39,16 @@ function EditSlider() {
   const [errorNotificationMessage, setErrorNotificationMessage] = useState("");
   const [disableAddSave, setDisableAddSave] = useState(false);
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+  const fetchData = async () => {
+    try {
+      const data = await fetchTestimonials();
+      setTestimonials(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchTestimonials();
-        setTestimonials(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
     fetchData();
   }, []);
 

@@ -55,7 +55,7 @@ function Nav() {
 
             <div></div>
             <div>
-              <Link rel="canonical" to="/contact">
+              <Link rel="canonical" to="/contact-us">
                 <button className="work-with-us-btn">
                   Work with us <span>.</span>
                 </button>
@@ -101,20 +101,6 @@ function Nav() {
                         ))}
                       </div>
                     </div>
-                    {/* <div className="services-list-mobile">
-                      <p className="navigations">Services</p>
-                      <div className="services-list-mobile mobile-list">
-                        {services.map((service) => (
-                          <Link rel="canonical"
-                            className="navigations"
-                            key={service.id}
-                            to={`/our-services/${service.id}`}
-                          >
-                            {service.heading}
-                          </Link>
-                        ))}
-                      </div>
-                    </div> */}
                   </li>
                   <li>
                     <Link rel="canonical" to="/carrer" className="navigations">
@@ -123,7 +109,11 @@ function Nav() {
                   </li>
 
                   <li>
-                    <Link rel="canonical" to="/contact" className="navigations">
+                    <Link
+                      rel="canonical"
+                      to="/contact-us"
+                      className="navigations"
+                    >
                       Contact
                     </Link>
                   </li>

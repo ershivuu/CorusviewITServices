@@ -25,17 +25,18 @@ function EditAboutUs() {
   const [editedData, setEditedData] = useState({ id: null, about_us: "" });
   const [characterLimitError, setCharacterLimitError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  
+  const getData = async () => {
+    try {
+      const result = await fetchMainTableData();
+      setData(result);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const result = await fetchMainTableData();
-        setData(result);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
+   
     getData();
   }, []);
 

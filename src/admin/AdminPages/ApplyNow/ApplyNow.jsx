@@ -45,36 +45,35 @@ function ApplyNow() {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
 
-  useEffect(() => {
-    const fetchApplicants = async () => {
-      try {
-        let data;
-        if (selectedRole === "All") {
-          data = await getApplicants();
-        } else {
-          data = await getApplicants(selectedRole);
-        }
-        setApplicants(data);
-      } catch (error) {
-        console.error("Error fetching applicants:", error);
-      }
-    };
+  const fetchRoles = async () => {
+    try {
+      const roles = await fetchJobRoles();
+      setJobRoles([{ role_id: 0, role: "All" }, ...roles]);
+    } catch (error) {
+      console.error("Error fetching roles:", error);
+    }
+  };
 
+  const fetchApplicants = async () => {
+    try {
+      let data;
+      if (selectedRole === "All") {
+        data = await getApplicants();
+      } else {
+        data = await getApplicants(selectedRole);
+      }
+      setApplicants(data);
+    } catch (error) {
+      console.error("Error fetching applicants:", error);
+    }
+  };
+  useEffect(() => {   
     fetchApplicants();
+    fetchRoles();
   }, [selectedRole]);
 
-  useEffect(() => {
-    const fetchRoles = async () => {
-      try {
-        const roles = await fetchJobRoles();
-        setJobRoles([{ role_id: 0, role: "All" }, ...roles]);
-      } catch (error) {
-        console.error("Error fetching roles:", error);
-      }
-    };
 
-    fetchRoles();
-  }, []);
+
 
   const handleClickOpen = (url) => {
     setCvUrl(url);

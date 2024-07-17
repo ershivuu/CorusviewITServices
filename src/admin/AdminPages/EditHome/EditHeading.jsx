@@ -28,10 +28,7 @@ function EditHeading() {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
-  const [successNotificationMessage, setSuccessNotificationMessage] =
-    useState("");
-
-  useEffect(() => {
+  const [successNotificationMessage, setSuccessNotificationMessage] = useState("");
     const getData = async () => {
       try {
         const result = await fetchMainTableData();
@@ -41,6 +38,8 @@ function EditHeading() {
       }
     };
 
+  useEffect(() => {
+    
     getData();
   }, []);
 

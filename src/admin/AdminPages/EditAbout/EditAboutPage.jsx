@@ -33,17 +33,17 @@ function EditAboutPage() {
   const [selectedField, setSelectedField] = useState("company_content"); // Set default value here
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
+  const fetchData = async () => {
+    try {
+      const data = await fetchAboutUsCompany();
+      setAboutUsData(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchAboutUsCompany();
-        setAboutUsData(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
+ 
     fetchData();
   }, []);
 

@@ -32,7 +32,7 @@ function Dashboard({ onLogout }) {
         >
           <div className="admin-header fixed-top">
             <div>
-              <img className="admin-logo" src={logo} alt="corusview" />
+              <img className="admin-logo" src={logo} alt="" />
             </div>
             <div id="logout-btn">
               <button onClick={onLogout}>

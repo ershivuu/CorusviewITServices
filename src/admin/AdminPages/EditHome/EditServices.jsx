@@ -69,10 +69,7 @@ function EditServices() {
   // Success message state
   const [successMessage, setSuccessMessage] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+ 
   const fetchData = async () => {
     try {
       const data = await fetchOurServicesData();
@@ -81,6 +78,9 @@ function EditServices() {
       setError(error.message);
     }
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleOpenEditDialog = (service) => {
     setEditedService({ ...service, icon_img: null }); // Reset icon_img state for editing

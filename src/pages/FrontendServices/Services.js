@@ -164,6 +164,15 @@ export const getRoles = async () => {
     throw error;
   }
 };
+export const getJobOpeningRoles = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/getJobOpeningRole`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact information:", error);
+    throw error;
+  }
+};
 export const currentJobOpenings = async () => {
   try {
     const response = await axios.get(`${API_URL}/jobOpenings`);

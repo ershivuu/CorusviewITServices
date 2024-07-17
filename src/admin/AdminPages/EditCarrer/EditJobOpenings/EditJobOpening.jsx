@@ -47,19 +47,16 @@ function EditJobOpening() {
   const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
 
   const [formValid, setFormValid] = useState(false); // State for form validation
+  const fetchRoles = async () => {
+    try {
+      const roles = await fetchJobRoles();
+      setJobRoles([{ role_id: 0, role: "All" }, ...roles]);
+    } catch (error) {
+      console.error("Error fetching roles:", error);
+    }
+  };
 
-  useEffect(() => {
-    const fetchRoles = async () => {
-      try {
-        const roles = await fetchJobRoles();
-        setJobRoles([{ role_id: 0, role: "All" }, ...roles]);
-      } catch (error) {
-        console.error("Error fetching roles:", error);
-      }
-    };
 
-    fetchRoles();
-  }, []);
 
   const fetchData = async () => {
     try {
@@ -76,6 +73,8 @@ function EditJobOpening() {
   };
 
   useEffect(() => {
+    
+    fetchRoles();
     fetchData();
   }, [selectedRole]);
 

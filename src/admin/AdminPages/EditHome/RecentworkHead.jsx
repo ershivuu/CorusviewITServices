@@ -26,9 +26,7 @@ const RecentworkHead = () => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   const fetchData = async () => {
     try {
@@ -38,7 +36,9 @@ const RecentworkHead = () => {
       console.error("Error fetching data:", error);
     }
   };
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleEditClick = () => {
     setUpdatedHeading(mainTableData?.recent_work_heading);
     setEditDialogOpen(true);
