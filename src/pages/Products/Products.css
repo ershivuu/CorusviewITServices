@@ -45,12 +45,14 @@
 .product-btns {
   text-align: center;
 }
+
 .product-btns button {
   margin: 10px;
   background-color: transparent;
   border: 2px solid var(--heading-color);
   border-radius: 10px;
   padding: 16px 50px 16px 50px;
+  color: black;
 }
 .color-bnt {
   background-color: var(--heading-color);
@@ -62,6 +64,7 @@
 }
 .second-btn button {
   font-family: "Poppins", sans-serif;
+  color: black;
 }
 
 @media screen and (max-width: 320px) {

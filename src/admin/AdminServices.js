@@ -2,6 +2,16 @@ import axios from "axios";
 import { API_URL } from "../config/config";
 const BASE_URL = API_URL;
 
+
+export const getJobOpeningRoles = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getJobOpeningRole`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact information:", error);
+    throw error;
+  }
+};
 // Get Home Heading data
 export const fetchMainTableData = async () => {
   try {

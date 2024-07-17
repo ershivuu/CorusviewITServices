@@ -3,7 +3,7 @@ import {
   getApplicants,
   getExportApplicants,
   deleteApplicants,
-  fetchJobRoles,
+  getJobOpeningRoles,
 } from "../../AdminServices";
 import {
   Table,
@@ -47,7 +47,7 @@ function ApplyNow() {
 
   const fetchRoles = async () => {
     try {
-      const roles = await fetchJobRoles();
+      const roles = await getJobOpeningRoles();
       setJobRoles([{ role_id: 0, role: "All" }, ...roles]);
     } catch (error) {
       console.error("Error fetching roles:", error);
@@ -67,13 +67,10 @@ function ApplyNow() {
       console.error("Error fetching applicants:", error);
     }
   };
-  useEffect(() => {   
+  useEffect(() => {
     fetchApplicants();
     fetchRoles();
   }, [selectedRole]);
-
-
-
 
   const handleClickOpen = (url) => {
     setCvUrl(url);
@@ -191,7 +188,10 @@ function ApplyNow() {
           ))}
         </Select>
       </FormControl>
-      <TableContainer component={Paper} style={{ marginTop: "20px", maxHeight: "500px", overflow: "auto" }}>
+      <TableContainer
+        component={Paper}
+        style={{ marginTop: "20px", maxHeight: "500px", overflow: "auto" }}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow>
@@ -212,7 +212,7 @@ function ApplyNow() {
             {applicants.map((applicant, index) => (
               <TableRow key={applicant.id}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{applicant.role || "-"}</TableCell>
+                <TableCell>{applicant.applied_for || "-"}</TableCell>
                 <TableCell>{applicant.position || "-"}</TableCell>
                 <TableCell>{applicant.name || "-"}</TableCell>
                 <TableCell>{applicant.surname || "-"}</TableCell>

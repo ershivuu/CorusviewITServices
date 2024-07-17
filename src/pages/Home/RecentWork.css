@@ -37,3 +37,10 @@
     height: 80vh;
   }
 }
+@media (max-height: 360px) {
+  /* CSS rules */
+  .workcard {
+    height: 70vh;
+
+  }
+}

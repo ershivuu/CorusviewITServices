@@ -86,10 +86,12 @@
   border-radius: 5px;
   padding: 5px 10px 5px 10px;
   font-size: 20px;
+  color: black;
 }
 .join-us button a {
   text-decoration: none;
   color: var(--sub-heading);
+  color: black;
 }
 .multi-group-images {
   margin-bottom: 120px;
