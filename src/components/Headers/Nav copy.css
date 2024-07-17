@@ -85,15 +85,12 @@ details div {
 .dropdown-menu {
   width: 100vw;
   max-width: 884px;
+
   border: none !important;
   border-radius: 20px;
   padding: 20px;
-
-  position: absolute;
-  left: 100%;
-  top: 0%;
-  transform: translate(-100%, 0%);
-  margin-top: 80px !important;
+  margin-top: 30px !important;
+  margin-left: -830px;
 }
 .dropdown-menu li {
   display: inline;
@@ -171,9 +168,6 @@ details div {
   .work-with-us-btn {
     display: none;
   }
-  .dropdown-menu {
-    margin-left: 0;
-  }
 }
 
 @media screen and (min-width: 321px) and (max-width: 480px) {
@@ -181,7 +175,6 @@ details div {
   .dropdown-menu {
     width: 100vw;
     padding: 20px;
-    margin-left: 10px;
   }
   .dropdown-menu li {
     display: block;
@@ -211,16 +204,12 @@ details div {
   .work-with-us-btn {
     display: none;
   }
-  .dropdown-menu {
-    margin-left: 10px;
-  }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .dropdown-menu {
     width: 97.9vw;
     padding: 20px;
-    margin-left: 10px;
   }
   .dropdown-menu li {
     display: inline;

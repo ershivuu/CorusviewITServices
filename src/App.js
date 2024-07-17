@@ -91,10 +91,6 @@ function App() {
             <Route path="editheading" element={<EditHeading />} />
             <Route path="editaboutus" element={<EditAboutUs />} />
             <Route path="editservices" element={<EditServices />} />
-            <Route path="editslider" element={<EditSlider />} />
-            <Route path="editrecentwork" element={<EditRecentWork />} />
-            <Route path="editaboutpage" element={<EditAboutPage />} />
-            <Route path="editaboutvalue" element={<EditAboutValue />} />
             <Route path="editservicehead" element={<EditServicesHead />} />
             <Route
               path="editserviceproblems"
@@ -124,7 +120,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="carrer" element={<Carrer />} />
+          <Route path="career" element={<Carrer />} />
           <Route path="contact-us" element={<Contact />} />
           <Route path="our-services/:id" element={<AllServiceDetails />} />
           <Route path="our-products" element={<Products />} />

@@ -78,7 +78,7 @@ function Nav() {
               <div className="dropdown">
                 <button
                   className="btn btn-secondary dropdown-toggle"
-                  type="button"
+                  type="button"            
                   onClick={toggleDropdown}
                   aria-expanded={isDropdownOpen ? "true" : "false"}
                 >
@@ -101,10 +101,7 @@ function Nav() {
                   </li>
                   <li>
                     <div className="service-dropdown">
-                      <button onClick={(e) => e.stopPropagation()}>
-                        Services
-                      </button>{" "}
-                      {/* Prevent parent dropdown close */}
+                      <button onClick={(e) => e.stopPropagation()}>Services</button> {/* Prevent parent dropdown close */}
                       <div className="service-dropdown-content">
                         {services.map((service) => (
                           <Link
