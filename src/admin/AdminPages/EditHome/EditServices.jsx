@@ -69,7 +69,6 @@ function EditServices() {
   // Success message state
   const [successMessage, setSuccessMessage] = useState(null);
 
- 
   const fetchData = async () => {
     try {
       const data = await fetchOurServicesData();
@@ -169,36 +168,48 @@ function EditServices() {
     const { name, value, files } = e.target;
 
     if (name === "icon_img") {
-      // File handling logic remains unchanged
+      const file = files[0]; // Assuming single file upload
+      if (file) {
+        const fileSize = file.size / 1024 / 1024; // in MB
+        const fileType = file.type.split("/")[1]; // Extract file type
+
+        // Check file type and size
+        if (!["png", "jpg", "jpeg"].includes(fileType)) {
+          setEditFileError(
+            "Unsupported file type. Please upload PNG, JPG, or JPEG files."
+          );
+          setEditButtonDisabled(true); // Disable save button on error
+        } else if (fileSize > 20) {
+          setEditFileError(
+            "File size exceeds 20 MB. Please upload a smaller file."
+          );
+          setEditButtonDisabled(true); // Disable save button on error
+        } else {
+          setEditedService({ ...editedService, icon_img: file });
+          setEditFileError(null); // Clear file error if no errors
+          setEditButtonDisabled(false); // Enable save button if error resolved
+        }
+      }
     } else if (name === "heading") {
       if (value.length >= MAX_HEADING_LENGTH) {
         setEditHeadingError(
           `Heading cannot exceed ${MAX_HEADING_LENGTH} characters.`
         );
-        setEditHeadingErrorNotification(
-          `Heading cannot exceed ${MAX_HEADING_LENGTH} characters.`
-        );
       } else {
         setEditedService({ ...editedService, heading: value });
         setEditHeadingError(null);
-        setEditHeadingErrorNotification(null); // Clear notification on valid input
       }
     } else if (name === "content") {
       if (value.length >= MAX_CONTENT_LENGTH) {
         setEditContentError(
           `Content cannot exceed ${MAX_CONTENT_LENGTH} characters.`
         );
-        setEditContentErrorNotification(
-          `Content cannot exceed ${MAX_CONTENT_LENGTH} characters.`
-        );
       } else {
         setEditedService({ ...editedService, content: value });
         setEditContentError(null);
-        setEditContentErrorNotification(null); // Clear notification on valid input
       }
     }
   };
-
   const handleSubmitAdd = async () => {
     try {
       // Validate if any field is empty
