@@ -67,7 +67,7 @@ const AddJobRole = () => {
       console.error("Error adding job role:", error);
       setNotification({
         open: true,
-        message: error.response?.data?.message || "Error adding job role.",
+        message: error.response?.data?.message || "Role already exists!",
         severity: "error",
       });
     }

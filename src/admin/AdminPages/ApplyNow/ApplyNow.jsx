@@ -3,7 +3,7 @@ import {
   getApplicants,
   getExportApplicants,
   deleteApplicants,
-  getJobOpeningRoles,
+  applicantsRoles,
 } from "../../AdminServices";
 import {
   Table,
@@ -29,7 +29,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import GetAppIcon from "@mui/icons-material/GetApp";
 
-import Notification from "../../../Notification/Notification"; // Update the path as per your file structure
+import Notification from "../../../Notification/Notification"; 
 
 function ApplyNow() {
   const [applicants, setApplicants] = useState([]);
@@ -47,7 +47,7 @@ function ApplyNow() {
 
   const fetchRoles = async () => {
     try {
-      const roles = await getJobOpeningRoles();
+      const roles = await applicantsRoles();
       setJobRoles([{ role_id: 0, role: "All" }, ...roles]);
     } catch (error) {
       console.error("Error fetching roles:", error);
@@ -132,7 +132,8 @@ function ApplyNow() {
         setNotificationSeverity("success");
         setNotificationOpen(true);
       }
-
+      fetchApplicants();
+      fetchRoles();
       setDeleteDialogOpen(false);
     } catch (error) {
       console.error("Error deleting applicant:", error);
