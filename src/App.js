@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Main, Route, Routes } from "react-router-dom";
-
+import Test from "./pages/Test/Test";
 // Lazy-loaded components
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel"));
 const EditServices = lazy(() =>
@@ -129,6 +129,7 @@ function App() {
           <Route path="our-services/:id" element={<AllServiceDetails />} />
           <Route path="our-products" element={<Products />} />
           <Route path="privacy-policy" element={<Policy />} />
+          <Route path="test" element={<Test />} />
         </Routes>
       </Suspense>
     </Main>
