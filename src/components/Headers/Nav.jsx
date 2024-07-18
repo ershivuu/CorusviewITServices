@@ -10,8 +10,8 @@ import hamburger from "../../assets/logos/hamburger.png";
 
 function Nav() {
   const [headerData, setHeaderData] = useState({
-    header_color1: "#ffff",
-    header_color2: "#ffff",
+    header_color1: "#83c5be",
+    header_color2: "#f3f9e9",
   });
   const [services, setServices] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
