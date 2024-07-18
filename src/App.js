@@ -114,6 +114,10 @@ function App() {
             <Route path="createjobroles" element={<AddJobRole />} />
             <Route path="editProducts" element={<EditProductsForm />} />
             <Route path="applynow" element={<ApplyNow />} />
+            <Route path="editslider" element={<EditSlider />} />
+            <Route path="editrecentwork" element={<EditRecentWork />} />
+            <Route path="editaboutpage" element={<EditAboutPage />} />
+            <Route path="editaboutvalue" element={<EditAboutValue />} />
           </Route>
 
           <Route path="*" element={<NoPage />} />
