@@ -97,7 +97,7 @@ function EditRecentWork() {
       setEditOpen(false);
       showNotification("File updated successfully!", "success");
 
-      fetchData(); // Refresh the data after update
+      fetchData();
     } catch (error) {
       setError(error.message);
     }
@@ -122,7 +122,7 @@ function EditRecentWork() {
 
       showNotification("File deleted successfully!", "success");
 
-      fetchData(); // Refresh the data after deletion
+      fetchData(); 
     } catch (error) {
       setError(error.message);
     }
@@ -152,8 +152,8 @@ function EditRecentWork() {
         return;
       }
 
-      // Validate file size (20 MB limit)
-      const maxSize = 20 * 1024 * 1024; // 20 MB in bytes
+      
+      const maxSize = 20 * 1024 * 1024; 
       if (file.size > maxSize) {
         showNotification("File size exceeds 20 MB limit.");
         setAddSaveDisabled(true);
@@ -175,7 +175,7 @@ function EditRecentWork() {
       setAddOpen(false);
       showNotification("File added successfully!", "success");
 
-      fetchData(); // Refresh the data after addition
+      fetchData(); 
     } catch (error) {
       setError(error.message);
     }

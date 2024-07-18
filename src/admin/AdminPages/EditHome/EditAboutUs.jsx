@@ -14,7 +14,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Notification from "../../../Notification/Notification"; // Adjust the path as per your project structure
+import Notification from "../../../Notification/Notification"; 
 
 const MAX_ABOUT_US_LENGTH = 350;
 
@@ -47,7 +47,7 @@ function EditAboutUs() {
 
   const handleClose = () => {
     setOpen(false);
-    setSuccessMessage(null); // Reset success message when dialog is closed
+    setSuccessMessage(null); 
   };
 
   const handleChange = (e) => {
@@ -77,7 +77,7 @@ function EditAboutUs() {
       });
       setOpen(false);
       setData({ ...data, about_us: editedData.about_us });
-      setSuccessMessage(response.message); // Set success message
+      setSuccessMessage(response.message); 
     } catch (error) {
       setError(error.message);
       setSuccessMessage(error.message, "error");
@@ -143,7 +143,7 @@ function EditAboutUs() {
         </DialogActions>
       </Dialog>
 
-      {/* Notification for Character Limit */}
+      
       <Notification
         open={characterLimitError !== null}
         handleClose={() => setCharacterLimitError(null)}
@@ -151,7 +151,6 @@ function EditAboutUs() {
         alertSeverity="error"
       />
 
-      {/* Success Notification */}
       <Notification
         open={successMessage !== null}
         handleClose={() => setSuccessMessage(null)}

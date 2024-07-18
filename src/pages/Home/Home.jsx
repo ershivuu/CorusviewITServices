@@ -29,7 +29,17 @@ function Home() {
   }, []);
 
   if (!mainTableData) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <Nav></Nav>
+        <div className="home-heading">
+          <p>
+            <span>5+ YEARS OF EXPERIENCE IN IT FIELD </span>
+            WHERE INNOVATION MEETS EXCELLENCE
+          </p>
+        </div>
+      </>
+    );
   }
 
   return (

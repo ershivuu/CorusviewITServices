@@ -155,7 +155,7 @@ function EditHeading() {
         </DialogActions>
       </Dialog>
 
-      {/* Notification for character limit */}
+     
       {showNotification && (
         <Notification
           open={showNotification}
@@ -165,7 +165,6 @@ function EditHeading() {
         />
       )}
 
-      {/* Success Notification */}
       {showSuccessNotification && (
         <Notification
           open={showSuccessNotification}

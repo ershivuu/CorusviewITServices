@@ -12,6 +12,15 @@ export const getJobOpeningRoles = async () => {
     throw error;
   }
 };
+export const applicantsRoles = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/applicantsRoles`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact information:", error);
+    throw error;
+  }
+};
 // Get Home Heading data
 export const fetchMainTableData = async () => {
   try {
