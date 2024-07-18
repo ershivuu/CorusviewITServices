@@ -173,7 +173,7 @@ function EditSlider() {
   };
 
   const handleAddSave = async () => {
-    // Check for empty fields
+   
     if (
       !editedTestimonial.description ||
       !editedTestimonial.img ||
@@ -214,7 +214,7 @@ function EditSlider() {
       );
       setTestimonials(updatedTestimonials);
 
-      // Show success notification
+   
       setShowErrorNotification(true);
       setErrorNotificationMessage("Data deleted successfully.");
     } catch (error) {

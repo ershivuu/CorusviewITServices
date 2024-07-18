@@ -19,7 +19,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import Notification from "../../../Notification/Notification"; // Adjust the path as per your project structure
+import Notification from "../../../Notification/Notification"; 
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
@@ -37,7 +37,7 @@ function EditServicesHead() {
     services_content: ""
   });
   const [addData, setAddData] = useState({
-    service_id: 0, // Initialize with appropriate default value or set according to your application logic
+    service_id: 0, 
     services_heading: "",
     services_content: ""
   });
@@ -103,11 +103,11 @@ function EditServicesHead() {
   const handleAddChange = (e) => {
     if (e.target.name === "selectedOurService") {
       setSelectedOurService(e.target.value);
-      // Update service_id based on selected service
+      
       
       setAddData({
         ...addData,
-        service_id: e.target.value.id // Adjust according to how service_id is determined
+        service_id: e.target.value.id
       });
     } else {
       setAddData({
@@ -166,7 +166,7 @@ const handleAdd = async () => {
 
     fetchData();
   } catch (error) {
-    // Check if error.response exists to handle API response errors
+  
     if (error.response && error.response.data && error.response.data.error) {
       setAlertMessage(error.response.data.error);
     } else {

@@ -91,35 +91,35 @@ function EditWhatYouGet() {
       handleNotification(response.message, "success");
     } catch (error) {
       console.error("Error updating service:", error);
-      // Handle error as needed
+     
       handleNotification("Error updating service", "error");
     }
   };
 
   const handleDeleteClick = (id) => {
-    setDeleteServiceId(id); // Set the service ID to delete
-    setOpenDeleteDialog(true); // Open the delete confirmation dialog
+    setDeleteServiceId(id); 
+    setOpenDeleteDialog(true); 
   };
 
   const handleConfirmDelete = async () => {
     try {
       const response = await deleteWhatYouGetService(deleteServiceId);
-      // Refresh the services list after successful deletion
+     
 
       getServices();
-      handleCloseDeleteDialog(); // Close the delete confirmation dialog
-      // Show success notification
+      handleCloseDeleteDialog(); 
+     
       handleNotification(response.message, "success");
     } catch (error) {
       console.error("Error deleting service:", error);
-      // Handle error as needed
+    
       handleNotification("Error deleting service", "error");
     }
   };
 
   const handleCloseDeleteDialog = () => {
-    setOpenDeleteDialog(false); // Close the delete confirmation dialog
-    setDeleteServiceId(null); // Clear the delete service ID
+    setOpenDeleteDialog(false); 
+    setDeleteServiceId(null); 
   };
 
   const handleAddClick = () => {
@@ -133,18 +133,18 @@ function EditWhatYouGet() {
 
   const handleAddService = async () => {
     try {
-      // Ensure selectedService is not null before proceeding
+     
       if (!selectedService) {
         handleNotification("Please select a service", "error");
         return;
       }
 
       const newService = {
-        service_id: selectedService.id, // Assuming 'id' is the correct property of selectedService
+        service_id: selectedService.id, 
         heading: newHeading,
       };
       const response = await addWhatYouGetService(newService);
-      await getServices(); // Refresh the services list after adding a new service
+      await getServices(); 
       handleCloseAddDialog();
 
       handleNotification(response.message, "success");

@@ -16,8 +16,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import Notification from "../../../Notification/Notification"; // Adjust path as per your file structure
-
+import Notification from "../../../Notification/Notification"; 
 const RecentworkHead = () => {
   const [mainTableData, setMainTableData] = useState(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -69,13 +68,13 @@ const RecentworkHead = () => {
         recent_work_heading: updatedHeading,
       }));
       handleDialogClose();
-      // Show success notification
+   
       setNotificationSeverity("success");
       setNotificationMessage("Data updated successfully");
       setNotificationOpen(true);
     } catch (error) {
       console.error("Error updating heading:", error);
-      // Show error notification
+     
       setNotificationSeverity("error");
       setNotificationMessage("Failed to update data");
       setNotificationOpen(true);

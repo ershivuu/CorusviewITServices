@@ -28,7 +28,7 @@ import {
   addSolution,
   fetchOnlyOurServiceHead,
 } from "../../AdminServices";
-import Notification from "../../../Notification/Notification"; // Replace with actual path
+import Notification from "../../../Notification/Notification"; 
 
 function EditServiceSolution() {
   const [solutions, setSolutions] = useState([]);
@@ -46,7 +46,6 @@ function EditServiceSolution() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Notification state
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("info");
@@ -198,7 +197,6 @@ function EditServiceSolution() {
     setOpenNotification(false);
   };
 
-  // Render loading indicator while fetching data
   if (loading) {
     return (
       <Box
@@ -214,7 +212,7 @@ function EditServiceSolution() {
     );
   }
 
-  // Render error message if data fetch fails
+
   if (error) {
     return (
       <Typography variant="body1" style={{ padding: "20px" }}>
@@ -223,7 +221,7 @@ function EditServiceSolution() {
     );
   }
 
-  // Render solutions table if solutions array is defined and not empty
+  
   return (
     <Box>
       <Typography variant="h5" component="h5">

@@ -26,10 +26,9 @@ import {
   deleteProblem,
   addProblem,
   fetchOnlyOurServiceHead,
-} from "../../AdminServices"; // Adjust path as per your project structure
+} from "../../AdminServices"; 
 
-import Notification from "../../../Notification/Notification"; // Adjust path as per your project structure
-
+import Notification from "../../../Notification/Notification"; 
 function EditServiceProblem() {
   const [problems, setProblems] = useState([]);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -43,7 +42,6 @@ function EditServiceProblem() {
   const [ourServicesHeadings, setOurServicesHeadings] = useState([]);
   const [selectedService, setSelectedService] = useState("");
 
-  // Notification state
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("info");
@@ -174,7 +172,6 @@ function EditServiceProblem() {
           Edit Service Problem
         </Typography>
 
-        {/* {/ Add Button /} */}
         <Button
           variant="contained"
           color="primary"
@@ -184,7 +181,6 @@ function EditServiceProblem() {
           Add Problem
         </Button>
 
-        {/* {/ Table of Problems /} */}
         <TableContainer
           component={Paper}
           style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}

@@ -20,7 +20,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Notification from "../../../Notification/Notification"; // Adjust the path as per your project structure
+import Notification from "../../../Notification/Notification"; 
 
 const MAX_HEADING_LENGTH = 25;
 const MAX_CONTENT_LENGTH = 200;
@@ -29,7 +29,6 @@ function EditServices() {
   const [servicesData, setServicesData] = useState([]);
   const [error, setError] = useState(null);
 
-  // State for Add Service Dialog
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [newService, setNewService] = useState({
     icon_img: null,
@@ -37,7 +36,7 @@ function EditServices() {
     content: "",
   });
   const [addFileError, setAddFileError] = useState(null);
-  const [addButtonDisabled, setAddButtonDisabled] = useState(false); // To disable save button on error
+  const [addButtonDisabled, setAddButtonDisabled] = useState(false); 
   const [headingError, setHeadingError] = useState(null);
   const [contentError, setContentError] = useState(null);
   const [headingErrorNotification, setHeadingErrorNotification] =
@@ -45,7 +44,6 @@ function EditServices() {
   const [contentErrorNotification, setContentErrorNotification] =
     useState(null);
 
-  // State for Edit Service Dialog
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [editedService, setEditedService] = useState({
     id: null,
@@ -54,7 +52,7 @@ function EditServices() {
     content: "",
   });
   const [editFileError, setEditFileError] = useState(null);
-  const [editButtonDisabled, setEditButtonDisabled] = useState(false); // To disable save button on error
+  const [editButtonDisabled, setEditButtonDisabled] = useState(false); 
   const [editHeadingError, setEditHeadingError] = useState(null);
   const [editContentError, setEditContentError] = useState(null);
   const [editHeadingErrorNotification, setEditHeadingErrorNotification] =
@@ -62,11 +60,11 @@ function EditServices() {
   const [editContentErrorNotification, setEditContentErrorNotification] =
     useState(null);
 
-  // State for Delete Confirmation Dialog
+
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [serviceToDelete, setServiceToDelete] = useState(null);
 
-  // Success message state
+  
   const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
@@ -83,16 +81,16 @@ function EditServices() {
   };
 
   const handleOpenEditDialog = (service) => {
-    setEditedService({ ...service, icon_img: null }); // Reset icon_img state for editing
+    setEditedService({ ...service, icon_img: null }); 
     setOpenEditDialog(true);
   };
 
   const handleCloseEditDialog = () => {
     setOpenEditDialog(false);
-    setEditHeadingError(null); // Clear heading error on close
-    setEditContentError(null); // Clear content error on close
-    setEditHeadingErrorNotification(null); // Clear heading error notification on close
-    setEditContentErrorNotification(null); // Clear content error notification on close
+    setEditHeadingError(null); 
+    setEditContentError(null); 
+    setEditHeadingErrorNotification(null); 
+    setEditContentErrorNotification(null); 
   };
 
   const handleOpenAddDialog = () => {
@@ -101,39 +99,38 @@ function EditServices() {
 
   const handleCloseAddDialog = () => {
     setOpenAddDialog(false);
-    setNewService({ icon_img: null, heading: "", content: "" }); // Reset new service state
-    setAddFileError(null); // Clear file error state
-    setAddButtonDisabled(false); // Enable save button on dialog close
-    setHeadingError(null); // Clear heading error on close
-    setContentError(null); // Clear content error on close
-    setHeadingErrorNotification(null); // Clear heading error notification on close
-    setContentErrorNotification(null); // Clear content error notification on close
+    setNewService({ icon_img: null, heading: "", content: "" }); 
+    setAddFileError(null); 
+    setAddButtonDisabled(false); 
+    setHeadingError(null); 
+    setContentError(null); 
+    setHeadingErrorNotification(null); 
+    setContentErrorNotification(null); 
   };
 
   const handleAddChange = (e) => {
     const { name, value, files } = e.target;
 
     if (name === "icon_img") {
-      const file = files[0]; // Assuming single file upload
+      const file = files[0]; 
       if (file) {
-        const fileSize = file.size / 1024 / 1024; // in MB
-        const fileType = file.type.split("/")[1]; // Extract file type
+        const fileSize = file.size / 1024 / 1024; 
+        const fileType = file.type.split("/")[1]; 
 
-        // Check file type and size
         if (!["png", "jpg", "jpeg"].includes(fileType)) {
           setAddFileError(
             "Unsupported file type. Please upload PNG, JPG, or JPEG files."
           );
-          setAddButtonDisabled(true); // Disable save button on error
+          setAddButtonDisabled(true); 
         } else if (fileSize > 20) {
           setAddFileError(
             "File size exceeds 20 MB. Please upload a smaller file."
           );
-          setAddButtonDisabled(true); // Disable save button on error
+          setAddButtonDisabled(true); 
         } else {
           setNewService({ ...newService, icon_img: file });
-          setAddFileError(null); // Clear file error if no errors
-          setAddButtonDisabled(false); // Enable save button if error resolved
+          setAddFileError(null); 
+          setAddButtonDisabled(false); 
         }
       }
     } else if (name === "heading") {
@@ -146,8 +143,8 @@ function EditServices() {
         );
       } else {
         setNewService({ ...newService, heading: value });
-        setHeadingError(null); // Clear heading error if no errors
-        setHeadingErrorNotification(null); // Clear heading error notification if no errors
+        setHeadingError(null); 
+        setHeadingErrorNotification(null); 
       }
     } else if (name === "content") {
       if (value.length >= MAX_CONTENT_LENGTH) {
@@ -159,8 +156,8 @@ function EditServices() {
         );
       } else {
         setNewService({ ...newService, content: value });
-        setContentError(null); // Clear content error if no errors
-        setContentErrorNotification(null); // Clear content error notification if no errors
+        setContentError(null); 
+        setContentErrorNotification(null); 
       }
     }
   };
@@ -169,7 +166,7 @@ function EditServices() {
     const { name, value, files } = e.target;
 
     if (name === "icon_img") {
-      // File handling logic remains unchanged
+     
     } else if (name === "heading") {
       if (value.length >= MAX_HEADING_LENGTH) {
         setEditHeadingError(
@@ -181,7 +178,7 @@ function EditServices() {
       } else {
         setEditedService({ ...editedService, heading: value });
         setEditHeadingError(null);
-        setEditHeadingErrorNotification(null); // Clear notification on valid input
+        setEditHeadingErrorNotification(null); 
       }
     } else if (name === "content") {
       if (value.length >= MAX_CONTENT_LENGTH) {
@@ -194,55 +191,55 @@ function EditServices() {
       } else {
         setEditedService({ ...editedService, content: value });
         setEditContentError(null);
-        setEditContentErrorNotification(null); // Clear notification on valid input
+        setEditContentErrorNotification(null); 
       }
     }
   };
 
   const handleSubmitAdd = async () => {
     try {
-      // Validate if any field is empty
+      
       if (!newService.icon_img) {
         setAddFileError("Icon image is required.");
-        return; // Stop submission if icon_img is empty
+        return; 
       } else {
         setAddFileError(null);
       }
 
       if (!newService.heading) {
         setHeadingError("Heading is required.");
-        return; // Stop submission if heading is empty
+        return; 
       } else if (newService.heading.length >= MAX_HEADING_LENGTH) {
         setHeadingError(
           `Heading cannot exceed ${MAX_HEADING_LENGTH} characters.`
         );
-        return; // Stop submission if heading exceeds max length
+        return; 
       } else {
         setHeadingError(null);
       }
 
       if (!newService.content) {
         setContentError("Content is required.");
-        return; // Stop submission if content is empty
+        return; 
       } else if (newService.content.length > MAX_CONTENT_LENGTH) {
         setContentError(
           `Content cannot exceed ${MAX_CONTENT_LENGTH} characters.`
         );
-        return; // Stop submission if content exceeds max length
+        return; 
       } else {
         setContentError(null);
       }
 
-      // If all validations pass, proceed to submit form data
+      
       const formData = new FormData();
       formData.append("icon_img", newService.icon_img);
       formData.append("heading", newService.heading);
       formData.append("content", newService.content);
 
       const response = await addServiceData(formData);
-      fetchData(); // Refresh data after addition
+      fetchData();
       handleCloseAddDialog();
-      setSuccessMessage(response.message); // Set success message
+      setSuccessMessage(response.message); 
     } catch (error) {
       setError(error.message);
     }
@@ -250,7 +247,7 @@ function EditServices() {
 
   const handleSubmitEdit = async () => {
     try {
-      // Validate if any field is empty or exceeds limits
+      
       if (!editedService.heading) {
         setEditHeadingError("Heading is required.");
         return;
@@ -271,13 +268,13 @@ function EditServices() {
         return;
       }
 
-      // Prepare FormData
+
       const formData = new FormData();
       formData.append("id", editedService.id);
       formData.append("heading", editedService.heading);
       formData.append("content", editedService.content);
 
-      // Add icon_img if it exists
+      
       if (editedService.icon_img) {
         formData.append("icon_img", editedService.icon_img);
       }
