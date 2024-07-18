@@ -14,6 +14,8 @@ function Nav() {
     header_color2: "#ffff",
   });
   const [services, setServices] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   useEffect(() => {
     const fetchHeaderData = async () => {
       try {
@@ -26,6 +28,7 @@ function Nav() {
 
     fetchHeaderData();
   }, []);
+
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -38,6 +41,15 @@ function Nav() {
 
     fetchServices();
   }, []);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
   return (
     <>
       <div>
@@ -50,39 +62,53 @@ function Nav() {
             style={{ backgroundColor: headerData.header_color2 }}
           >
             <a href="/">
-              <img className="header-logo" src={logo} />
+              <img className="header-logo" src={logo} alt="corusview IT" />
             </a>
+
+            <div></div>
+            <div>
+              <Link rel="canonical" to="/contact-us">
+                <button className="work-with-us-btn">
+                  Work with us <span>.</span>
+                </button>
+              </Link>
+            </div>
 
             <div>
               <div className="dropdown">
                 <button
                   className="btn btn-secondary dropdown-toggle"
                   type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  onClick={toggleDropdown}
+                  aria-expanded={isDropdownOpen ? "true" : "false"}
                 >
-                  <img className="hamburger" src={hamburger} />
+                  <img className="hamburger" src={hamburger} alt="hamburger" />
                 </button>
                 <ul
-                  className="dropdown-menu"
+                  className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}
                   style={{ backgroundColor: headerData.header_color2 }}
+                  onClick={closeDropdown} // Close dropdown on any click inside the dropdown
                 >
                   <li>
-                    <Link to="/" className="navigations">
+                    <Link rel="canonical" to="/" className="navigations">
                       Home
                     </Link>
                   </li>
                   <li>
-                    <Link to="/about" className="navigations">
+                    <Link rel="canonical" to="/about" className="navigations">
                       About Us
                     </Link>
                   </li>
                   <li>
-                    <div class="service-dropdown">
-                      <button>Services</button>
-                      <div class="service-dropdown-content">
+                    <div className="service-dropdown">
+                      <button onClick={(e) => e.stopPropagation()}>
+                        Services
+                      </button>{" "}
+                      {/* Prevent parent dropdown close */}
+                      <div className="service-dropdown-content">
                         {services.map((service) => (
                           <Link
+                            rel="canonical"
                             key={service.id}
                             to={`/our-services/${service.id}`}
                           >
@@ -91,34 +117,27 @@ function Nav() {
                         ))}
                       </div>
                     </div>
-                    {/* <div className="services-list-mobile">
-                      <p className="navigations">Services</p>
-                      <div className="services-list-mobile mobile-list">
-                        {services.map((service) => (
-                          <Link
-                            className="navigations"
-                            key={service.id}
-                            to={`/our-services/${service.id}`}
-                          >
-                            {service.heading}
-                          </Link>
-                        ))}
-                      </div>
-                    </div> */}
                   </li>
                   <li>
-                    <Link to="/carrer" className="navigations">
+                    <Link rel="canonical" to="/career" className="navigations">
                       Career
                     </Link>
                   </li>
-
                   <li>
-                    <Link to="/contact" className="navigations">
+                    <Link
+                      rel="canonical"
+                      to="/contact-us"
+                      className="navigations"
+                    >
                       Contact
                     </Link>
                   </li>
                   <li>
-                    <Link to="/our-products" className="navigations">
+                    <Link
+                      rel="canonical"
+                      to="/our-products"
+                      className="navigations"
+                    >
                       Products
                     </Link>
                   </li>

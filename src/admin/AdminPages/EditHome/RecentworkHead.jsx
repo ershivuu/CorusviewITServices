@@ -14,7 +14,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import Notification from "../../../Notification/Notification"; 
 const RecentworkHead = () => {
@@ -25,9 +25,7 @@ const RecentworkHead = () => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   const fetchData = async () => {
     try {
@@ -37,7 +35,9 @@ const RecentworkHead = () => {
       console.error("Error fetching data:", error);
     }
   };
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleEditClick = () => {
     setUpdatedHeading(mainTableData?.recent_work_heading);
     setEditDialogOpen(true);
@@ -91,9 +91,9 @@ const RecentworkHead = () => {
   return (
     <>
       <Typography variant="h5" component="h5">
-      Edit Recent Work Title
-    </Typography>
-      <TableContainer component={Paper} style={{marginTop:"10px"}}>
+        Edit Recent Work Title
+      </Typography>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table>
           <TableHead>
             <TableRow>

@@ -30,11 +30,6 @@ const EditFooter = () => {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("default");
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     try {
       const response = await fetchFooterData();
@@ -46,6 +41,11 @@ const EditFooter = () => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+ 
 
   const handleEditClick = (item) => {
     setEditItem({ ...item });

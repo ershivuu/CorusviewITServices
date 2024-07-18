@@ -3,7 +3,7 @@ import {
   getApplicants,
   getExportApplicants,
   deleteApplicants,
-  fetchJobRoles,
+  getJobOpeningRoles,
 } from "../../AdminServices";
 import {
   Table,
@@ -45,36 +45,32 @@ function ApplyNow() {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
 
-  useEffect(() => {
-    const fetchApplicants = async () => {
-      try {
-        let data;
-        if (selectedRole === "All") {
-          data = await getApplicants();
-        } else {
-          data = await getApplicants(selectedRole);
-        }
-        setApplicants(data);
-      } catch (error) {
-        console.error("Error fetching applicants:", error);
-      }
-    };
+  const fetchRoles = async () => {
+    try {
+      const roles = await getJobOpeningRoles();
+      setJobRoles([{ role_id: 0, role: "All" }, ...roles]);
+    } catch (error) {
+      console.error("Error fetching roles:", error);
+    }
+  };
 
+  const fetchApplicants = async () => {
+    try {
+      let data;
+      if (selectedRole === "All") {
+        data = await getApplicants();
+      } else {
+        data = await getApplicants(selectedRole);
+      }
+      setApplicants(data);
+    } catch (error) {
+      console.error("Error fetching applicants:", error);
+    }
+  };
+  useEffect(() => {
     fetchApplicants();
-  }, [selectedRole]);
-
-  useEffect(() => {
-    const fetchRoles = async () => {
-      try {
-        const roles = await fetchJobRoles();
-        setJobRoles([{ role_id: 0, role: "All" }, ...roles]);
-      } catch (error) {
-        console.error("Error fetching roles:", error);
-      }
-    };
-
     fetchRoles();
-  }, []);
+  }, [selectedRole]);
 
   const handleClickOpen = (url) => {
     setCvUrl(url);
@@ -192,7 +188,10 @@ function ApplyNow() {
           ))}
         </Select>
       </FormControl>
-      <TableContainer component={Paper} style={{ marginTop: "20px", maxHeight: "500px", overflow: "auto" }}>
+      <TableContainer
+        component={Paper}
+        style={{ marginTop: "20px", maxHeight: "500px", overflow: "auto" }}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow>
@@ -213,7 +212,7 @@ function ApplyNow() {
             {applicants.map((applicant, index) => (
               <TableRow key={applicant.id}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{applicant.role || "-"}</TableCell>
+                <TableCell>{applicant.applied_for || "-"}</TableCell>
                 <TableCell>{applicant.position || "-"}</TableCell>
                 <TableCell>{applicant.name || "-"}</TableCell>
                 <TableCell>{applicant.surname || "-"}</TableCell>

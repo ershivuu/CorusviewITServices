@@ -1,10 +1,12 @@
 // src/App.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import Login from "../Login/Login";
 import Notification from "../../Notification/Notification";
 
 function AdminPanel() {
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
@@ -23,6 +25,7 @@ function AdminPanel() {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
+    navigate("/admin");
     setIsLoggedIn(false);
     setNotificationMessage("Logout successful!");
     setNotificationSeverity("success");

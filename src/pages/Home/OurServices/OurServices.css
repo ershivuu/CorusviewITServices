@@ -60,11 +60,15 @@
   background-color: transparent;
   border: 2px solid darkgray;
   border-radius: 10px;
+  margin-left: 6%;
 }
 .accordion-body button a {
   text-decoration: none;
   color: darkgray;
   padding: 5px 10px 5px 10px;
+}
+.accordion-body p {
+  margin-left: 6%;
 }
 
 @-webkit-keyframes grabspace {
@@ -124,9 +128,17 @@
   .services-heading {
     font-size: 30px;
   }
+  .accordion-body p,
+  .accordion-body button {
+    margin-left: 0%;
+  }
 }
 
 @media screen and (min-width: 321px) and (max-width: 480px) {
+  .accordion-body p,
+  .accordion-body button {
+    margin-left: 0%;
+  }
   .accordion-button p {
     margin-left: 8%;
     font-size: 18px;
@@ -146,6 +158,10 @@
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
+  .accordion-body p,
+  .accordion-body button {
+    margin-left: 0%;
+  }
   .accordion-button p {
     margin-left: 8%;
     font-size: 18px;

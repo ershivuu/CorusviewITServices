@@ -6,13 +6,15 @@ import cloud from "../../../assets/images/cloud.png";
 import dbms from "../../../assets/images/dbms.png";
 import web from "../../../assets/images/web.png";
 import mobile from "../../../assets/images/mobile.png";
+import UIUX from "../../../assets/images/UIUX.png";
+import DigitalMarketing from "../../../assets/images/digitalmarketing.png";
 function ServicesCommonData() {
   return (
     <>
       <div className="dev-process">
         <p>Our Process</p>
         <div>
-          <img src={devprocess} />
+          <img src={devprocess} loading="lazy" alt="Developement process"/>
         </div>
       </div>
       <div className="tools">
@@ -78,31 +80,63 @@ function ServicesCommonData() {
               <p>JavaScript</p>
               <p>Xamarin</p>
             </div>
+            <div className="mobile-box-1">
+              <p>UI/UX</p>
+              <p>Figma</p>
+              <p>Framer</p>
+              <p>Adobe XD</p>
+              <p>Principle</p>
+              <p>Wireframe</p>
+              <p>InVision</p>
+              <p>Animation</p>
+              <p>UX Law's</p>
+            </div>
+            <div className="mobile-box-1">
+              <p>DIGITAL MARKETING</p>
+              <p>Ahrefs</p>
+              <p>Google Analytics</p>
+              <p>SEMrush</p>
+              <p>Buffer</p>
+              <p>HubSpot</p>
+              <p>Sprout Social</p>
+            </div>
           </div>
 
           <div className="tool-pc-view">
             <div className="pc-view-box-1">
-              <img src={framework} alt="" />
+              <img src={framework} alt="frameworks" loading="lazy" />
             </div>
             <div className="pc-view-box-1 pc-view-flex-box">
               <div className="pc-view-box-1">
-                <img src={language} alt="" />
+                <img src={language} alt="programming language" loading="lazy" />
               </div>
               <div className="pc-view-box-1">
-                <img src={cloud} alt="" />
+                <img src={cloud} alt="cloud services" loading="lazy" />
               </div>
             </div>
             <div className="pc-view-box-1">
               <div className="pc-view-box-1">
-                <img src={dbms} alt="" />
+                <img src={dbms} alt="dbms" loading="lazy" />
               </div>
             </div>
             <div className="pc-view-box-1 pc-view-flex-box">
               <div className="pc-view-box-1">
-                <img src={web} alt="" />
+                <img src={web} alt="Web Developement" loading="lazy" />
               </div>
               <div className="pc-view-box-1">
-                <img src={mobile} alt="" />
+                <img src={mobile} alt="Mobile Developement" loading="lazy" />
+              </div>
+            </div>
+            <div className="pc-view-box-1 pc-view-flex-box">
+              <div className="pc-view-box-1">
+                <img src={UIUX} alt="UIUX Design" loading="lazy" />
+              </div>
+              <div className="pc-view-box-1">
+                <img
+                  src={DigitalMarketing}
+                  alt="DigitalMarketing"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

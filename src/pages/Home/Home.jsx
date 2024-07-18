@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { getHomeHeading } from "../FrontendServices/Services";
 import "./Home.css";
 import Customer from "./Customers/Customer";
@@ -11,17 +10,14 @@ import Footers from "../../components/Footers/Footers";
 import uipos from "../../assets/images/projects/uipos.png";
 import cview from "../../assets/images/projects/cview.png";
 import RecentWork from "./RecentWork";
+import cviewsurvey from "../../assets/logos/clients/cviewsurvey.png";
+import medicaps from "../../assets/logos/clients/medicaps.png";
+import goldenBansi from "../../assets/logos/clients/GoldenBansi.png";
+import iposup from "../../assets/logos/clients/iposup.png";
+import wemalife from "../../assets/logos/clients/wemalife.png";
 
 function Home() {
   const [mainTableData, setMainTableData] = useState(null);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,18 +40,45 @@ function Home() {
           <span>{mainTableData.heading_1}</span> {mainTableData.heading_2}
         </p>
       </div>
+      <div className="our-client-logo">
+        <div>
+          <a href="https://cviewsurvey.com/home" target="_blank">
+            <img src={cviewsurvey} alt="cviewsurvey" />
+          </a>
+        </div>
+        <div>
+          <a href="https://www.medicaps.ac.in/" target="_blank">
+            <img src={medicaps} alt="medicaps" />
+          </a>
+        </div>
+        <div>
+          <a href="https://iposup.com/" target="_blank">
+            <img src={iposup} alt="iposup" />
+          </a>
+        </div>
+        <div>
+          <a href="https://www.goldenbansi.com/" target="_blank">
+            <img src={goldenBansi} alt="goldenbansi" />
+          </a>
+        </div>
 
+        <div>
+          <a href="https://www.wemacare.com/" target="_blank">
+            <img src={wemalife} alt="wemacare" />
+          </a>
+        </div>
+      </div>
       <div>
         <OurServices></OurServices>
       </div>
 
       <div className="about-company">
         <div className="vector-grp">
-          <img src={vector1} alt="" />
-          <img src={vector2} alt="" />
+          <img src={vector1} alt="vector1" />
+          <img src={vector2} alt="vector2" />
         </div>
 
-        <div className="abt-com-flex" ref={ref}>
+        <div className="abt-com-flex">
           <div>
             <p>About Us</p>
           </div>

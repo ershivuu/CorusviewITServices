@@ -1,141 +1,132 @@
-import logo from "./logo.svg";
-import "./App.css";
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Main, Route, Routes } from "react-router-dom";
-import About from "./pages/About/About";
-import Home from "./pages/Home/Home";
-import Carrer from "./pages/Carrer/Carrer";
-import Contact from "./pages/Contact/Contact";
 
-import Techno from "./pages/Softwaredev/Techno";
-import Products from "./pages/Products/Products";
-import AdminPanel from "./admin/AdminPanel/AdminPanel";
+// Lazy-loaded components
+const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel"));
+const EditServices = lazy(() =>
+  import("./admin/AdminPages/EditHome/EditServices")
+);
+const EditSlider = lazy(() => import("./admin/AdminPages/EditHome/EditSlider"));
+const EditRecentWork = lazy(() =>
+  import("./admin/AdminPages/EditHome/EditRecentWork")
+);
+const EditAboutUs = lazy(() =>
+  import("./admin/AdminPages/EditHome/EditAboutUs")
+);
+const EditHeading = lazy(() =>
+  import("./admin/AdminPages/EditHome/EditHeading")
+);
+const EditAboutPage = lazy(() =>
+  import("./admin/AdminPages/EditAbout/EditAboutPage")
+);
+const EditAboutValue = lazy(() =>
+  import("./admin/AdminPages/EditAbout/EditAboutValue")
+);
+const EditServicesHead = lazy(() =>
+  import("./admin/AdminPages/EditServices/EditServicesHead")
+);
+const EditServiceProblem = lazy(() =>
+  import("./admin/AdminPages/EditServices/EditServiceProblem")
+);
+const EditServiceSolution = lazy(() =>
+  import("./admin/AdminPages/EditServices/EditServiceSolution")
+);
+const EditWhatYouGet = lazy(() =>
+  import("./admin/AdminPages/EditServices/EditWhatYouGet")
+);
+const EditContactUs = lazy(() =>
+  import("./admin/AdminPages/EditContact/EditContactUs")
+);
+const EditContactForm = lazy(() =>
+  import("./admin/AdminPages/EditContact/EditContactForm")
+);
+const EditCarrerHead = lazy(() =>
+  import("./admin/AdminPages/EditCarrer/EditCarrerHead")
+);
+const EditCarrerImages = lazy(() =>
+  import("./admin/AdminPages/EditCarrer/EditCarrerImages")
+);
+const EditCarrerWYS = lazy(() =>
+  import("./admin/AdminPages/EditCarrer/EditCarrerWYS")
+);
+const EditCarrerRYS = lazy(() =>
+  import("./admin/AdminPages/EditCarrer/EditCarrerRYS")
+);
+const EditJobOpening = lazy(() =>
+  import("./admin/AdminPages/EditCarrer/EditJobOpenings/EditJobOpening")
+);
+const EditHeader = lazy(() =>
+  import("./admin/AdminPages/EditHeader/EditHeader")
+);
+const EditFooter = lazy(() =>
+  import("./admin/AdminPages/EditFooter/EditFooter")
+);
+const EditProductsForm = lazy(() =>
+  import("./admin/AdminPages/EditProducts/EditProductsForm")
+);
+const AddJobRole = lazy(() =>
+  import("./admin/AdminPages/EditCarrer/AddJobRole")
+);
+const RecentworkHead = lazy(() =>
+  import("./admin/AdminPages/EditHome/RecentworkHead")
+);
+const NoPage = lazy(() => import("./pages/NotFound/NoPage"));
+const Home = lazy(() => import("./pages/Home/Home"));
+const About = lazy(() => import("./pages/About/About"));
+const Carrer = lazy(() => import("./pages/Carrer/Carrer"));
+const Contact = lazy(() => import("./pages/Contact/Contact"));
+const Products = lazy(() => import("./pages/Products/Products"));
+const Policy = lazy(() => import("./pages/PolicyPage/Policy"));
+const ApplyNow = lazy(() => import("./admin/AdminPages/ApplyNow/ApplyNow"));
+const AllServiceDetails = lazy(() =>
+  import("./pages/Home/AllServices/AllServiceDetails")
+);
 
-import EditServices from "./admin/AdminPages/EditHome/EditServices";
-import EditSlider from "./admin/AdminPages/EditHome/EditSlider";
-import EditRecentWork from "./admin/AdminPages/EditHome/EditRecentWork";
-import EditAboutUs from "./admin/AdminPages/EditHome/EditAboutUs";
-import EditHeading from "./admin/AdminPages/EditHome/EditHeading";
-import EditAboutPage from "./admin/AdminPages/EditAbout/EditAboutPage";
-import EditAboutValue from "./admin/AdminPages/EditAbout/EditAboutValue";
-import EditServicesHead from "./admin/AdminPages/EditServices/EditServicesHead";
-import EditServiceProblem from "./admin/AdminPages/EditServices/EditServiceProblem";
-import EditServiceSolution from "./admin/AdminPages/EditServices/EditServiceSolution";
-
-
-import EditWhatYouGet from "./admin/AdminPages/EditServices/EditWhatYouGet";
-import EditContactUs from "./admin/AdminPages/EditContact/EditContactUs";
-import EditContactForm from "./admin/AdminPages/EditContact/EditContactForm";
-import EditCarrerHead from "./admin/AdminPages/EditCarrer/EditCarrerHead";
-import EditCarrerImages from "./admin/AdminPages/EditCarrer/EditCarrerImages";
-import EditCarrerWYS from "./admin/AdminPages/EditCarrer/EditCarrerWYS";
-import EditCarrerRYS from "./admin/AdminPages/EditCarrer/EditCarrerRYS";
-import EditJobOpening from "./admin/AdminPages/EditCarrer/EditJobOpenings/EditJobOpening";
-import EditHeader from "./admin/AdminPages/EditHeader/EditHeader";
-import EditFooter from "./admin/AdminPages/EditFooter/EditFooter";
-import EditProductsForm from "./admin/AdminPages/EditProducts/EditProductsForm";
-import AddJobRole from "./admin/AdminPages/EditCarrer/AddJobRole";
-import RecentworkHead from "./admin/AdminPages/EditHome/RecentworkHead";
-import NoPage from "./pages/NotFound/NoPage";
-import AllServiceDetails from "./pages/Home/AllServices/AllServiceDetails";
-import ApplyNow from "./admin/AdminPages/ApplyNow/ApplyNow";
 function App() {
   return (
     <Main>
-      {/* <Nav></Nav> */}
-      <Routes>
-        <Route path="admin" element={<AdminPanel />}>
-          <Route exact path="editheading" element={<EditHeading />}></Route>
-          <Route exact path="editaboutus" element={<EditAboutUs />}></Route>
-          <Route exact path="editservices" element={<EditServices />}></Route>
-          <Route exact path="editslider" element={<EditSlider />}></Route>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="admin" element={<AdminPanel />}>
+            <Route path="editheading" element={<EditHeading />} />
+            <Route path="editaboutus" element={<EditAboutUs />} />
+            <Route path="editservices" element={<EditServices />} />
+            <Route path="editservicehead" element={<EditServicesHead />} />
+            <Route
+              path="editserviceproblems"
+              element={<EditServiceProblem />}
+            />
+            <Route
+              path="editservicesolution"
+              element={<EditServiceSolution />}
+            />
+            <Route path="editwhatyouget" element={<EditWhatYouGet />} />
+            <Route path="editcontactus" element={<EditContactUs />} />
+            <Route path="editcontactform" element={<EditContactForm />} />
+            <Route path="editcarrerhead" element={<EditCarrerHead />} />
+            <Route path="editcarrerimages" element={<EditCarrerImages />} />
+            <Route path="editcarrerwys" element={<EditCarrerWYS />} />
+            <Route path="recentworktitle" element={<RecentworkHead />} />
+            <Route path="editcarrerrys" element={<EditCarrerRYS />} />
+            <Route path="editjobopening" element={<EditJobOpening />} />
+            <Route path="editheader" element={<EditHeader />} />
+            <Route path="editfooter" element={<EditFooter />} />
+            <Route path="createjobroles" element={<AddJobRole />} />
+            <Route path="editProducts" element={<EditProductsForm />} />
+            <Route path="applynow" element={<ApplyNow />} />
+          </Route>
 
-          <Route
-            exact
-            path="editrecentwork"
-            element={<EditRecentWork />}
-          ></Route>
-
-          {/* // About us page Routing */}
-          <Route exact path="editaboutpage" element={<EditAboutPage />}></Route>
-          <Route
-            exact
-            path="editaboutvalue"
-            element={<EditAboutValue />}
-          ></Route>
-
-          {/* // Services Page Routing  */}
-          <Route
-            exact
-            path="editservicehead"
-            element={<EditServicesHead />}
-          ></Route>
-        
-          <Route
-            exact
-            path="editserviceproblems"
-            element={<EditServiceProblem />}
-          ></Route>
-          <Route
-            exact
-            path="editservicesolution"
-            element={<EditServiceSolution />}
-          ></Route>
-          
-          <Route
-            exact
-            path="editwhatyouget"
-            element={<EditWhatYouGet />}
-          ></Route>
-          <Route exact path="editcontactus" element={<EditContactUs />}></Route>
-          <Route
-            exact
-            path="editcontactform"
-            element={<EditContactForm />}
-          ></Route>
-          <Route
-            exact
-            path="editcarrerhead"
-            element={<EditCarrerHead />}
-          ></Route>
-          <Route
-            exact
-            path="editcarrerimages"
-            element={<EditCarrerImages />}
-          ></Route>
-          <Route exact path="editcarrerwys" element={<EditCarrerWYS />}></Route>
-          <Route
-            exact
-            path="recentworktitle"
-            element={<RecentworkHead />}
-          ></Route>
-          <Route exact path="editcarrerrys" element={<EditCarrerRYS />}></Route>
-          <Route
-            exact
-            path="editjobopening"
-            element={<EditJobOpening />}
-          ></Route>
-          <Route exact path="editheader" element={<EditHeader />}></Route>
-          <Route exact path="editfooter" element={<EditFooter />}></Route>
-          <Route exact path="createjobroles" element={<AddJobRole />}></Route>
-
-          <Route
-            exact
-            path="editProducts"
-            element={<EditProductsForm />}
-          ></Route>
-          <Route exact path="applynow" element={<ApplyNow />}></Route>
-        </Route>
-        <Route exact path="*" element={<NoPage />}></Route>
-        <Route exact path="/" element={<Home />}></Route>
-        <Route exact path="home" element={<Home />}></Route>
-        <Route path="about" element={<About />}></Route>
-        <Route path="carrer" element={<Carrer />}></Route>
-        <Route path="contact" element={<Contact />}></Route>
-        <Route path="services" element={<Techno />}></Route>
-        <Route path="our-services/:id" element={<AllServiceDetails />}></Route>
-        <Route path="our-products" element={<Products />}></Route>
-      </Routes>
+          <Route path="*" element={<NoPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="career" element={<Carrer />} />
+          <Route path="contact-us" element={<Contact />} />
+          <Route path="our-services/:id" element={<AllServiceDetails />} />
+          <Route path="our-products" element={<Products />} />
+          <Route path="privacy-policy" element={<Policy />} />
+        </Routes>
+      </Suspense>
     </Main>
   );
 }

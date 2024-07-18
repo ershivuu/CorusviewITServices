@@ -31,17 +31,17 @@ function EditAboutValue() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertSeverity, setAlertSeverity] = useState("success");
+  const fetchData = async () => {
+    try {
+      const data = await fetchOurValues();
+      setOurValues(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchOurValues();
-        setOurValues(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
+    
     fetchData();
   }, []);
 

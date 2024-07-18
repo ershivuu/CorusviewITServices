@@ -34,9 +34,7 @@ function EditContactUs() {
   const [notificationMessage, setNotificationMessage] = useState('');
   const [notificationSeverity, setNotificationSeverity] = useState('error'); // Default severity is error
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   const fetchData = async () => {
     try {
@@ -47,7 +45,9 @@ function EditContactUs() {
       // Handle errors as needed
     }
   };
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleEditClick = (row) => {
     setEditedData({ ...row }); // Ensure to spread row data correctly
     setEditDialogOpen(true);

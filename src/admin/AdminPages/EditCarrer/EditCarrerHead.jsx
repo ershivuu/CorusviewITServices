@@ -30,18 +30,16 @@ function EditCarrerHead() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("error"); // Default severity is error
-
+  const fetchData = async () => {
+    try {
+      const data = await fetchCareerHead();
+      setCareerHead(data);
+    } catch (error) {
+      console.error("Error fetching career head data:", error);
+      // Handle errors as needed
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchCareerHead();
-        setCareerHead(data);
-      } catch (error) {
-        console.error("Error fetching career head data:", error);
-        // Handle errors as needed
-      }
-    };
-
     fetchData();
   }, []);
 

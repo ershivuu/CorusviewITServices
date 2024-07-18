@@ -8,6 +8,7 @@ import locationlogo from "../../assets/logos/location.png";
 import email from "../../assets/logos/mail.png";
 import phone from "../../assets/logos/phone-call.png";
 import { getFooterData } from "../../pages/FrontendServices/Services";
+import { Link } from "react-router-dom";
 
 function Footers() {
   const [footerData, setFooterData] = useState(null);
@@ -53,7 +54,7 @@ function Footers() {
                 </a>
               </div>
               <div className="flex-info">
-                <img src={email} alt="" />
+                <img src={email} alt="corusview email" />
 
                 {footerData ? (
                   <p>
@@ -66,7 +67,7 @@ function Footers() {
                 )}
               </div>
               <div className="flex-info">
-                <img src={phone} alt="" />
+                <img src={phone} alt="corusview number" />
                 {footerData ? (
                   <p>
                     <a href={`tel:${footerData.phone}`}>{footerData.phone}</a>
@@ -83,7 +84,7 @@ function Footers() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img src={insta} alt="" />
+                    <img src={insta} alt="corusview insta" />
                   </a>
                 </div>
                 <div>
@@ -92,7 +93,7 @@ function Footers() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img src={linkedin} alt="" />
+                    <img src={linkedin} alt="corusview linkedin" />
                   </a>
                 </div>
                 <div>
@@ -101,7 +102,7 @@ function Footers() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img src={youtube} alt="" />
+                    <img src={youtube} alt="corusview youtube" />
                   </a>
                 </div>
               </div>
@@ -111,7 +112,9 @@ function Footers() {
         <div className="footer-2 set-footer">
           <p>@Corusview 2024 All rights reserved </p>
           <p>Terms & Conditions Applied </p>
-          <p>Privacy policy</p>
+          <Link rel="canonical" to="/privacy-policy">
+            <p>Privacy policy</p>
+          </Link>
         </div>
       </div>
     </>

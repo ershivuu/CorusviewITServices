@@ -30,9 +30,7 @@ const HeaderTable = () => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("info");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   const fetchData = async () => {
     try {
@@ -44,7 +42,9 @@ const HeaderTable = () => {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleEditClick = (name) => {
     setEditItemName(name); // Set name for editing
     setEditDialogOpen(true);

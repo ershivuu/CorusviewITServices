@@ -39,17 +39,16 @@ function EditSlider() {
   const [errorNotificationMessage, setErrorNotificationMessage] = useState("");
   const [disableAddSave, setDisableAddSave] = useState(false);
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+  const fetchData = async () => {
+    try {
+      const data = await fetchTestimonials();
+      setTestimonials(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchTestimonials();
-        setTestimonials(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -94,11 +93,11 @@ function EditSlider() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     // Apply character limit if applicable
-    if (name === "description" && value.length > 220) {
+    if (name === "description" && value.length > 250) {
       setShowErrorNotification(true);
       setErrorNotificationMessage("Description cannot exceed 220 characters.");
       return;
-    } else if (name === "designation" && value.length > 10) {
+    } else if (name === "designation" && value.length > 50) {
       setShowErrorNotification(true);
       setErrorNotificationMessage("Designation cannot exceed 10 characters.");
       return;
@@ -225,17 +224,21 @@ function EditSlider() {
   return (
     <>
       <Typography variant="h5" component="h5">
-      Edit Testimonial
-    </Typography>
+        Edit Testimonial
+      </Typography>
       <Box>
         <Button
-      variant="contained" color="primary"
+          variant="contained"
+          color="primary"
           onClick={handleOpenAddDialog}
           style={{ marginTop: 10 }}
         >
           Add Testimonial
         </Button>
-        <TableContainer style={{marginTop:"10px",maxHeight: "500px", overflow: "auto"}} component={Paper} >
+        <TableContainer
+          style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+          component={Paper}
+        >
           <Table stickyHeader>
             <TableHead>
               <TableRow>

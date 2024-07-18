@@ -4,6 +4,7 @@ import {
   getRoles,
   addApplicants,
   getPositions,
+  getJobOpeningRoles,
 } from "../FrontendServices/Services";
 import "./JobOpenings.css";
 
@@ -48,7 +49,7 @@ function JobOpenings({ openDialog, setOpenDialog }) {
   });
 
   const getJobRoles = async () => {
-    const data = await getRoles();
+    const data = await getJobOpeningRoles();
     setRoles(data);
   };
 
@@ -377,7 +378,7 @@ function JobOpenings({ openDialog, setOpenDialog }) {
                   }}
                   placeholder="Select your CV file"
                 />
-                  <p style={{ color: "gray", fontSize: "0.8rem" }}>
+                <p style={{ color: "gray", fontSize: "0.8rem" }}>
                   Only PDF files are allowed.
                 </p>
               </Grid>

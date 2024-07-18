@@ -50,9 +50,6 @@
 }
 .tool-pc-view img {
   width: 100%;
-  /* -webkit-animation: pop linear;
-  animation: pop linear;
-  animation-timeline: view(); */
 }
 .tool-pc-view div {
   margin-top: 20px;

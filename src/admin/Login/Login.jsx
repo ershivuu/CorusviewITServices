@@ -1,18 +1,18 @@
-// src/Login/Login.js
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Notification from "../../Notification/Notification";
 
 function Login({ onLogin }) {
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [notificationOpen, setNotificationOpen] = useState(false); // State for notification open
-  const [alertMessage, setAlertMessage] = useState(""); // State for alert message
-  const [alertSeverity, setAlertSeverity] = useState("info"); // State for alert severity
-
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("info");
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -21,9 +21,10 @@ function Login({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username === "admin" && password === "admin") {
-      localStorage.setItem("username", username); 
+    if (username === "corusviewit" && password === "corusview@admin") {
+      localStorage.setItem("username", username);
       onLogin();
+      navigate("/admin/editheader");
     } else {
       setAlertMessage("Invalid credentials");
       setAlertSeverity("error");

@@ -2,10 +2,20 @@ import axios from "axios";
 import { API_URL } from "../config/config";
 const BASE_URL = API_URL;
 
+
+export const getJobOpeningRoles = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getJobOpeningRole`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact information:", error);
+    throw error;
+  }
+};
 // Get Home Heading data
 export const fetchMainTableData = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/main_table`);
+    const response = await axios.get(`${BASE_URL}/HomePage`);
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -16,7 +26,7 @@ export const fetchMainTableData = async () => {
 // put Home Heading data
 export const updateMainTableData = async (id, newData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/main_table`, newData);
+    const response = await axios.put(`${BASE_URL}/HomePage`, newData);
     return response.data;
   } catch (error) {
     throw error;

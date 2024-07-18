@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
 import { carrerHead, getCareerInfo } from "../FrontendServices/Services";
 import "./Carrer.css";
 import Nav from "../../components/Headers/Nav";
@@ -34,16 +33,6 @@ function Carrer() {
     fetchCarrerInfo();
     getCarrerHeadings();
   }, []);
-
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView]);
 
   const dummyCarrerInfo = [
     {
@@ -93,7 +82,9 @@ function Carrer() {
         {careerData ? (
           <div className="carrer-heading">
             <p>{careerData.carrer_heading}</p>
-            <p>{careerData.carrer_content}</p>
+            {careerData.carrer_content.split("\n").map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </div>
         ) : (
           <div className="carrer-heading">
@@ -121,7 +112,10 @@ function Carrer() {
             ? careerInfo.map((item) => (
                 <div key={item.id} className="env-card">
                   <p>{item.heading}</p>
-                  <p>{item.content}</p>
+                  {/* <p>{item.content}</p> */}
+                  {item.content.split("\n").map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
                 </div>
               ))
             : dummyCarrerInfo.map((item) => (
@@ -139,10 +133,11 @@ function Carrer() {
       {careerData ? (
         <div className="join-us">
           <p>{careerData.ryh_heading}</p>
-          <p>{careerData.ryh_content}</p>
-          <button onClick={() => setOpenDialog(true)}>
-            Go Ahead &#8594;
-          </button>
+          {/* <p>{careerData.ryh_content}</p> */}
+          {careerData.ryh_content.split("\n").map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+          <button onClick={() => setOpenDialog(true)}>Go Ahead &#8594;</button>
         </div>
       ) : (
         <div className="join-us">
@@ -155,9 +150,7 @@ function Carrer() {
             and ready to contribute, raise your hand and join us on our mission.
             Let's build something amazing together.
           </p>
-          <button onClick={() => setOpenDialog(true)}>
-            Go Ahead &#8594;
-          </button>
+          <button onClick={() => setOpenDialog(true)}>Go Ahead &#8594;</button>
         </div>
       )}
 

@@ -87,6 +87,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 .search-bar {
   display: flex;
@@ -96,6 +97,7 @@
 .search-bar input {
   border-radius: 10px;
   border: none;
+  padding: 10px 15px;
 }
 .search-bar input:focus {
   outline: none;

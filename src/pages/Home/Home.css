@@ -41,6 +41,19 @@
   top: 0;
   right: 0;
 }
+.our-client-logo img {
+  width: 180px;
+  height: 100px;
+  object-fit: contain;
+}
+.our-client-logo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  margin-block: 10%;
+}
 
 .abt-com-flex {
   display: -webkit-box;
@@ -255,10 +268,20 @@
   .recent-works-heading p:nth-child(1) {
     font-size: 30px;
   }
+  .our-client-logo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin-top: -50px;
+  }
 }
 
 @media screen and (min-width: 321px) and (max-width: 767px) {
   /* Styles for larger smartphones */
+
   .abt-com-flex {
     text-align: center;
   }
@@ -297,6 +320,15 @@
 
   .recent-works-heading p:nth-child(1) {
     font-size: 30px;
+  }
+  .our-client-logo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin-top: -50px;
   }
 }
 

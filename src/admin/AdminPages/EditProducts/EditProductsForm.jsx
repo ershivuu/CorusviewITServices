@@ -21,7 +21,7 @@ import {
   DialogActions,
   Button,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import Notification from "../../../Notification/Notification"; // Adjust path as per your file structure
 
@@ -220,12 +220,20 @@ export default function EditProductsForm() {
   return (
     <>
       <Typography variant="h5" component="h5">
-      Edit Product
-    </Typography>
-      <Button style={{marginTop:"10px"}} variant="contained" color="primary" onClick={handleAddClick}>
+        Edit Product
+      </Typography>
+      <Button
+        style={{ marginTop: "10px" }}
+        variant="contained"
+        color="primary"
+        onClick={handleAddClick}
+      >
         Add Products
       </Button>
-      <TableContainer component={Paper} style={{marginTop:"10px",maxHeight: "500px", overflow: "auto"}}>
+      <TableContainer
+        component={Paper}
+        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow>
@@ -285,12 +293,7 @@ export default function EditProductsForm() {
                   )}
                 </TableCell>
                 <TableCell>
-                  <Button
-                
-                    onClick={() => handleEditClick(product)}
-                  >
-                    Edit
-                  </Button>
+                  <Button onClick={() => handleEditClick(product)}>Edit</Button>
                 </TableCell>
                 <TableCell>
                   <Button
@@ -325,6 +328,8 @@ export default function EditProductsForm() {
             label="Content"
             type="text"
             fullWidth
+            multiline
+            rows={4}
             value={updatedProduct.content}
             onChange={handleInputChange}
           />
@@ -380,6 +385,8 @@ export default function EditProductsForm() {
             name="content"
             label="Content"
             type="text"
+            multiline
+            rows={4}
             fullWidth
             value={newProduct.content}
             onChange={handleNewInputChange}

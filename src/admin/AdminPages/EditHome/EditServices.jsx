@@ -23,7 +23,7 @@ import Typography from "@mui/material/Typography";
 import Notification from "../../../Notification/Notification"; 
 
 const MAX_HEADING_LENGTH = 25;
-const MAX_CONTENT_LENGTH = 200;
+const MAX_CONTENT_LENGTH = 5000;
 
 function EditServices() {
   const [servicesData, setServicesData] = useState([]);
@@ -67,10 +67,7 @@ function EditServices() {
   
   const [successMessage, setSuccessMessage] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+ 
   const fetchData = async () => {
     try {
       const data = await fetchOurServicesData();
@@ -79,6 +76,9 @@ function EditServices() {
       setError(error.message);
     }
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleOpenEditDialog = (service) => {
     setEditedService({ ...service, icon_img: null }); 
@@ -340,7 +340,10 @@ function EditServices() {
           />
         )}
 
-        <TableContainer component={Paper} style={{ marginTop: "10px",maxHeight: "500px", overflow: "auto" }}>
+        <TableContainer
+          component={Paper}
+          style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+        >
           <Table stickyHeader>
             <TableHead>
               <TableRow>
@@ -447,6 +450,8 @@ function EditServices() {
               name="content"
               value={newService.content}
               onChange={handleAddChange}
+              multiline
+              rows={4}
               // error={!!contentError}
               // helperText={contentError}
             />
@@ -524,6 +529,8 @@ function EditServices() {
               name="content"
               value={editedService.content}
               onChange={handleEditChange}
+              multiline
+              rows={4}
               // error={!!editContentError}
               // helperText={editContentError}
             />

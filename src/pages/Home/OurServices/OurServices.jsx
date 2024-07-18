@@ -1,20 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import React, { useEffect, useState } from "react";
+
 import { getHomeServices } from "../../FrontendServices/Services";
 import "./OurServices.css";
 import { Link } from "react-router-dom";
 
 function OurServices() {
   const [services, setServices] = useState([]);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,17 +28,9 @@ function OurServices() {
   };
   return (
     <div className="container">
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, x: -500 },
-          visible: { opacity: 1, x: 0 },
-        }}
-        initial="hidden"
-        animate={controls}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
+      <div>
         <p className="services-heading">Our Services</p>
-      </motion.div>
+      </div>
       <div>
         <div className="accordion accordion-flush" id="accordionFlushExample">
           {services.map((service) => (
@@ -64,6 +47,7 @@ function OurServices() {
                   <img
                     src={service.icon_img}
                     alt={service.icon_img_originalname}
+                    loading="lazy"
                   />
                   <p>
                     <span>{service.heading}</span>
@@ -79,7 +63,7 @@ function OurServices() {
                 <div className="accordion-body">
                   <p>{truncateText(service.content, 20)}</p>
                   <button onClick={() => handleReadMoreClick(service)}>
-                    <Link to={`/our-services/${service.id}`} target="_top">
+                    <Link rel="canonical" to={`/our-services/${service.id}`} target="_top">
                       Read More...
                     </Link>
                   </button>

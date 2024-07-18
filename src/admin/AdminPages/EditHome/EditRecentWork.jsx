@@ -37,9 +37,7 @@ function EditRecentWork() {
   const [addSaveDisabled, setAddSaveDisabled] = useState(true);
   const [editSaveDisabled, setEditSaveDisabled] = useState(true);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   const fetchData = async () => {
     try {
@@ -49,7 +47,9 @@ function EditRecentWork() {
       setError(error.message);
     }
   };
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleEditOpen = (work) => {
     setEditedWork(work);
     setEditOpen(true);

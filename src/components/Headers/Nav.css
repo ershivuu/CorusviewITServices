@@ -23,7 +23,43 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+.work-with-us-btn {
+  background-color: white;
+  color: #375350;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 50px;
+  padding-inline: 40px;
+  height: 50px;
+  margin-top: 10px;
+  margin-right: -180px;
+  transition: 0.2s ease;
+}
+.work-with-us-btn span {
+  position: absolute;
+  font-size: 80px;
+  margin-left: 5px;
+  top: 0;
+  margin-top: -20px;
+}
+.work-with-us-btn:hover {
+  background-color: #375350;
+  color: white;
+}
 
+@keyframes dotbtn {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 2;
+  }
+  100% {
+    scale: 1;
+  }
+}
 .header-logo {
   height: 30px;
   width: 200px;
@@ -49,11 +85,15 @@ details div {
 .dropdown-menu {
   width: 100vw;
   max-width: 884px;
-
   border: none !important;
   border-radius: 20px;
   padding: 20px;
-  margin-top: 30px !important;
+
+  position: absolute;
+  left: 100%;
+  top: 0%;
+  transform: translate(-100%, 0%);
+  margin-top: 80px !important;
 }
 .dropdown-menu li {
   display: inline;
@@ -128,6 +168,12 @@ details div {
   .header-child {
     margin-inline: 10px;
   }
+  .work-with-us-btn {
+    display: none;
+  }
+  .dropdown-menu {
+    margin-left: 0;
+  }
 }
 
 @media screen and (min-width: 321px) and (max-width: 480px) {
@@ -135,6 +181,7 @@ details div {
   .dropdown-menu {
     width: 100vw;
     padding: 20px;
+    margin-left: 10px;
   }
   .dropdown-menu li {
     display: block;
@@ -143,11 +190,12 @@ details div {
   .header-child {
     margin-inline: 10px;
   }
-  /* .service-dropdown {
-    display: none;
-  } */
+
   .services-list-mobile {
     display: block;
+  }
+  .work-with-us-btn {
+    display: none;
   }
 }
 
@@ -160,12 +208,19 @@ details div {
   .header-child {
     margin-inline: 10px;
   }
+  .work-with-us-btn {
+    display: none;
+  }
+  .dropdown-menu {
+    margin-left: 10px;
+  }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .dropdown-menu {
     width: 97.9vw;
     padding: 20px;
+    margin-left: 10px;
   }
   .dropdown-menu li {
     display: inline;
@@ -173,6 +228,9 @@ details div {
   }
   .header-child {
     margin-inline: 10px;
+  }
+  .work-with-us-btn {
+    display: none;
   }
 }
 

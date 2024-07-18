@@ -1,7 +1,6 @@
 .workcard img {
   width: inherit;
   height: inherit;
-
   border-radius: inherit;
 }
 .workcard {
@@ -36,5 +35,12 @@
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
   .main-container {
     height: 80vh;
+  }
+}
+@media (max-height: 360px) {
+  /* CSS rules */
+  .workcard {
+    height: 70vh;
+
   }
 }

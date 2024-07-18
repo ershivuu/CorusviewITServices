@@ -26,7 +26,7 @@ function RecentWork() {
       <ReactCardCarousel autoplay={true} autoplay_speed={5000}>
         {recentWorks.map((work, index) => (
           <div key={index} className="workcard">
-            <img src={work.img} alt={work.img_originalname} />
+            <img src={work.img} alt={work.img_originalname} loading="lazy" />
           </div>
         ))}
       </ReactCardCarousel>

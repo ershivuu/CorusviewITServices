@@ -53,6 +53,12 @@
   font-size: 16px;
   font-family: "Poppins", sans-serif;
 }
+.footer-2 a {
+  color: rgba(255, 255, 255, 0.735);
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
 .flex-info {
   display: -webkit-box;
   display: -ms-flexbox;
