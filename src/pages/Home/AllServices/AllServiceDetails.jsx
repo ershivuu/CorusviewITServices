@@ -24,7 +24,14 @@ function AllServiceDetails() {
   }, [id]);
 
   if (!service) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <div className="page-heading">
+          <p>Software Developement</p>
+          <p>ss services</p>
+        </div>
+      </>
+    );
   }
 
   return (

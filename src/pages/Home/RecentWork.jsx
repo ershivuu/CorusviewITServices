@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { getRecentWorks } from "../FrontendServices/Services";
 import "./RecentWork.css";
 import ReactCardCarousel from "react-card-carousel";
-import workA from "../../assets/images/projects/ironman.jpg";
-import workB from "../../assets/images/projects/Spiderman.jpeg";
-import workC from "../../assets/images/projects/cyberpunk.jpg";
 
 function RecentWork() {
   const [recentWorks, setRecentWorks] = useState([]);
