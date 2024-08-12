@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Main, Route, Routes } from "react-router-dom";
 import Test from "./pages/Test/Test";
-// Lazy-loaded components
+
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel"));
 const EditServices = lazy(() =>
   import("./admin/AdminPages/EditHome/EditServices")
@@ -85,7 +85,7 @@ const AllServiceDetails = lazy(() =>
 function App() {
   return (
     <Main>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div></div>}>
         <Routes>
           <Route path="admin" element={<AdminPanel />}>
             <Route path="editheading" element={<EditHeading />} />
