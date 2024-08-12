@@ -17,13 +17,13 @@ import {
 } from "@mui/material";
 import { ChromePicker } from "react-color";
 import { fetchHeaderData, updateHeaderColor } from "../../AdminServices";
-import Notification from "../../../Notification/Notification"; // Import the Notification component
+import Notification from "../../../Notification/Notification";
 
 const HeaderTable = () => {
   const [headerData, setHeaderData] = useState(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState("");
-  const [editItemName, setEditItemName] = useState(""); // Use name for editing
+  const [editItemName, setEditItemName] = useState(""); 
   const [loading, setLoading] = useState(true);
 
   const [notificationOpen, setNotificationOpen] = useState(false);
@@ -46,7 +46,7 @@ const HeaderTable = () => {
     fetchData();
   }, []);
   const handleEditClick = (name) => {
-    setEditItemName(name); // Set name for editing
+    setEditItemName(name); 
     setEditDialogOpen(true);
   };
 
@@ -56,7 +56,7 @@ const HeaderTable = () => {
 
   const handleColorUpdate = async () => {
     try {
-      // Determine which color to update based on editItemName
+      
       let fieldToUpdate;
       if (editItemName === "header_color1") {
         fieldToUpdate = "header_color1";
@@ -70,15 +70,15 @@ const HeaderTable = () => {
         fieldToUpdate
       );
 
-      // Handle successful update
+    
       setNotificationMessage(response.message || "Update successful");
       setNotificationSeverity("success");
       setNotificationOpen(true);
 
-      fetchData(); // Refresh data after update
+      fetchData(); 
       setEditDialogOpen(false);
     } catch (error) {
-      // Handle error update
+     
       console.error("Error updating color:", error);
       setNotificationMessage("Failed to update color");
       setNotificationSeverity("error");

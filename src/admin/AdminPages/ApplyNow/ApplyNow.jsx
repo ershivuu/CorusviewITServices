@@ -40,7 +40,6 @@ function ApplyNow() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteApplicantId, setDeleteApplicantId] = useState(null);
 
-  // Notification state
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
@@ -93,13 +92,13 @@ function ApplyNow() {
       link.click();
       link.parentNode.removeChild(link);
 
-      // Show notification for successful download
+
       setNotificationMessage("Excel file downloaded successfully");
       setNotificationSeverity("success");
       setNotificationOpen(true);
     } catch (error) {
       console.error("Error exporting applicants:", error);
-      // Show notification for error if needed
+     
       setNotificationMessage("Error exporting applicants");
       setNotificationSeverity("error");
       setNotificationOpen(true);
@@ -113,22 +112,22 @@ function ApplyNow() {
 
   const confirmDelete = async () => {
     try {
-      // Call API to delete applicant
+     
       const response = await deleteApplicants(deleteApplicantId);
 
-      // Check response status or message to determine success or failure
+     
       if (response.status === "success") {
         setApplicants(
           applicants.filter((applicant) => applicant.id !== deleteApplicantId)
         );
 
-        // Show success notification
+      
         setNotificationMessage(response.message);
         setNotificationSeverity("success");
         setNotificationOpen(true);
       } else {
-        // Show error notification if deletion failed
-        setNotificationMessage(response.message); // Adjust if the API returns a specific error message
+    
+        setNotificationMessage(response.message); 
         setNotificationSeverity("success");
         setNotificationOpen(true);
       }
@@ -137,7 +136,7 @@ function ApplyNow() {
       setDeleteDialogOpen(false);
     } catch (error) {
       console.error("Error deleting applicant:", error);
-      // Show error notification
+      
       setNotificationMessage("Error deleting applicant");
       setNotificationSeverity("error");
       setNotificationOpen(true);
@@ -265,7 +264,6 @@ function ApplyNow() {
         </DialogContent>
       </Dialog>
 
-      {/* Notification for Excel download and delete actions */}
       <Notification
         open={notificationOpen}
         handleClose={handleNotificationClose}

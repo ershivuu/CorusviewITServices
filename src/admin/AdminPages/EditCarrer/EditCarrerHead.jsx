@@ -13,10 +13,10 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import { fetchCareerHead, updateCareerHead } from "../../AdminServices";
-import Notification from "../../../Notification/Notification"; // Adjust path as per your file structure
+import Notification from "../../../Notification/Notification";
 
 function EditCarrerHead() {
   const [careerHead, setCareerHead] = useState(null);
@@ -26,17 +26,15 @@ function EditCarrerHead() {
     carrer_content: "",
   });
 
-  // Notification state
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
-  const [notificationSeverity, setNotificationSeverity] = useState("error"); // Default severity is error
+  const [notificationSeverity, setNotificationSeverity] = useState("error");
   const fetchData = async () => {
     try {
       const data = await fetchCareerHead();
       setCareerHead(data);
     } catch (error) {
       console.error("Error fetching career head data:", error);
-      // Handle errors as needed
     }
   };
   useEffect(() => {
@@ -63,8 +61,10 @@ function EditCarrerHead() {
   };
 
   const handleSave = async () => {
-    // Validate fields
-    if (!editedData.carrer_heading.trim() || !editedData.carrer_content.trim()) {
+    if (
+      !editedData.carrer_heading.trim() ||
+      !editedData.carrer_content.trim()
+    ) {
       setNotificationMessage("All fields are required.");
       setNotificationSeverity("error");
       setNotificationOpen(true);
@@ -74,17 +74,16 @@ function EditCarrerHead() {
     try {
       const response = await updateCareerHead(editedData);
       setEditOpen(false);
-      // Refresh career head data after update
+
       const updatedData = await fetchCareerHead();
       setCareerHead(updatedData);
 
-      // Show success message from API response
-      setNotificationMessage(response.message); // Assuming your API response has a 'message' field
+      setNotificationMessage(response.message);
       setNotificationSeverity("success");
       setNotificationOpen(true);
     } catch (error) {
       console.error("Error updating career head data:", error);
-      // Handle error
+
       setNotificationMessage("Failed to update career head.");
       setNotificationSeverity("error");
       setNotificationOpen(true);
@@ -99,15 +98,15 @@ function EditCarrerHead() {
   };
 
   if (!careerHead) {
-    return <div>Loading...</div>; // Add a loader or placeholder while data is being fetched
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
       <Typography variant="h5" component="h5">
-      Edit Carrer Head
-    </Typography>
-      <TableContainer component={Paper} style={{marginTop:"10px"}}>
+        Edit Carrer Head
+      </Typography>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -123,9 +122,7 @@ function EditCarrerHead() {
               <TableCell>{careerHead.carrer_heading}</TableCell>
               <TableCell>{careerHead.carrer_content}</TableCell>
               <TableCell>
-                <Button  onClick={handleEditOpen}>
-                  Edit
-                </Button>
+                <Button onClick={handleEditOpen}>Edit</Button>
               </TableCell>
             </TableRow>
           </TableBody>
@@ -166,7 +163,6 @@ function EditCarrerHead() {
         </DialogActions>
       </Dialog>
 
-      {/* Notification */}
       <Notification
         open={notificationOpen}
         handleClose={handleNotificationClose}

@@ -18,13 +18,13 @@ import {
 } from "@mui/material";
 import { fetchFooterData, updateFooterData } from "../../AdminServices";
 import { ChromePicker } from "react-color";
-import Notification from "../../../Notification/Notification"; // Adjust the path as needed
+import Notification from "../../../Notification/Notification"; 
 
 const EditFooter = () => {
   const [footerData, setFooterData] = useState(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editItem, setEditItem] = useState({});
-  const [selectedColor, setSelectedColor] = useState("#000000"); // Default color
+  const [selectedColor, setSelectedColor] = useState("#000000"); 
   const [loading, setLoading] = useState(true);
 
   const [notificationOpen, setNotificationOpen] = useState(false);
@@ -49,7 +49,7 @@ const EditFooter = () => {
 
   const handleEditClick = (item) => {
     setEditItem({ ...item });
-    setSelectedColor(item.footer_color); // Set initial color for color picker
+    setSelectedColor(item.footer_color); 
     setEditDialogOpen(true);
   };
 

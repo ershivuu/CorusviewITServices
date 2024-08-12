@@ -17,7 +17,7 @@ import {
   Typography
 } from "@mui/material";
 import { fetchCareerHead, updateCareerHead } from "../../AdminServices";
-import Notification from "../../../Notification/Notification"; // Adjust the path as per your file structure
+import Notification from "../../../Notification/Notification"; 
 
 function EditCarrerRYS() {
   const [careerHead, setCareerHead] = useState({});
@@ -25,12 +25,11 @@ function EditCarrerRYS() {
   const [updatedHeading, setUpdatedHeading] = useState("");
   const [updatedContent, setUpdatedContent] = useState("");
 
-  // Notification state variables
+
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("info");
 
-  // Function to show notifications
   const showNotification = (message, severity) => {
     setNotificationMessage(message);
     setNotificationSeverity(severity);
@@ -43,7 +42,7 @@ function EditCarrerRYS() {
       setCareerHead(data);
     } catch (error) {
       console.error("Error fetching career head data:", error);
-      // Handle errors as needed
+     
     }
   };
 
@@ -63,7 +62,7 @@ function EditCarrerRYS() {
 
   const handleUpdate = async () => {
     try {
-      // Check for empty fields
+    
       if (!updatedHeading.trim() || !updatedContent.trim()) {
         showNotification("All fields are required", "error");
         return;
@@ -74,12 +73,12 @@ function EditCarrerRYS() {
         ryh_content: updatedContent,
       });
       
-      fetchData(); // Refresh data after update
+      fetchData(); 
       handleCloseEdit();
-      showNotification(response.message, "success"); // Show success notification
+      showNotification(response.message, "success"); 
     } catch (error) {
       console.error("Error updating career head data:", error);
-      // Handle errors as needed
+     
       showNotification("Error updating career head information", "error");
     }
   };
@@ -153,7 +152,7 @@ function EditCarrerRYS() {
         </DialogActions>
       </Dialog>
 
-      {/* Notification Component */}
+      
       <Notification
         open={notificationOpen}
         handleClose={() => setNotificationOpen(false)}

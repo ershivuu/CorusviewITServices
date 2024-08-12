@@ -95,7 +95,7 @@ function EditContactForm() {
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Message</TableCell>
-              <TableCell>Delete</TableCell> {/* Add Actions column */}
+              <TableCell>Delete</TableCell> 
             </TableRow>
           </TableHead>
           <TableBody>
@@ -130,7 +130,7 @@ function EditContactForm() {
         </DialogActions>
       </Dialog>
 
-      {/* Notification */}
+
       <Notification
         open={notificationOpen}
         handleClose={handleNotificationClose}

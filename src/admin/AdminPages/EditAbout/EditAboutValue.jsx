@@ -14,7 +14,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import Notification from "../../../Notification/Notification"; // Adjust the path as per your file structure
+import Notification from "../../../Notification/Notification";
 
 function EditAboutValue() {
   const [ourValues, setOurValues] = useState([]);
@@ -27,7 +27,6 @@ function EditAboutValue() {
     content: "",
   });
 
-  // Notification state
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertSeverity, setAlertSeverity] = useState("success");
@@ -41,7 +40,6 @@ function EditAboutValue() {
   };
 
   useEffect(() => {
-    
     fetchData();
   }, []);
 
@@ -57,7 +55,6 @@ function EditAboutValue() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Character limit validations
     if (name === "heading" && value.length > 15) {
       setAlertMessage("Heading should not exceed 15 characters.");
       setAlertSeverity("error");
@@ -80,7 +77,6 @@ function EditAboutValue() {
 
   const handleSave = async () => {
     if (!editedData.heading || !editedData.content) {
-      // Show notification for required fields
       setAlertMessage("This feild is required.");
       setAlertSeverity("error");
       setNotificationOpen(true);
@@ -89,19 +85,17 @@ function EditAboutValue() {
     try {
       const response = await updateOurValuesById(editedData.id, editedData);
 
-      // Show success notification
       setAlertMessage(response.message);
       setAlertSeverity("success");
       setNotificationOpen(true);
 
       setEditOpen(false);
 
-      // Refresh the data
       const updatedData = await fetchOurValues();
       setOurValues(updatedData);
     } catch (error) {
       setError(error.message);
-      // Show error notification
+
       setAlertMessage("Failed to update data");
       setAlertSeverity("error");
       setNotificationOpen(true);
@@ -139,9 +133,9 @@ function EditAboutValue() {
   return (
     <>
       <Typography variant="h5" component="h5">
-      Edit About Value
-    </Typography>
-      <TableContainer component={Paper} style={{marginTop:"10px"}}>
+        Edit About Value
+      </Typography>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table>
           <TableHead>
             <TableRow>

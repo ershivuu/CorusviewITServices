@@ -14,7 +14,7 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import {
   fetchCareerWYS,
@@ -35,13 +35,9 @@ function EditCarrerWYS() {
   const [newHeading, setNewHeading] = useState("");
   const [newContent, setNewContent] = useState("");
 
-
-
-
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("info");
-
 
   const showNotification = (message, severity) => {
     setNotificationMessage(message);
@@ -49,14 +45,12 @@ function EditCarrerWYS() {
     setNotificationOpen(true);
   };
 
-
   const fetchData = async () => {
     try {
       const data = await fetchCareerWYS();
       setCareerData(data);
     } catch (error) {
       console.error("Error fetching career data:", error);
-      // Handle errors as needed
     }
   };
 
@@ -91,7 +85,6 @@ function EditCarrerWYS() {
   };
 
   const handleUpdate = async () => {
-
     if (!updatedHeading || !updatedContent) {
       showNotification("This feild is required", "error");
       return;
@@ -101,34 +94,32 @@ function EditCarrerWYS() {
         heading: updatedHeading,
         content: updatedContent,
       });
-      fetchData(); // Refresh data after update
+      fetchData();
       handleCloseEdit();
-      // Show success notification
+
       showNotification(response.message, "success");
     } catch (error) {
       console.error("Error updating career data:", error);
-      // Handle errors as needed
+
       showNotification("Error updating career information", "error");
     }
   };
 
-
   const handleDelete = async () => {
     try {
       const response = await deleteCareerWYS(selectedCareer.id);
-      fetchData(); // Refresh data after delete
+      fetchData();
       handleCloseDelete();
-      // Show success notification
+
       showNotification(response.message, "success");
     } catch (error) {
       console.error("Error deleting career data:", error);
-      // Handle errors as needed
+
       showNotification("Error deleting career information", "error");
     }
   };
 
   const handleAdd = async () => {
-
     if (!newHeading || !newContent) {
       showNotification("This feild is required", "error");
       return;
@@ -139,18 +130,16 @@ function EditCarrerWYS() {
         content: newContent,
       };
       const response = await createCareerWYS(newCareerData);
-      fetchData(); // Refresh data after add
+      fetchData();
       handleCloseAdd();
-      // Show success notification
+
       showNotification(response.message, "success");
     } catch (error) {
       console.error("Error adding career data:", error);
-      // Handle errors as needed
+
       showNotification("Error adding career information", "error");
     }
   };
-
-
 
   useEffect(() => {
     fetchData();
@@ -158,13 +147,21 @@ function EditCarrerWYS() {
 
   return (
     <div>
-   <Typography variant="h5" component="h5">
-      Edit Carrer What You'll See
-    </Typography>
-      <Button variant="contained" color="primary" onClick={handleAddClick} style={{marginTop:"10px"}}>
+      <Typography variant="h5" component="h5">
+        Edit Carrer What You'll See
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleAddClick}
+        style={{ marginTop: "10px" }}
+      >
         Add Career
       </Button>
-      <TableContainer style={{marginTop:"10px",maxHeight: "500px", overflow: "auto"}} component={Paper}>
+      <TableContainer
+        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+        component={Paper}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow>

@@ -27,7 +27,7 @@ function EditSlider() {
   const [error, setError] = useState(null);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openAddDialog, setOpenAddDialog] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false); // State for confirmation dialog
+  const [confirmDelete, setConfirmDelete] = useState(false); 
   const [editedTestimonial, setEditedTestimonial] = useState({
     id: null,
     description: "",
@@ -92,7 +92,7 @@ function EditSlider() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Apply character limit if applicable
+
     if (name === "description" && value.length > 250) {
       setShowErrorNotification(true);
       setErrorNotificationMessage("Description cannot exceed 220 characters.");
@@ -113,26 +113,24 @@ function EditSlider() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Check file type
       const acceptedFileTypes = ["image/jpeg", "image/png"];
       if (!acceptedFileTypes.includes(file.type)) {
         setShowErrorNotification(true);
         setErrorNotificationMessage("Please upload a JPEG or PNG image.");
-        setDisableAddSave(true); // Disable Add/Save button
+        setDisableAddSave(true);
         return;
       }
 
-      // Check file size (max 20MB)
-      const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
+      const maxFileSize = 20 * 1024 * 1024;
       if (file.size > maxFileSize) {
         setShowErrorNotification(true);
         setErrorNotificationMessage("File size exceeds 20MB limit.");
-        setDisableAddSave(true); // Disable Add/Save button
+        setDisableAddSave(true);
         return;
       }
 
       setEditedTestimonial({ ...editedTestimonial, img: file });
-      setDisableAddSave(false); // Enable Add/Save button if file is valid
+      setDisableAddSave(false);
     }
   };
 
@@ -172,7 +170,6 @@ function EditSlider() {
   };
 
   const handleAddSave = async () => {
-   
     if (
       !editedTestimonial.description ||
       !editedTestimonial.img ||
@@ -213,7 +210,6 @@ function EditSlider() {
       );
       setTestimonials(updatedTestimonials);
 
-   
       setShowErrorNotification(true);
       setErrorNotificationMessage("Data deleted successfully.");
     } catch (error) {

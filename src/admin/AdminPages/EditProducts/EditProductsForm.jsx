@@ -23,7 +23,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import Notification from "../../../Notification/Notification"; // Adjust path as per your file structure
+import Notification from "../../../Notification/Notification";
 
 const truncateStyle = {
   maxWidth: "100px",
@@ -54,7 +54,6 @@ export default function EditProductsForm() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteProductId, setDeleteProductId] = useState(null);
 
-  // Notification State
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success"); // Default to success
@@ -105,7 +104,6 @@ export default function EditProductsForm() {
   };
 
   const handleUpdate = async () => {
-    // Check if any required field is empty
     if (
       !updatedProduct.heading ||
       !updatedProduct.content ||
@@ -113,11 +111,10 @@ export default function EditProductsForm() {
       !updatedProduct.link1 ||
       !updatedProduct.link2
     ) {
-      // Show error notification
       setNotificationSeverity("error");
       setNotificationMessage("All fields are required.");
       setNotificationOpen(true);
-      return; // Exit function to prevent API call
+      return;
     }
 
     try {
@@ -132,7 +129,7 @@ export default function EditProductsForm() {
       );
       fetchData();
       handleDialogClose();
-      // Show success notification
+
       setNotificationSeverity("success");
       setNotificationMessage("Product updated successfully");
       setNotificationOpen(true);
@@ -150,7 +147,6 @@ export default function EditProductsForm() {
   };
 
   const handleAddProduct = async () => {
-    // Check if any required field is empty
     if (
       !newProduct.heading ||
       !newProduct.content ||
@@ -158,11 +154,10 @@ export default function EditProductsForm() {
       !newProduct.link1 ||
       !newProduct.link2
     ) {
-      // Show error notification
       setNotificationSeverity("error");
       setNotificationMessage("All fields are required.");
       setNotificationOpen(true);
-      return; // Exit function to prevent API call
+      return;
     }
 
     try {
@@ -177,7 +172,7 @@ export default function EditProductsForm() {
       });
       setOpenAdd(false);
       fetchData();
-      // Show success notification
+
       setNotificationSeverity("success");
       setNotificationMessage("Product added successfully");
       setNotificationOpen(true);
@@ -196,7 +191,7 @@ export default function EditProductsForm() {
       await deleteProducts(deleteProductId);
       setProducts(products.filter((product) => product.id !== deleteProductId));
       setDeleteDialogOpen(false);
-      // Show success notification
+
       setNotificationSeverity("success");
       setNotificationMessage("Product deleted successfully");
       setNotificationOpen(true);
@@ -446,7 +441,6 @@ export default function EditProductsForm() {
         </DialogActions>
       </Dialog>
 
-      {/* Notification Component */}
       <Notification
         open={notificationOpen}
         handleClose={handleNotificationClose}

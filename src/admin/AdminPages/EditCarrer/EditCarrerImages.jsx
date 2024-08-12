@@ -18,7 +18,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 import {
   fetchCareerImages,
   updateCareerImage,
@@ -41,7 +41,6 @@ function EditCarrerImages() {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
 
-  // State to track if each file field is filled
   const [fileFieldsFilled, setFileFieldsFilled] = useState({
     img_1: false,
     img_2: false,
@@ -53,7 +52,6 @@ function EditCarrerImages() {
     img_8: false,
   });
 
-  // State to disable save button in Edit dialog
   const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
 
   const fetchData = async () => {
@@ -62,7 +60,6 @@ function EditCarrerImages() {
       setCareerImages(data);
     } catch (error) {
       console.error("Error fetching career images data:", error);
-      // Handle errors as needed
     }
   };
 
@@ -73,19 +70,18 @@ function EditCarrerImages() {
   const handleEditOpen = (data) => {
     setSelectedImageId(data.id);
     setOpenDialog(true);
-    setSelectedOption(""); // Reset selectedOption when dialog opens
+    setSelectedOption("");
   };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    // Reset save button state when option changes
+
     setSaveButtonDisabled(true);
   };
 
   const handleFileChange = (event, fieldName) => {
     const file = event.target.files[0];
 
-    // Check file size
     if (file.size > 20 * 1024 * 1024) {
       setNotificationSeverity("error");
       setNotificationMessage(
@@ -96,7 +92,6 @@ function EditCarrerImages() {
       return;
     }
 
-    // Check file type
     const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
     if (!allowedFormats.includes(file.type)) {
       setNotificationSeverity("error");
@@ -108,25 +103,22 @@ function EditCarrerImages() {
       return;
     }
 
-    // Update selectedFiles state
     setSelectedFiles((prevFiles) => ({
       ...prevFiles,
       [fieldName]: file,
     }));
 
-    // Mark the field as filled
     setFileFieldsFilled((prevFields) => ({
       ...prevFields,
       [fieldName]: true,
     }));
 
-    // Enable save button if all conditions are met
     setSaveButtonDisabled(false);
   };
 
   const handleDialogClose = () => {
     setOpenDialog(false);
-    // Reset fileFieldsFilled and selectedFiles on dialog close
+
     setFileFieldsFilled({
       img_1: false,
       img_2: false,
@@ -157,7 +149,7 @@ function EditCarrerImages() {
       const response = await updateCareerImage(selectedImageId, formData);
       console.log("Career image updated successfully:", response);
       setNotificationSeverity("success");
-      setNotificationMessage(response.message); // Use API response message
+      setNotificationMessage(response.message);
       setNotificationOpen(true);
     } catch (error) {
       console.error("Error updating career image:", error);
@@ -171,7 +163,7 @@ function EditCarrerImages() {
 
   const handleAddDialogClose = () => {
     setOpenAddDialog(false);
-    // Reset fileFieldsFilled and selectedFiles on dialog close
+
     setFileFieldsFilled({
       img_1: false,
       img_2: false,
@@ -199,7 +191,7 @@ function EditCarrerImages() {
       const response = await uploadCareerImages(formData);
       console.log("Career images added successfully:", response);
       setNotificationSeverity("success");
-      setNotificationMessage(response.message); // Use API response message
+      setNotificationMessage(response.message);
       setNotificationOpen(true);
     } catch (error) {
       console.error("Error adding career images:", error);
@@ -243,7 +235,6 @@ function EditCarrerImages() {
     setNotificationOpen(false);
   };
 
-  // Disable Add Images button until all fields are filled
   const addImagesDisabled =
     !fileFieldsFilled.img_1 ||
     !fileFieldsFilled.img_2 ||
@@ -256,15 +247,23 @@ function EditCarrerImages() {
 
   return (
     <div>
-        <Typography variant="h5" component="h5">
-      Edit Carrer Image
-    </Typography>
-      {/* Button to add images */}
-      <Button variant="contained" color="primary" onClick={handleAddOpen} style={{marginTop:"10px"}}>
+      <Typography variant="h5" component="h5">
+        Edit Carrer Image
+      </Typography>
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleAddOpen}
+        style={{ marginTop: "10px" }}
+      >
         Add Image
       </Button>
 
-      <TableContainer style={{ marginTop: "10px",maxHeight: "500px", overflow: "auto" }} component={Paper}>
+      <TableContainer
+        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+        component={Paper}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow>

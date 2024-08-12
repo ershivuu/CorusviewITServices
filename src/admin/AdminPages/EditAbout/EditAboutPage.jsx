@@ -18,8 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import Notification from "../../../Notification/Notification"; // Adjust the import path as per your folder structure
-
+import Notification from "../../../Notification/Notification"; 
 function EditAboutPage() {
   const [aboutUsData, setAboutUsData] = useState([]);
   const [error, setError] = useState(null);
@@ -30,7 +29,7 @@ function EditAboutPage() {
     story_content: "",
     vision_content: "",
   });
-  const [selectedField, setSelectedField] = useState("company_content"); // Set default value here
+  const [selectedField, setSelectedField] = useState("company_content"); 
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const fetchData = async () => {
@@ -49,7 +48,7 @@ function EditAboutPage() {
 
   const handleEditOpen = (data) => {
     setEditedData(data);
-    setSelectedField("company_content"); // Reset to default value on edit open
+    setSelectedField("company_content"); 
     setEditOpen(true);
   };
 
@@ -70,13 +69,13 @@ function EditAboutPage() {
 
   const handleSave = async () => {
     try {
-      // Call your update API here and pass the editedData
+
       const response = await updateAboutUsCompany(editedData);
 
       setEditOpen(false);
       showNotification(response.message, "success");
 
-      // Refresh the data
+     
       const updatedData = await fetchAboutUsCompany();
       setAboutUsData(updatedData);
     } catch (error) {

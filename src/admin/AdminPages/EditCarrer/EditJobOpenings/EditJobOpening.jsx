@@ -19,7 +19,7 @@ import {
   TextField,
   Box,
   DialogContentText,
-  Typography
+  Typography,
 } from "@mui/material";
 import {
   fetchJobOpenings,
@@ -34,7 +34,7 @@ function EditJobOpening() {
   const [jobOpenings, setJobOpenings] = useState([]);
   const [jobRoles, setJobRoles] = useState([]);
   const [selectedRole, setSelectedRole] = useState("All");
-  const [addJobRole, setAddJobRole] = useState(""); // Separate state for add job role
+  const [addJobRole, setAddJobRole] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [editedJob, setEditedJob] = useState(null);
   const [openAddDialog, setOpenAddDialog] = useState(false);
@@ -46,7 +46,7 @@ function EditJobOpening() {
   const [selectedJobId, setSelectedJobId] = useState(null);
   const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
 
-  const [formValid, setFormValid] = useState(false); // State for form validation
+  const [formValid, setFormValid] = useState(false);
   const fetchRoles = async () => {
     try {
       const roles = await fetchJobRoles();
@@ -56,13 +56,11 @@ function EditJobOpening() {
     }
   };
 
-
-
   const fetchData = async () => {
     try {
       let openings;
       if (selectedRole === "All") {
-        openings = await fetchJobOpenings(); // Fetch all job openings
+        openings = await fetchJobOpenings();
       } else {
         openings = await fetchJobOpenings(selectedRole);
       }
@@ -73,7 +71,6 @@ function EditJobOpening() {
   };
 
   useEffect(() => {
-    
     fetchRoles();
     fetchData();
   }, [selectedRole]);
@@ -92,7 +89,7 @@ function EditJobOpening() {
       !editedJob.position ||
       !editedJob.location ||
       !editedJob.level ||
-      !addJobRole // Check against addJobRole instead of selectedRole
+      !addJobRole
     ) {
       setNotificationMessage("All fields are required.");
       setNotificationSeverity("error");
@@ -102,7 +99,7 @@ function EditJobOpening() {
 
     try {
       const formData = new FormData();
-      formData.append("role", addJobRole); // Use addJobRole for adding new job opening
+      formData.append("role", addJobRole);
       formData.append("position", editedJob.position);
       formData.append("location", editedJob.location);
       formData.append("level", editedJob.level);
@@ -113,7 +110,7 @@ function EditJobOpening() {
 
       setOpenAddDialog(false);
       setEditedJob(null);
-      setAddJobRole(""); // Reset addJobRole after submission
+      setAddJobRole("");
 
       setNotificationMessage(response.message);
       setNotificationSeverity("success");
@@ -217,14 +214,13 @@ function EditJobOpening() {
       ? jobOpenings
       : jobOpenings.filter((job) => job.role === selectedRole);
 
-  // Update form validation state based on editedJob and addJobRole
   useEffect(() => {
     if (
       editedJob &&
       editedJob.position &&
       editedJob.location &&
       editedJob.level &&
-      addJobRole // Check against addJobRole instead of selectedRole
+      addJobRole
     ) {
       setFormValid(true);
     } else {
@@ -234,13 +230,13 @@ function EditJobOpening() {
 
   return (
     <Box>
-        <Typography variant="h5" component="h5">
-      Edit Job Opening
-    </Typography>
+      <Typography variant="h5" component="h5">
+        Edit Job Opening
+      </Typography>
       <Button
         variant="contained"
         color="primary"
-        style={{ marginTop: "10px",  }}
+        style={{ marginTop: "10px" }}
         onClick={() => setOpenAddDialog(true)}
       >
         Add Job Opening
@@ -269,8 +265,14 @@ function EditJobOpening() {
       </FormControl>
 
       <Paper>
-        <TableContainer style={{ marginTop: "30px",maxHeight: "500px", overflow: "auto" }}>
-          <Table sx={{ minWidth: 650 }} aria-label="Job Openings Table" stickyHeader>
+        <TableContainer
+          style={{ marginTop: "30px", maxHeight: "500px", overflow: "auto" }}
+        >
+          <Table
+            sx={{ minWidth: 650 }}
+            aria-label="Job Openings Table"
+            stickyHeader
+          >
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
@@ -315,7 +317,7 @@ function EditJobOpening() {
           <DialogTitle>Add New Job Opening</DialogTitle>
           <DialogContent>
             <form>
-              <FormControl fullWidth style={{marginTop:"10px"}}>
+              <FormControl fullWidth style={{ marginTop: "10px" }}>
                 <InputLabel id="role-select-label">Select Role</InputLabel>
                 <Select
                   labelId="role-select-label"
@@ -385,7 +387,7 @@ function EditJobOpening() {
           <DialogTitle>Edit Job Opening</DialogTitle>
           <DialogContent>
             <form>
-              <FormControl fullWidth style={{marginTop:"10px"}}>
+              <FormControl fullWidth style={{ marginTop: "10px" }}>
                 <InputLabel id="role-select-label">Select Role</InputLabel>
                 <Select
                   labelId="role-select-label"

@@ -165,26 +165,25 @@ function EditServices() {
     const { name, value, files } = e.target;
 
     if (name === "icon_img") {
-      const file = files[0]; // Assuming single file upload
+      const file = files[0]; 
       if (file) {
-        const fileSize = file.size / 1024 / 1024; // in MB
-        const fileType = file.type.split("/")[1]; // Extract file type
+        const fileSize = file.size / 1024 / 1024; 
+        const fileType = file.type.split("/")[1]; 
 
-        // Check file type and size
         if (!["png", "jpg", "jpeg"].includes(fileType)) {
           setEditFileError(
             "Unsupported file type. Please upload PNG, JPG, or JPEG files."
           );
-          setEditButtonDisabled(true); // Disable save button on error
+          setEditButtonDisabled(true); 
         } else if (fileSize > 20) {
           setEditFileError(
             "File size exceeds 20 MB. Please upload a smaller file."
           );
-          setEditButtonDisabled(true); // Disable save button on error
+          setEditButtonDisabled(true); 
         } else {
           setEditedService({ ...editedService, icon_img: file });
-          setEditFileError(null); // Clear file error if no errors
-          setEditButtonDisabled(false); // Enable save button if error resolved
+          setEditFileError(null); 
+          setEditButtonDisabled(false); 
         }
       }
     } else if (name === "heading") {
@@ -290,10 +289,10 @@ function EditServices() {
         formData.append("icon_img", editedService.icon_img);
       }
 
-      // Call updateServiceData function
+    
       const response = await updateServiceData(editedService.id, formData);
-      setSuccessMessage(response.message); // Assuming your response structure has a 'message' field
-      fetchData(); // Refresh data after update
+      setSuccessMessage(response.message); 
+      fetchData(); 
       handleCloseEditDialog();
     } catch (error) {
       setError(error.message);
@@ -304,9 +303,9 @@ function EditServices() {
     try {
       if (serviceToDelete) {
         const response = await deleteServiceData(serviceToDelete.id);
-        fetchData(); // Refresh data after deletion
+        fetchData(); 
         setOpenDeleteDialog(false);
-        setSuccessMessage(response.message); // Set success message
+        setSuccessMessage(response.message); 
       }
     } catch (error) {
       setError(error.message);
@@ -323,7 +322,7 @@ function EditServices() {
   };
 
   const handleSuccessNotificationClose = () => {
-    setSuccessMessage(null); // Close success notification
+    setSuccessMessage(null); 
   };
 
   return (
@@ -341,7 +340,6 @@ function EditServices() {
           Add Service
         </Button>
 
-        {/* Success Notification */}
         {successMessage && (
           <Notification
             open={true}
@@ -402,7 +400,7 @@ function EditServices() {
         <Dialog open={openAddDialog} onClose={handleCloseAddDialog}>
           <DialogTitle>Add New Service</DialogTitle>
           <DialogContent>
-            {/* Error Notifications */}
+           
             {addFileError && (
               <Notification
                 open={true}
@@ -463,8 +461,7 @@ function EditServices() {
               onChange={handleAddChange}
               multiline
               rows={4}
-              // error={!!contentError}
-              // helperText={contentError}
+              
             />
           </DialogContent>
           <DialogActions>
@@ -529,8 +526,7 @@ function EditServices() {
               name="heading"
               value={editedService.heading}
               onChange={handleEditChange}
-              // error={!!editHeadingError}
-              // helperText={editHeadingError}
+        
             />
             <TextField
               margin="dense"
@@ -542,8 +538,7 @@ function EditServices() {
               onChange={handleEditChange}
               multiline
               rows={4}
-              // error={!!editContentError}
-              // helperText={editContentError}
+          
             />
           </DialogContent>
           <DialogActions>

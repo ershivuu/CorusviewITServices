@@ -63,7 +63,7 @@ function EditRecentWork() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Validate file type
+     
       const isValidType =
         file.type === "image/jpeg" || file.type === "image/png";
       if (!isValidType) {
@@ -74,8 +74,8 @@ function EditRecentWork() {
         return;
       }
 
-      // Validate file size (20 MB limit)
-      const maxSize = 20 * 1024 * 1024; // 20 MB in bytes
+    
+      const maxSize = 20 * 1024 * 1024; 
       if (file.size > maxSize) {
         showNotification("File size exceeds 20 MB limit.");
         setEditSaveDisabled(true);
@@ -141,7 +141,7 @@ function EditRecentWork() {
   const handleAddFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Validate file type
+  
       const isValidType =
         file.type === "image/jpeg" || file.type === "image/png";
       if (!isValidType) {

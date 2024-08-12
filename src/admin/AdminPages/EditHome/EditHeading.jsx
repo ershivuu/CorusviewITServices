@@ -59,7 +59,7 @@ function EditHeading() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (value.length > 35) {
-      // Truncate input to 35 characters
+
       setEditedData({ ...editedData, [name]: value.slice(0, 35) });
       setShowNotification(true);
       setNotificationMessage(`Maximum 35 characters allowed for ${name}`);
