@@ -213,29 +213,32 @@ function JobOpenings({ openDialog, setOpenDialog }) {
             </div>
           </div>
           <div>
-            {filteredJobOpenings.map((job) => (
-              <div key={job.id} className="current-job-openings">
-                <div className="job-role">
-                  <p>{job.role}</p>
-                </div>
-                <div className="position">
-                  <div>
-                    <p>
-                      {job.position}-<span>{job.level}</span>
-                    </p>
-                    <p className="job-location">{job.location}</p>
+            {filteredJobOpenings
+              .slice()
+              .sort((a, b) => b.id - a.id)
+              .map((job) => (
+                <div key={job.id} className="current-job-openings">
+                  <div className="job-role">
+                    <p>{job.role}</p>
                   </div>
-                  <div>
-                    <button
-                      className="apply-btn"
-                      onClick={() => handleClickOpen(job)}
-                    >
-                      Apply
-                    </button>
+                  <div className="position">
+                    <div>
+                      <p>
+                        {job.position}-<span>{job.level}</span>
+                      </p>
+                      <p className="job-location">{job.location}</p>
+                    </div>
+                    <div>
+                      <button
+                        className="apply-btn"
+                        onClick={() => handleClickOpen(job)}
+                      >
+                        Apply
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>

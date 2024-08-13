@@ -21,6 +21,7 @@ function Login({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // admin id and password
     if (username === "corusviewit" && password === "corusview@admin") {
       localStorage.setItem("username", username);
       onLogin();

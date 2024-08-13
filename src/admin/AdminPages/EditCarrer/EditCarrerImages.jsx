@@ -256,15 +256,25 @@ function EditCarrerImages() {
 
   return (
     <div>
-        <Typography variant="h5" component="h5">
-      Edit Carrer Image
-    </Typography>
-      {/* Button to add images */}
-      <Button variant="contained" color="primary" onClick={handleAddOpen} style={{marginTop:"10px"}}>
-        Add Image
-      </Button>
+      <Typography variant="h5" component="h5">
+        Edit Carrer Image
+      </Typography>
 
-      <TableContainer style={{ marginTop: "10px",maxHeight: "500px", overflow: "auto" }} component={Paper}>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddOpen}
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+        >
+          Add Image
+        </Button>
+      </div>
+
+      <TableContainer
+        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+        component={Paper}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow>

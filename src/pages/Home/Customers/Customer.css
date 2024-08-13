@@ -52,7 +52,7 @@
 .about-client img {
   width: inherit;
   height: inherit;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 50%;
 }
 .our-client-img {

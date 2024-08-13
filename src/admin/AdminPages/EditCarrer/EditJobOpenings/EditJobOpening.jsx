@@ -19,7 +19,7 @@ import {
   TextField,
   Box,
   DialogContentText,
-  Typography
+  Typography,
 } from "@mui/material";
 import {
   fetchJobOpenings,
@@ -56,8 +56,6 @@ function EditJobOpening() {
     }
   };
 
-
-
   const fetchData = async () => {
     try {
       let openings;
@@ -73,7 +71,6 @@ function EditJobOpening() {
   };
 
   useEffect(() => {
-    
     fetchRoles();
     fetchData();
   }, [selectedRole]);
@@ -234,22 +231,21 @@ function EditJobOpening() {
 
   return (
     <Box>
-        <Typography variant="h5" component="h5">
-      Edit Job Opening
-    </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ marginTop: "10px",  }}
-        onClick={() => setOpenAddDialog(true)}
-      >
-        Add Job Opening
-      </Button>
+      <Typography variant="h5" component="h5">
+        Edit Job Opening
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "10px" }}
+          onClick={() => setOpenAddDialog(true)}
+        >
+          Add Job Opening
+        </Button>
+      </div>
 
-      <FormControl
-        sx={{ minWidth: 250 }}
-        style={{ float: "right", marginTop: "10px" }}
-      >
+      <FormControl sx={{ minWidth: 250 }} style={{ marginTop: "10px" }}>
         <InputLabel id="role-select-label">Filter by Role</InputLabel>
 
         <Select
@@ -269,8 +265,14 @@ function EditJobOpening() {
       </FormControl>
 
       <Paper>
-        <TableContainer style={{ marginTop: "30px",maxHeight: "500px", overflow: "auto" }}>
-          <Table sx={{ minWidth: 650 }} aria-label="Job Openings Table" stickyHeader>
+        <TableContainer
+          style={{ marginTop: "30px", maxHeight: "500px", overflow: "auto" }}
+        >
+          <Table
+            sx={{ minWidth: 650 }}
+            aria-label="Job Openings Table"
+            stickyHeader
+          >
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
@@ -284,29 +286,32 @@ function EditJobOpening() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredJobOpenings.map((job, index) => (
-                <TableRow key={job.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{job.role}</TableCell>
-                  <TableCell>{job.position}</TableCell>
-                  <TableCell>{job.location}</TableCell>
-                  <TableCell>
-                    {new Date(job.posted_date).toLocaleDateString()}
-                  </TableCell>
-                  <TableCell>{job.level}</TableCell>
-                  <TableCell>
-                    <Button onClick={() => handleEditClick(job)}>Edit</Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      color="error"
-                      onClick={() => handleDeleteClick(job.id)}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {filteredJobOpenings
+                .slice()
+                .sort((a, b) => b.id - a.id)
+                .map((job, index) => (
+                  <TableRow key={job.id}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{job.role}</TableCell>
+                    <TableCell>{job.position}</TableCell>
+                    <TableCell>{job.location}</TableCell>
+                    <TableCell>
+                      {new Date(job.posted_date).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>{job.level}</TableCell>
+                    <TableCell>
+                      <Button onClick={() => handleEditClick(job)}>Edit</Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        color="error"
+                        onClick={() => handleDeleteClick(job.id)}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
@@ -315,7 +320,7 @@ function EditJobOpening() {
           <DialogTitle>Add New Job Opening</DialogTitle>
           <DialogContent>
             <form>
-              <FormControl fullWidth style={{marginTop:"10px"}}>
+              <FormControl fullWidth style={{ marginTop: "10px" }}>
                 <InputLabel id="role-select-label">Select Role</InputLabel>
                 <Select
                   labelId="role-select-label"
@@ -385,7 +390,7 @@ function EditJobOpening() {
           <DialogTitle>Edit Job Opening</DialogTitle>
           <DialogContent>
             <form>
-              <FormControl fullWidth style={{marginTop:"10px"}}>
+              <FormControl fullWidth style={{ marginTop: "10px" }}>
                 <InputLabel id="role-select-label">Select Role</InputLabel>
                 <Select
                   labelId="role-select-label"

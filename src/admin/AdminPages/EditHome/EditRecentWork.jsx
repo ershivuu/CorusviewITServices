@@ -37,8 +37,6 @@ function EditRecentWork() {
   const [addSaveDisabled, setAddSaveDisabled] = useState(true);
   const [editSaveDisabled, setEditSaveDisabled] = useState(true);
 
-
-
   const fetchData = async () => {
     try {
       const data = await fetchRecentWorks();
@@ -203,18 +201,23 @@ function EditRecentWork() {
   return (
     <>
       <Typography variant="h5" component="h5">
-      Edit Recent Work
-    </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleAddOpen}
-        style={{ marginBottom: "20px", marginTop:"10px" }}
-      >
-        Add New Work
-      </Button>
+        Edit Recent Work
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddOpen}
+          style={{ marginBottom: "20px", marginTop: "10px" }}
+        >
+          Add New Work
+        </Button>
+      </div>
 
-      <TableContainer component={Paper} style={{marginTop:"10px",maxHeight: "500px", overflow: "auto"}}>
+      <TableContainer
+        component={Paper}
+        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
+      >
         <Table stickyHeader>
           <TableHead>
             <TableRow>

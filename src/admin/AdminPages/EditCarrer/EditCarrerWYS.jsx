@@ -14,7 +14,7 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import {
   fetchCareerWYS,
@@ -35,20 +35,15 @@ function EditCarrerWYS() {
   const [newHeading, setNewHeading] = useState("");
   const [newContent, setNewContent] = useState("");
 
-
-
-
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("info");
-
 
   const showNotification = (message, severity) => {
     setNotificationMessage(message);
     setNotificationSeverity(severity);
     setNotificationOpen(true);
   };
-
 
   const fetchData = async () => {
     try {
@@ -91,7 +86,6 @@ function EditCarrerWYS() {
   };
 
   const handleUpdate = async () => {
-
     if (!updatedHeading || !updatedContent) {
       showNotification("This feild is required", "error");
       return;
@@ -112,7 +106,6 @@ function EditCarrerWYS() {
     }
   };
 
-
   const handleDelete = async () => {
     try {
       const response = await deleteCareerWYS(selectedCareer.id);
@@ -128,7 +121,6 @@ function EditCarrerWYS() {
   };
 
   const handleAdd = async () => {
-
     if (!newHeading || !newContent) {
       showNotification("This feild is required", "error");
       return;
@@ -150,21 +142,26 @@ function EditCarrerWYS() {
     }
   };
 
-
-
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
     <div>
-   <Typography variant="h5" component="h5">
-      Edit Carrer What You'll See
-    </Typography>
-      <Button variant="contained" color="primary" onClick={handleAddClick} style={{marginTop:"10px"}}>
-        Add Career
-      </Button>
-      <TableContainer style={{marginTop:"10px",maxHeight: "500px", overflow: "auto"}} component={Paper}>
+      <Typography variant="h5" component="h5">
+        Edit Carrer What You'll See
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddClick}
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+        >
+          Add Career
+        </Button>
+      </div>
+      <TableContainer style={{ marginTop: "10px" }} component={Paper}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>

@@ -98,7 +98,6 @@ function Customer() {
             </button>
           </div>
         </div>
-
         <div className="custom-heading">
           <p>
             What our <br /> Customers <br /> are Saying

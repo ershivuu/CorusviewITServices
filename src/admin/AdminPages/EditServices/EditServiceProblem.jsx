@@ -174,21 +174,19 @@ function EditServiceProblem() {
           Edit Service Problem
         </Typography>
 
-        {/* Add Button */}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleAddClick}
-          style={{ marginBottom: "1rem" }}
-        >
-          Add Problem
-        </Button>
+        <div style={{ float: "right" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAddClick}
+            style={{ marginBottom: "1rem" }}
+          >
+            Add Problem
+          </Button>
+        </div>
 
         {/* Table of Problems */}
-        <TableContainer
-          component={Paper}
-          style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
-        >
+        <TableContainer component={Paper} style={{ marginTop: "10px" }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>

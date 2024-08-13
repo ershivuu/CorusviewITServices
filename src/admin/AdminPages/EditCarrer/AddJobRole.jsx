@@ -13,7 +13,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Typography
+  Typography,
 } from "@mui/material";
 import { fetchJobRoles, addJobRole, deleteJobRole } from "../../AdminServices";
 import Notification from "../../../Notification/Notification";
@@ -118,19 +118,21 @@ const AddJobRole = () => {
 
   return (
     <div>
-        <Typography variant="h5" component="h5">
-     Add Job Roles
-    </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ marginTop: "10px" }}
-        onClick={() => setOpenDialog(true)}
-      >
-        Add Role
-      </Button>
+      <Typography variant="h5" component="h5">
+        Add Job Roles
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+          onClick={() => setOpenDialog(true)}
+        >
+          Add Role
+        </Button>
+      </div>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog} >
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Add New Job Role</DialogTitle>
         <DialogContent>
           <TextField
@@ -154,7 +156,7 @@ const AddJobRole = () => {
         </DialogActions>
       </Dialog>
 
-      <TableContainer component={Paper} style={{ marginTop: "10px" ,maxHeight: "500px", overflow: "auto"}}>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table aria-label="Job Roles Table" stickyHeader>
           <TableHead>
             <TableRow>

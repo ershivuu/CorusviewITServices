@@ -132,7 +132,7 @@ function ApplyNow() {
         setNotificationSeverity("success");
         setNotificationOpen(true);
       }
-
+      fetchApplicants();
       setDeleteDialogOpen(false);
     } catch (error) {
       console.error("Error deleting applicant:", error);
@@ -161,16 +161,17 @@ function ApplyNow() {
       <Typography variant="h5" component="h5">
         Apply Now Data
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleExport}
-        style={{ marginTop: "10px" }}
-        startIcon={<GetAppIcon />}
-      >
-        Download Excel
-      </Button>
-      <FormControl sx={{ minWidth: 250 }} style={{ float: "right" }}>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleExport}
+          startIcon={<GetAppIcon />}
+        >
+          Download Excel
+        </Button>
+      </div>
+      <FormControl sx={{ minWidth: 250, marginTop: "20px" }}>
         <InputLabel id="role-select-label">Filter by Role</InputLabel>
 
         <Select
@@ -188,11 +189,8 @@ function ApplyNow() {
           ))}
         </Select>
       </FormControl>
-      <TableContainer
-        component={Paper}
-        style={{ marginTop: "20px", maxHeight: "500px", overflow: "auto" }}
-      >
-        <Table stickyHeader>
+      <TableContainer component={Paper} style={{ marginTop: "20px" }}>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>S No.</TableCell>

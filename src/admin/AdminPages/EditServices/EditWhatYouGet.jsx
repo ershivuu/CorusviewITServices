@@ -24,7 +24,6 @@ import {
   updateWhatYouGetService,
   deleteWhatYouGetService,
   addWhatYouGetService,
-
   fetchOnlyOurServiceHead,
 } from "../../AdminServices"; // Adjust the import path as per your project structure
 import Notification from "../../../Notification/Notification"; // Adjust the import path as per your project structure
@@ -185,18 +184,17 @@ function EditWhatYouGet() {
       <Typography variant="h5" component="h5">
         Edit What You Will Get
       </Typography>
-      <Button
-        onClick={handleAddClick}
-        variant="contained"
-        color="primary"
-        style={{ marginBottom: "1rem", marginTop: "10px" }}
-      >
-        Add Service
-      </Button>
-      <TableContainer
-        component={Paper}
-        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
-      >
+      <div style={{ float: "right" }}>
+        <Button
+          onClick={handleAddClick}
+          variant="contained"
+          color="primary"
+          style={{ marginBottom: "1rem", marginTop: "10px" }}
+        >
+          Add Service
+        </Button>
+      </div>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
@@ -325,11 +323,11 @@ function EditWhatYouGet() {
 
       {/* Notification */}
       <Notification
-          open={openNotification}
-          handleClose={handleCloseNotification}
-          alertMessage={notificationMessage}
-          alertSeverity={notificationSeverity}
-        />
+        open={openNotification}
+        handleClose={handleCloseNotification}
+        alertMessage={notificationMessage}
+        alertSeverity={notificationSeverity}
+      />
     </div>
   );
 }

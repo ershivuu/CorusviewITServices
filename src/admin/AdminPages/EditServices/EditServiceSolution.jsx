@@ -229,18 +229,17 @@ function EditServiceSolution() {
       <Typography variant="h5" component="h5">
         Edit Service Solution
       </Typography>
-      <Button
-        onClick={handleAddClick}
-        variant="contained"
-        color="primary"
-        style={{ marginTop: "10px" }}
-      >
-        Add New Solution
-      </Button>
-      <TableContainer
-        component={Paper}
-        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
-      >
+      <div style={{ float: "right" }}>
+        <Button
+          onClick={handleAddClick}
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+        >
+          Add New Solution
+        </Button>
+      </div>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>

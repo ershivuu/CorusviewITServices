@@ -222,18 +222,17 @@ export default function EditProductsForm() {
       <Typography variant="h5" component="h5">
         Edit Product
       </Typography>
-      <Button
-        style={{ marginTop: "10px" }}
-        variant="contained"
-        color="primary"
-        onClick={handleAddClick}
-      >
-        Add Products
-      </Button>
-      <TableContainer
-        component={Paper}
-        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
-      >
+      <div style={{ float: "right" }}>
+        <Button
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+          variant="contained"
+          color="primary"
+          onClick={handleAddClick}
+        >
+          Add Products
+        </Button>
+      </div>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>

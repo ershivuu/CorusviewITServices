@@ -223,18 +223,20 @@ function EditSlider() {
 
   return (
     <>
-      <Typography variant="h5" component="h5">
-        Edit Testimonial
-      </Typography>
       <Box>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleOpenAddDialog}
-          style={{ marginTop: 10 }}
-        >
-          Add Testimonial
-        </Button>
+        <Typography variant="h5" component="h5">
+          Edit Testimonial
+        </Typography>
+        <div style={{ float: "right" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleOpenAddDialog}
+            style={{ marginBottom: "10px" }}
+          >
+            Add Testimonial
+          </Button>
+        </div>
         <TableContainer
           style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
           component={Paper}

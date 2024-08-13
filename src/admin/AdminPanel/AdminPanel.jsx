@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import Login from "../Login/Login";
@@ -25,13 +25,35 @@ function AdminPanel() {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
-    navigate("/admin");
+    localStorage.removeItem("username");
+    sessionStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("username");
+    navigate("/");
     setIsLoggedIn(false);
     setNotificationMessage("Logout successful!");
     setNotificationSeverity("success");
     setNotificationOpen(true);
+    clearTimeout(logoutTimer);
   };
+  let logoutTimer;
+  const startLogoutTimer = () => {
+    logoutTimer = setTimeout(() => {
+      handleLogout();
+    }, 30 * 60 * 1000);
+  };
+  const handleUserActivity = () => {
+    clearTimeout(logoutTimer);
+    startLogoutTimer();
+  };
+  useEffect(() => {
+    window.addEventListener("mousemove", handleUserActivity);
+    window.addEventListener("keydown", handleUserActivity);
 
+    return () => {
+      window.removeEventListener("mousemove", handleUserActivity);
+      window.removeEventListener("keydown", handleUserActivity);
+    };
+  }, []);
   const handleCloseNotification = () => {
     setNotificationOpen(false);
   };

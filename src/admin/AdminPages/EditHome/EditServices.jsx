@@ -331,20 +331,21 @@ function EditServices() {
 
   return (
     <>
-      <Typography variant="h5" component="h5">
-        Edit Sevices
-      </Typography>
       <Box>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleOpenAddDialog}
-          style={{ marginBottom: "1rem", marginTop: "10px" }}
-        >
-          Add Service
-        </Button>
+        <Typography variant="h5" component="h5">
+          Edit Sevices
+        </Typography>
+        <div style={{ float: "right" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleOpenAddDialog}
+            style={{ marginBottom: "1rem", marginTop: "10px" }}
+          >
+            Add Service
+          </Button>
+        </div>
 
-        {/* Success Notification */}
         {successMessage && (
           <Notification
             open={true}
@@ -354,10 +355,7 @@ function EditServices() {
           />
         )}
 
-        <TableContainer
-          component={Paper}
-          style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
-        >
+        <TableContainer component={Paper}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
