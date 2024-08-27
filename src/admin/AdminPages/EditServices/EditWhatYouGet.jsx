@@ -195,7 +195,7 @@ function EditWhatYouGet() {
         </Button>
       </div>
       <TableContainer component={Paper} style={{ marginTop: "10px" }}>
-        <Table stickyHeader>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>S no.</TableCell>

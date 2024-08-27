@@ -271,11 +271,8 @@ function EditCarrerImages() {
         </Button>
       </div>
 
-      <TableContainer
-        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
-        component={Paper}
-      >
-        <Table stickyHeader>
+      <TableContainer style={{ marginTop: "10px" }} component={Paper}>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>

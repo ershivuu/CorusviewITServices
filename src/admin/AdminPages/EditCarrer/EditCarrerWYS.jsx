@@ -162,7 +162,7 @@ function EditCarrerWYS() {
         </Button>
       </div>
       <TableContainer style={{ marginTop: "10px" }} component={Paper}>
-        <Table stickyHeader>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>

@@ -214,10 +214,7 @@ function EditRecentWork() {
         </Button>
       </div>
 
-      <TableContainer
-        component={Paper}
-        style={{ marginTop: "10px", maxHeight: "500px", overflow: "auto" }}
-      >
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>

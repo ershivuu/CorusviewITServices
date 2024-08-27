@@ -38,6 +38,34 @@ function Home() {
             WHERE INNOVATION MEETS EXCELLENCE
           </p>
         </div>
+        <div className="our-client-logo">
+          <div>
+            <a href="https://cviewsurvey.com/home" target="_blank">
+              <img src={cviewsurvey} alt="cviewsurvey" />
+            </a>
+          </div>
+          <div>
+            <a href="https://www.medicaps.ac.in/" target="_blank">
+              <img src={medicaps} alt="medicaps" />
+            </a>
+          </div>
+          <div>
+            <a href="https://iposup.com/" target="_blank">
+              <img src={iposup} alt="iposup" />
+            </a>
+          </div>
+          <div>
+            <a href="https://www.goldenbansi.com/" target="_blank">
+              <img src={goldenBansi} alt="goldenbansi" />
+            </a>
+          </div>
+
+          <div>
+            <a href="https://www.wemacare.com/" target="_blank">
+              <img src={wemalife} alt="wemacare" />
+            </a>
+          </div>
+        </div>
       </>
     );
   }

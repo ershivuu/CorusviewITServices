@@ -240,7 +240,7 @@ function EditServiceSolution() {
         </Button>
       </div>
       <TableContainer component={Paper} style={{ marginTop: "10px" }}>
-        <Table stickyHeader>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
