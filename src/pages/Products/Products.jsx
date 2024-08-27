@@ -33,7 +33,9 @@ function Products() {
               <p>{product.heading}</p>
             </div>
             <div className="product-content">
-              <p>{product.content}</p>
+              {product.content.split("\n").map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
           </div>
           <div className="prod-vector">
@@ -43,22 +45,20 @@ function Products() {
                 src={product.video_link}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
+                allowFullScreen
+                loading="lazy"
               ></iframe>
             </div>
           </div>
 
           <div className="product-btns">
-            <button>
-              <a href={product.link1} target="_blank">
-                Know More
-              </a>
-            </button>
-            <button>
-              <a href={product.link2} target="_blank">
-                How it works
-              </a>
-            </button>
+            <a href={product.link1} target="_blank" className="first-btn">
+              <button>Know More</button>
+            </a>
+
+            <a href={product.link2} target="_blank" className="second-btn">
+              <button>How it works</button>
+            </a>
           </div>
         </div>
       ))}

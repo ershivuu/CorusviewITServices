@@ -14,14 +14,21 @@ import {
   DialogContent,
   DialogActions,
   Box,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  CircularProgress,
 } from "@mui/material";
 import {
   fetchAllSolutions,
   updateSolution,
   deleteSolution,
   addSolution,
+  fetchOnlyOurServiceHead,
 } from "../../AdminServices";
-import Notification from "../../../Notification/Notification"; // Adjust path as per your project structure
+import Notification from "../../../Notification/Notification"; // Replace with actual path
 
 function EditServiceSolution() {
   const [solutions, setSolutions] = useState([]);
@@ -30,33 +37,58 @@ function EditServiceSolution() {
   const [editedHeading, setEditedHeading] = useState("");
   const [editedContent, setEditedContent] = useState("");
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [openAddDialog, setOpenAddDialog] = useState(false); // Added state for the add dialog
+  const [openAddDialog, setOpenAddDialog] = useState(false);
   const [newHeading, setNewHeading] = useState("");
   const [newContent, setNewContent] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+  const [ourServicesHeadings, setOurServicesHeadings] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Notification state
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
-  const [notificationSeverity, setNotificationSeverity] = useState("success");
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [notificationSeverity, setNotificationSeverity] = useState("info");
 
   const fetchData = async () => {
     try {
       const solutionsData = await fetchAllSolutions();
-      setSolutions(solutionsData);
+      setSolutions(solutionsData.data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching solutions:", error);
-      // Handle errors as needed
+      setError(error);
+      setLoading(false);
+      showNotification(
+        "Failed to fetch solutions. Please try again later.",
+        "error"
+      );
     }
   };
 
+  const fetchOurServiceHeadings = async () => {
+    try {
+      const data = await fetchOnlyOurServiceHead();
+      setOurServicesHeadings(data);
+    } catch (error) {
+      console.error("Error fetching our service headings:", error);
+      showNotification(
+        "Failed to fetch service headings. Please try again later.",
+        "error"
+      );
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    fetchOurServiceHeadings();
+  }, []);
+
   const handleEditClick = (solution) => {
     setSelectedSolution(solution);
-    setEditedHeading(solution.inner_heading);
-    setEditedContent(solution.inner_content);
+    setEditedHeading(solution.solutions_inner_heading);
+    setEditedContent(solution.solutions_inner_content);
     setOpenEditDialog(true);
   };
 
@@ -70,18 +102,23 @@ function EditServiceSolution() {
   const handleSaveChanges = async () => {
     try {
       const updatedData = {
-        inner_heading: editedHeading,
-        inner_content: editedContent,
+        service_id: selectedSolution.service_id,
+        solutions_inner_heading: editedHeading,
+        solutions_inner_content: editedContent,
       };
-      const response = await updateSolution(selectedSolution.id, updatedData);
-      await fetchData(); // Refresh the solutions list after successful update
+      const response = await updateSolution(
+        selectedSolution.solutions_id,
+        updatedData
+      );
+      await fetchData();
       handleCloseEditDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("Solution updated successfully.", "success");
     } catch (error) {
       console.error("Error updating solution:", error);
-      // Handle error as needed
-      handleNotification("Error updating solution", "error");
+      showNotification(
+        "Failed to update solution. Please try again later.",
+        "error"
+      );
     }
   };
 
@@ -92,15 +129,16 @@ function EditServiceSolution() {
 
   const handleConfirmDelete = async () => {
     try {
-      const response = await deleteSolution(selectedSolution.id);
-      await fetchData(); // Refresh the solutions list after successful deletion
+      const response = await deleteSolution(selectedSolution.solutions_id);
+      await fetchData();
       handleCloseDeleteDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("Solution deleted successfully.", "success");
     } catch (error) {
       console.error("Error deleting solution:", error);
-      // Handle error as needed
-      handleNotification(error.message, "error");
+      showNotification(
+        "Failed to delete solution. Please try again later.",
+        "error"
+      );
     }
   };
 
@@ -115,19 +153,31 @@ function EditServiceSolution() {
 
   const handleSaveNewSolution = async () => {
     try {
+      if (!selectedService) {
+        showNotification("Please select a service heading.", "error");
+        return;
+      }
+      if (!newHeading.trim() || !newContent.trim()) {
+        showNotification("Please fill in all fields.", "error");
+        return;
+      }
+
       const newSolution = {
-        inner_heading: newHeading,
-        inner_content: newContent,
+        solutions_inner_heading: newHeading,
+        solutions_inner_content: newContent,
+        our_services_heading: selectedService.heading,
+        service_id: selectedService.id,
       };
       const response = await addSolution(newSolution);
-      await fetchData(); // Refresh the solutions list after successful addition
+      await fetchData();
       handleCloseAddDialog();
-      // Show success notification
-      handleNotification(response.message, "success");
+      showNotification("New solution added successfully.", "success");
     } catch (error) {
       console.error("Error adding solution:", error);
-      // Handle error as needed
-      handleNotification(error.message, "error");
+      showNotification(
+        "Failed to add new solution. Please try again later.",
+        "error"
+      );
     }
   };
 
@@ -135,9 +185,10 @@ function EditServiceSolution() {
     setOpenAddDialog(false);
     setNewHeading("");
     setNewContent("");
+    setSelectedService("");
   };
 
-  const handleNotification = (message, severity) => {
+  const showNotification = (message, severity) => {
     setNotificationMessage(message);
     setNotificationSeverity(severity);
     setOpenNotification(true);
@@ -147,23 +198,53 @@ function EditServiceSolution() {
     setOpenNotification(false);
   };
 
+  // Render loading indicator while fetching data
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  // Render error message if data fetch fails
+  if (error) {
+    return (
+      <Typography variant="body1" style={{ padding: "20px" }}>
+        Error fetching solutions. Please try again later.
+      </Typography>
+    );
+  }
+
+  // Render solutions table if solutions array is defined and not empty
   return (
     <Box>
-      <h2>Service Solutions</h2>
-      <Button
-        onClick={handleAddClick}
-        variant="contained"
-        color="primary"
-        style={{ marginTop: "1rem" }}
-      >
-        Add New Solution
-      </Button>
-      {/* Table of Solutions */}
-      <TableContainer component={Paper}>
+      <Typography variant="h5" component="h5">
+        Edit Service Solution
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          onClick={handleAddClick}
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+        >
+          Add New Solution
+        </Button>
+      </div>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
+              <TableCell>Our Services Heading</TableCell>
               <TableCell>Inner Heading</TableCell>
               <TableCell>Inner Content</TableCell>
               <TableCell>Edit</TableCell>
@@ -172,17 +253,21 @@ function EditServiceSolution() {
           </TableHead>
           <TableBody>
             {solutions.map((solution) => (
-              <TableRow key={solution.id}>
-                <TableCell>{solution.id}</TableCell>
-                <TableCell>{solution.inner_heading}</TableCell>
-                <TableCell>{solution.inner_content}</TableCell>
+              <TableRow key={solution.solutions_id}>
+                <TableCell>{solution.solutions_id}</TableCell>
+                <TableCell>{solution.our_services_heading}</TableCell>
+                <TableCell>{solution.solutions_inner_heading}</TableCell>
+                <TableCell>{solution.solutions_inner_content}</TableCell>
                 <TableCell>
                   <Button onClick={() => handleEditClick(solution)}>
                     Edit
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <Button onClick={() => handleDeleteClick(solution)}>
+                  <Button
+                    color="error"
+                    onClick={() => handleDeleteClick(solution)}
+                  >
                     Delete
                   </Button>
                 </TableCell>
@@ -192,7 +277,6 @@ function EditServiceSolution() {
         </Table>
       </TableContainer>
 
-      {/* Edit Dialog */}
       <Dialog open={openEditDialog} onClose={handleCloseEditDialog}>
         <DialogTitle>Edit Solution</DialogTitle>
         <DialogContent>
@@ -216,17 +300,12 @@ function EditServiceSolution() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseEditDialog}>Cancel</Button>
-          <Button
-            onClick={handleSaveChanges}
-            variant="contained"
-            color="primary"
-          >
-            Save Changes
+          <Button onClick={handleSaveChanges} color="primary">
+            Save
           </Button>
         </DialogActions>
       </Dialog>
 
-      {/* Delete Confirmation Dialog */}
       <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
         <DialogTitle>Delete Solution</DialogTitle>
         <DialogContent>
@@ -234,20 +313,30 @@ function EditServiceSolution() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDeleteDialog}>Cancel</Button>
-          <Button
-            onClick={handleConfirmDelete}
-            variant="contained"
-            color="secondary"
-          >
+          <Button onClick={handleConfirmDelete} color="error">
             Delete
           </Button>
         </DialogActions>
       </Dialog>
 
-      {/* Add Dialog */}
       <Dialog open={openAddDialog} onClose={handleCloseAddDialog}>
         <DialogTitle>Add New Solution</DialogTitle>
         <DialogContent>
+          <FormControl fullWidth>
+            <InputLabel>Select Our Service Heading</InputLabel>
+            <Select
+              value={selectedService}
+              onChange={(e) => setSelectedService(e.target.value)}
+              fullWidth
+              name="selectedOurService"
+            >
+              {ourServicesHeadings.map((service) => (
+                <MenuItem key={service.id} value={service}>
+                  {service.heading}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             autoFocus
             margin="dense"
@@ -268,17 +357,12 @@ function EditServiceSolution() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAddDialog}>Cancel</Button>
-          <Button
-            onClick={handleSaveNewSolution}
-            variant="contained"
-            color="primary"
-          >
-            Add Solution
+          <Button onClick={handleSaveNewSolution} color="primary">
+            Save
           </Button>
         </DialogActions>
       </Dialog>
 
-      {/* Notification */}
       <Notification
         open={openNotification}
         handleClose={handleCloseNotification}

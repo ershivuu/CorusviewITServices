@@ -13,6 +13,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import Notification from "../../../Notification/Notification";
 
 function EditHeading() {
@@ -27,10 +28,7 @@ function EditHeading() {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
-  const [successNotificationMessage, setSuccessNotificationMessage] =
-    useState("");
-
-  useEffect(() => {
+  const [successNotificationMessage, setSuccessNotificationMessage] = useState("");
     const getData = async () => {
       try {
         const result = await fetchMainTableData();
@@ -40,6 +38,8 @@ function EditHeading() {
       }
     };
 
+  useEffect(() => {
+    
     getData();
   }, []);
 
@@ -95,7 +95,10 @@ function EditHeading() {
 
   return (
     <>
-      <TableContainer component={Paper}>
+    <Typography variant="h5" component="h5">
+      Edit Heading
+    </Typography>
+      <TableContainer component={Paper} style={{marginTop:"10px"}}>
         <Table>
           <TableHead>
             <TableRow>

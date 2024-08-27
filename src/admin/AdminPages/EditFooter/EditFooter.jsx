@@ -14,6 +14,7 @@ import {
   DialogActions,
   TextField,
   CircularProgress,
+  Typography
 } from "@mui/material";
 import { fetchFooterData, updateFooterData } from "../../AdminServices";
 import { ChromePicker } from "react-color";
@@ -29,11 +30,6 @@ const EditFooter = () => {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("default");
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     try {
       const response = await fetchFooterData();
@@ -45,6 +41,11 @@ const EditFooter = () => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+ 
 
   const handleEditClick = (item) => {
     setEditItem({ ...item });
@@ -99,7 +100,10 @@ const EditFooter = () => {
 
   return (
     <div>
-      <TableContainer component={Paper}>
+        <Typography variant="h5" component="h5">
+      Edit Footer
+    </Typography>
+      <TableContainer component={Paper} style={{marginTop:"10px"}}>
         <Table>
           <TableHead>
             <TableRow>
@@ -111,7 +115,7 @@ const EditFooter = () => {
               <TableCell>Link 2</TableCell>
               <TableCell>Link 3</TableCell>
               <TableCell>Footer Color</TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell>Edit</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -205,7 +209,7 @@ const EditFooter = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
-          <Button onClick={handleUpdate} variant="contained" color="primary">Update</Button>
+          <Button onClick={handleUpdate}  color="primary">Update</Button>
         </DialogActions>
       </Dialog>
 

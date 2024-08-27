@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  fetchOurValues,
-  updateOurValuesById,
-} from "../../AdminServices";
+import { fetchOurValues, updateOurValuesById } from "../../AdminServices";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -34,17 +31,17 @@ function EditAboutValue() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertSeverity, setAlertSeverity] = useState("success");
+  const fetchData = async () => {
+    try {
+      const data = await fetchOurValues();
+      setOurValues(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchOurValues();
-        setOurValues(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
+    
     fetchData();
   }, []);
 
@@ -82,7 +79,6 @@ function EditAboutValue() {
   };
 
   const handleSave = async () => {
-
     if (!editedData.heading || !editedData.content) {
       // Show notification for required fields
       setAlertMessage("This feild is required.");
@@ -91,7 +87,7 @@ function EditAboutValue() {
       return;
     }
     try {
-     const response = await updateOurValuesById(editedData.id, editedData);
+      const response = await updateOurValuesById(editedData.id, editedData);
 
       // Show success notification
       setAlertMessage(response.message);
@@ -142,7 +138,10 @@ function EditAboutValue() {
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <Typography variant="h5" component="h5">
+      Edit About Value
+    </Typography>
+      <TableContainer component={Paper} style={{marginTop:"10px"}}>
         <Table>
           <TableHead>
             <TableRow>

@@ -8,6 +8,7 @@ import locationlogo from "../../assets/logos/location.png";
 import email from "../../assets/logos/mail.png";
 import phone from "../../assets/logos/phone-call.png";
 import { getFooterData } from "../../pages/FrontendServices/Services";
+import { Link } from "react-router-dom";
 
 function Footers() {
   const [footerData, setFooterData] = useState(null);
@@ -40,16 +41,40 @@ function Footers() {
             </div>
             <div className="info">
               <div className="flex-info">
-                <img src={locationlogo} alt="" />
-                <p>{footerData ? footerData.address : "Loading..."}</p>
+                <img src={locationlogo} alt="Location Logo" />
+
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                    footerData ? footerData.address : ""
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p>{footerData ? footerData.address : "Loading..."}</p>
+                </a>
               </div>
               <div className="flex-info">
-                <img src={email} alt="" />
-                <p>{footerData ? footerData.email : "Loading..."}</p>
+                <img src={email} alt="corusview email" />
+
+                {footerData ? (
+                  <p>
+                    <a href={`mailto:${footerData.email}`}>
+                      {footerData.email}
+                    </a>
+                  </p>
+                ) : (
+                  "Loading..."
+                )}
               </div>
               <div className="flex-info">
-                <img src={phone} alt="" />
-                <p>{footerData ? footerData.phone : "Loading..."}</p>
+                <img src={phone} alt="corusview number" />
+                {footerData ? (
+                  <p>
+                    <a href={`tel:${footerData.phone}`}>{footerData.phone}</a>
+                  </p>
+                ) : (
+                  "Loading..."
+                )}
               </div>
 
               <div className="social-icons">
@@ -59,7 +84,7 @@ function Footers() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img src={insta} alt="" />
+                    <img src={insta} alt="corusview insta" />
                   </a>
                 </div>
                 <div>
@@ -68,7 +93,7 @@ function Footers() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img src={linkedin} alt="" />
+                    <img src={linkedin} alt="corusview linkedin" />
                   </a>
                 </div>
                 <div>
@@ -77,7 +102,7 @@ function Footers() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img src={youtube} alt="" />
+                    <img src={youtube} alt="corusview youtube" />
                   </a>
                 </div>
               </div>
@@ -85,9 +110,11 @@ function Footers() {
           </div>
         </div>
         <div className="footer-2 set-footer">
-          <p>&#169;Corusview 2023 All rights reserved </p>
+          <p>@Corusview 2024 All rights reserved </p>
           <p>Terms & Conditions Applied </p>
-          <p>Privacy policy</p>
+          <Link rel="canonical" to="/privacy-policy">
+            <p>Privacy policy</p>
+          </Link>
         </div>
       </div>
     </>

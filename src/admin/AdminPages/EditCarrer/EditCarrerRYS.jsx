@@ -14,6 +14,7 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
+  Typography
 } from "@mui/material";
 import { fetchCareerHead, updateCareerHead } from "../../AdminServices";
 import Notification from "../../../Notification/Notification"; // Adjust the path as per your file structure
@@ -85,8 +86,10 @@ function EditCarrerRYS() {
 
   return (
     <div>
-      <h2>Career Head Information</h2>
-      <TableContainer component={Paper}>
+     <Typography variant="h5" component="h5">
+      Edit Go Ahead
+    </Typography>
+      <TableContainer component={Paper} style={{marginTop:"10px"}}>
         <Table>
           <TableHead>
             <TableRow>
@@ -103,7 +106,7 @@ function EditCarrerRYS() {
               <TableCell>{careerHead.ryh_content}</TableCell>
               <TableCell>
                 <Button
-                  variant="outlined"
+                  
                   color="primary"
                   onClick={handleEditClick}
                 >
@@ -119,9 +122,7 @@ function EditCarrerRYS() {
       <Dialog open={openEdit} onClose={handleCloseEdit}>
         <DialogTitle>Edit Career Head Information</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Edit the career head information:
-          </DialogContentText>
+          
           <TextField
             autoFocus
             margin="dense"

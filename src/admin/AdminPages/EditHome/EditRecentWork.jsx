@@ -19,6 +19,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
+
 import Notification from "../../../Notification/Notification"; // Adjust the import path as per your folder structure
 
 function EditRecentWork() {
@@ -36,10 +37,6 @@ function EditRecentWork() {
   const [addSaveDisabled, setAddSaveDisabled] = useState(true);
   const [editSaveDisabled, setEditSaveDisabled] = useState(true);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     try {
       const data = await fetchRecentWorks();
@@ -48,7 +45,9 @@ function EditRecentWork() {
       setError(error.message);
     }
   };
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleEditOpen = (work) => {
     setEditedWork(work);
     setEditOpen(true);
@@ -201,17 +200,22 @@ function EditRecentWork() {
 
   return (
     <>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleAddOpen}
-        style={{ marginBottom: "20px" }}
-      >
-        Add New Work
-      </Button>
+      <Typography variant="h5" component="h5">
+        Edit Recent Work
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddOpen}
+          style={{ marginBottom: "20px", marginTop: "10px" }}
+        >
+          Add New Work
+        </Button>
+      </div>
 
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>

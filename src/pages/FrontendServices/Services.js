@@ -10,10 +10,28 @@ export const getHomeServices = async () => {
     throw error;
   }
 };
+export const getOurServicesHeading = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/getOurServicesHeading`);
+    return response.data; // Assuming API returns JSON data
+  } catch (error) {
+    console.error("Error fetching services heading:", error);
+    throw error; // Throw error for handling in component
+  }
+};
+export const getServiceById = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/getServicesPageData/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching service by ID", error);
+    return null;
+  }
+};
 
 export const getHomeHeading = async () => {
   try {
-    const response = await axios.get(`${API_URL}/main_table`);
+    const response = await axios.get(`${API_URL}/HomePage`);
     return response.data;
   } catch (error) {
     console.error("Error fetching main table data:", error);
@@ -146,6 +164,15 @@ export const getRoles = async () => {
     throw error;
   }
 };
+export const getJobOpeningRoles = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/getJobOpeningRole`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact information:", error);
+    throw error;
+  }
+};
 export const currentJobOpenings = async () => {
   try {
     const response = await axios.get(`${API_URL}/jobOpenings`);
@@ -190,6 +217,25 @@ export const getHeaderData = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching header data:", error);
+    throw error;
+  }
+};
+// add apply now data
+export const addApplicants = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/applicants`, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// get positions
+export const getPositions = async (data) => {
+  try {
+    const response = await axios.get(`${API_URL}/jobPositions`, data);
+    return response.data;
+  } catch (error) {
     throw error;
   }
 };

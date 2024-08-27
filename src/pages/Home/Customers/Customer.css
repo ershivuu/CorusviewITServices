@@ -1,10 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
 .our-customers {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -21,44 +14,33 @@
 }
 .custom-crousol {
   max-width: 526px;
+  width: 526px;
   min-height: 375px;
   background: url("../../../assets/images/slider-bg.png");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   padding: 30px 50px 30px 50px;
-  /* -webkit-animation: rotateslider linear;
-          animation: rotateslider linear;
-  animation-timeline: view(-300px); */
 }
-@-webkit-keyframes rotateslider {
-  0% {
-    -webkit-transform: skewY(45deg);
-    transform: skewY(45deg);
-  }
-  25% {
-    -webkit-transform: skewY(15deg);
-    transform: skewY(15deg);
-  }
-  50% {
-    -webkit-transform: skewY(0deg);
-    transform: skewY(0deg);
-  }
+.carousal-with-element {
+  position: relative;
 }
-@keyframes rotateslider {
-  0% {
-    -webkit-transform: skewY(45deg);
-    transform: skewY(45deg);
-  }
-  25% {
-    -webkit-transform: skewY(15deg);
-    transform: skewY(15deg);
-  }
-  50% {
-    -webkit-transform: skewY(0deg);
-    transform: skewY(0deg);
-  }
+.slider-vector {
+  position: absolute;
+  z-index: -999;
+  transition: 0.3s ease-in-out;
+  margin-top: -50px;
+  margin-left: -60px;
+}
+.slider-vector img {
+  width: 570px;
+  min-height: 400px;
+}
+.custom-crousol:hover .slider-vector {
+  transform: rotate(15deg);
 }
 .carousel-item {
+  padding-inline: 10px;
   text-align: center;
   color: white;
   font-family: "Poppins", sans-serif;
@@ -68,15 +50,24 @@
 }
 
 .about-client img {
-  width: 50px;
-  height: 50px;
+  width: inherit;
+  height: inherit;
+  object-fit: contain;
   border-radius: 50%;
+}
+.our-client-img {
+  width: 90px;
+  height: 90px;
+  margin: auto;
 }
 .client-details p:nth-child(1) {
   color: black;
+  margin: 0;
   font-weight: 700;
+  margin: 0;
 }
 .client-details p:nth-child(2) {
+  color: white;
   font-weight: 400;
 }
 .custom-btn {
@@ -90,9 +81,9 @@
 }
 .custom-heading-mobile {
   display: none;
+  font-size: 30px;
 }
 @media screen and (max-width: 320px) {
-  /* Styles for smaller smartphones */
   .custom-crousol {
     padding: 30px 10px 30px 10px;
   }
@@ -105,6 +96,17 @@
   }
   .custom-heading-mobile {
     display: block;
+  }
+  .carousel-item {
+    font-size: 12px;
+  }
+
+  .about-client img {
+    width: 50px;
+    height: 50px;
+  }
+  .slider-vector {
+    display: none;
   }
 }
 
@@ -122,16 +124,52 @@
   .custom-heading-mobile {
     display: block;
   }
+  .carousel-item {
+    font-size: 12px;
+  }
+
+  .about-client img {
+    width: inherit;
+    height: inherit;
+  }
+  .our-client-img {
+    width: 50px;
+    height: 50px;
+  }
+  .slider-vector {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  /* Styles for tablets */
+  .custom-heading p {
+    text-align: center;
+    font-size: 40px !important;
+  }
+  .slider-vector {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   /* Styles for small desktops and tablets in landscape */
+  .custom-heading p {
+    text-align: center;
+    font-size: 40px !important;
+  }
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1440px) {
-  /* Styles for larger desktops and laptops */
+  .custom-heading p {
+    text-align: center;
+    font-size: 40px !important;
+  }
+}
+.carousel-control-next {
+  right: 0;
+  top: 35%;
+}
+.carousel-control-prev {
+  right: 0;
+  top: 35%;
 }

@@ -13,6 +13,7 @@ import {
   DialogContent,
   DialogActions,
   CircularProgress,
+  Typography
 } from "@mui/material";
 import { ChromePicker } from "react-color";
 import { fetchHeaderData, updateHeaderColor } from "../../AdminServices";
@@ -29,9 +30,7 @@ const HeaderTable = () => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("info");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   const fetchData = async () => {
     try {
@@ -43,7 +42,9 @@ const HeaderTable = () => {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleEditClick = (name) => {
     setEditItemName(name); // Set name for editing
     setEditDialogOpen(true);
@@ -63,7 +64,11 @@ const HeaderTable = () => {
         fieldToUpdate = "header_color2";
       }
 
-      const response = await updateHeaderColor(headerData.id, selectedColor, fieldToUpdate);
+      const response = await updateHeaderColor(
+        headerData.id,
+        selectedColor,
+        fieldToUpdate
+      );
 
       // Handle successful update
       setNotificationMessage(response.message || "Update successful");
@@ -91,7 +96,10 @@ const HeaderTable = () => {
 
   return (
     <div>
-      <TableContainer component={Paper}>
+        <Typography variant="h5" component="h5">
+      Edit Header
+    </Typography>
+      <TableContainer component={Paper} style={{marginTop:"10px"}}>
         <Table>
           <TableHead>
             <TableRow>
@@ -105,7 +113,7 @@ const HeaderTable = () => {
               <TableCell>{headerData.id}</TableCell>
               <TableCell
                 style={{
-                  backgroundColor: headerData.header_color1, width: 50, height: 50,
+                  backgroundColor: headerData.header_color1,
                 }}
               ></TableCell>
               <TableCell>
@@ -118,7 +126,7 @@ const HeaderTable = () => {
               <TableCell>{headerData.id}</TableCell>
               <TableCell
                 style={{
-                  backgroundColor: headerData.header_color2, width: 50, height: 50,
+                  backgroundColor: headerData.header_color2,
                 }}
               ></TableCell>
               <TableCell>
@@ -141,11 +149,7 @@ const HeaderTable = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
-          <Button
-            onClick={handleColorUpdate}
-            variant="contained"
-            color="primary"
-          >
+          <Button onClick={handleColorUpdate} color="primary">
             Update Color
           </Button>
         </DialogActions>

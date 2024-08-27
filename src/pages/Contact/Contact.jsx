@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   getContactInfo,
-  getRoles,
   submitContactForm,
 } from "../FrontendServices/Services";
 
@@ -12,18 +11,15 @@ import location from "../../assets/logos/color-logo/location.png";
 import message from "../../assets/logos/message.png";
 import Nav from "../../components/Headers/Nav";
 import Footers from "../../components/Footers/Footers";
-
+import Notification from "../../Notification/Notification";
 function Contact() {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [selectedButton, setSelectedButton] = useState(""); // State for selected button
   const [contactInfo, setContactInfo] = useState(null);
-  const [roles, setRoles] = useState(null);
-
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-    role: "",
   });
 
   const [formErrors, setFormErrors] = useState({
@@ -41,31 +37,9 @@ function Contact() {
     }
   };
 
-  const fetchRole = async () => {
-    try {
-      const data = await getRoles();
-      setRoles(data);
-    } catch (error) {
-      console.error("Error fetching contact information:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchRole();
     fetchData();
   }, []);
-
-  const handleSelectChange = (event) => {
-    const selectedRole = event.target.value;
-    setSelectedOption(selectedRole);
-  };
-
-  const handleClickChange = (roleValue) => {
-    setSelectedOption(roleValue); // Set selectedOption state
-
-    // Set selected button and update style
-    setSelectedButton(roleValue);
-  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -98,7 +72,15 @@ function Contact() {
     setFormErrors(errors);
     return formIsValid;
   };
+  const showNotification = (message, severity = "default") => {
+    setNotificationMessage(message);
+    setNotificationOpen(true);
+  };
 
+  const closeNotification = () => {
+    setNotificationOpen(false);
+    setNotificationMessage("");
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -107,19 +89,18 @@ function Contact() {
     }
 
     try {
-      const response = await submitContactForm(formData, selectedOption);
+      console.log(formData, "--------------------------");
+      const response = await submitContactForm(formData);
 
       console.log("Response:", response);
+      showNotification(response.message, "success");
 
       // Reset form data and selected option after successful submission
       setFormData({
         name: "",
         email: "",
         message: "",
-        role: "",
       });
-      setSelectedOption("");
-      setSelectedButton(""); // Clear selected button state after submission
     } catch (error) {
       console.error("Error:", error);
     }
@@ -128,6 +109,13 @@ function Contact() {
   return (
     <>
       <Nav />
+
+      <Notification
+        open={notificationOpen}
+        handleClose={closeNotification}
+        alertMessage={notificationMessage}
+        alertSeverity="success"
+      />
       <div className="contact-flex-box">
         {contactInfo && (
           <div className="contact-card contact-card-1">
@@ -137,15 +125,22 @@ function Contact() {
             <div>
               <p>
                 <img src={email} alt="Email Icon" />
-                {contactInfo.email}
+                <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
               </p>
               <p>
                 <img src={phone} alt="Phone Icon" />
-                {contactInfo.phone}
+                <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
               </p>
               <p>
-                <img src={location} alt="Location Icon" />
-                {contactInfo.address}
+                <a
+                  href={`https://maps.google.com/maps?q=${encodeURIComponent(
+                    contactInfo.address
+                  )}`}
+                  target="_blank"
+                >
+                  <img src={location} alt="Location Icon" />
+                  {contactInfo.address}
+                </a>
               </p>
             </div>
           </div>
@@ -155,33 +150,6 @@ function Contact() {
           <p>I'm interested in...</p>
           <div className="contact-form">
             <form onSubmit={handleSubmit}>
-              <div className="vacancy-btns">
-                {roles &&
-                  roles.map((role) => (
-                    <button
-                      key={role.id}
-                      type="button"
-                      onClick={() => handleClickChange(role.role)}
-                      className={selectedButton === role.role ? "selected" : ""}
-                    >
-                      {role.role}
-                    </button>
-                  ))}
-              </div>
-
-              <select
-                value={selectedOption}
-                onChange={handleSelectChange}
-                className="hidden-select-options"
-              >
-                <option value="">Select...</option>
-                {roles &&
-                  roles.map((role) => (
-                    <option key={role.id} value={role.value}>
-                      {role.role}
-                    </option>
-                  ))}
-              </select>
               <input
                 type="text"
                 name="name"

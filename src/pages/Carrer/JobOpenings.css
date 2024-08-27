@@ -66,6 +66,7 @@
   border-radius: 15px;
 }
 .all-roles {
+  max-width: 1000px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -86,11 +87,20 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 .search-bar {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+.search-bar input {
+  border-radius: 10px;
+  border: none;
+  padding: 10px 15px;
+}
+.search-bar input:focus {
+  outline: none;
 }
 @media only screen and (max-width: 767px) {
   .position {

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
-
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Notification from "../../Notification/Notification";
 
 function Login({ onLogin }) {
-  const [username, setUsername] = useState(
-    localStorage.getItem("username") || ""
-  );
+  const navigate = useNavigate(); // Initialize useNavigate hook
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("info");
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -19,12 +21,20 @@ function Login({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username === "admin" && password === "admin") {
-      localStorage.setItem("username", username); // Store username in localStorage
+    // admin id and password
+    if (username === "corusviewit" && password === "corusview@admin") {
+      localStorage.setItem("username", username);
       onLogin();
+      navigate("/admin/editheader");
     } else {
-      alert("Invalid credentials");
+      setAlertMessage("Invalid credentials");
+      setAlertSeverity("error");
+      setNotificationOpen(true);
     }
+  };
+
+  const handleCloseNotification = () => {
+    setNotificationOpen(false);
   };
 
   return (
@@ -72,6 +82,12 @@ function Login({ onLogin }) {
           <p>Design & Developed By CorusView</p>
         </div>
       </div>
+      <Notification
+        open={notificationOpen}
+        handleClose={handleCloseNotification}
+        alertMessage={alertMessage}
+        alertSeverity={alertSeverity}
+      />
     </>
   );
 }

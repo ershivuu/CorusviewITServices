@@ -13,7 +13,11 @@ import {
   TableHead,
   TableRow,
   Paper,
+<<<<<<< HEAD
   Typography
+=======
+  Typography,
+>>>>>>> 4acc27ef0dc70dabdbf5c357e96b9f4f6f3a1432
 } from "@mui/material";
 import { fetchJobRoles, addJobRole, deleteJobRole } from "../../AdminServices";
 import Notification from "../../../Notification/Notification";
@@ -118,6 +122,7 @@ const AddJobRole = () => {
 
   return (
     <div>
+<<<<<<< HEAD
         <Typography variant="h5" component="h5">
      Add Job Roles
     </Typography>
@@ -129,6 +134,21 @@ const AddJobRole = () => {
       >
         Add Role
       </Button>
+=======
+      <Typography variant="h5" component="h5">
+        Add Job Roles
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+          onClick={() => setOpenDialog(true)}
+        >
+          Add Role
+        </Button>
+      </div>
+>>>>>>> 4acc27ef0dc70dabdbf5c357e96b9f4f6f3a1432
 
       <Dialog open={openDialog} onClose={handleCloseDialog} >
         <DialogTitle>Add New Job Role</DialogTitle>
@@ -154,7 +174,11 @@ const AddJobRole = () => {
         </DialogActions>
       </Dialog>
 
+<<<<<<< HEAD
       <TableContainer component={Paper} style={{ marginTop: "10px" ,maxHeight: "500px", overflow: "auto"}}>
+=======
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
+>>>>>>> 4acc27ef0dc70dabdbf5c357e96b9f4f6f3a1432
         <Table aria-label="Job Roles Table" stickyHeader>
           <TableHead>
             <TableRow>

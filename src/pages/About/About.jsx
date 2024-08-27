@@ -3,6 +3,7 @@ import { getAboutCompany, getOurValues } from "../FrontendServices/Services";
 import "./About.css";
 import Nav from "../../components/Headers/Nav";
 import Footers from "../../components/Footers/Footers";
+import { Link } from "react-router-dom";
 
 function About() {
   const [aboutUsData, setAboutUsData] = useState(null);
@@ -37,15 +38,27 @@ function About() {
             <div className="about-us-cards">
               <div className="about-us-card">
                 <p>Our Company</p>
-                <p>{aboutUsData[0].company_content}</p>
+                {aboutUsData[0].company_content
+                  .split("\n")
+                  .map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
               </div>
               <div className="about-us-card">
                 <p>Our Story</p>
-                <p>{aboutUsData[0].story_content}</p>
+                {aboutUsData[0].story_content
+                  .split("\n")
+                  .map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
               </div>
               <div className="about-us-card">
                 <p>Our Vision</p>
-                <p>{aboutUsData[0].vision_content}</p>
+                {aboutUsData[0].vision_content
+                  .split("\n")
+                  .map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
               </div>
             </div>
           </div>
@@ -104,9 +117,9 @@ function About() {
           </div>
         )}
         <div className="join-us-btn">
-          <button>
-            <a href="">Join Us</a>
-          </button>
+          <Link rel="canonical" to="/career" target="_top">
+            <button>Join Us</button>
+          </Link>
         </div>
       </div>
       <Footers></Footers>

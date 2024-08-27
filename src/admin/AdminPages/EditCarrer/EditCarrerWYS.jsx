@@ -14,6 +14,7 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
+  Typography,
 } from "@mui/material";
 import {
   fetchCareerWYS,
@@ -34,20 +35,15 @@ function EditCarrerWYS() {
   const [newHeading, setNewHeading] = useState("");
   const [newContent, setNewContent] = useState("");
 
-
-
-
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("info");
-
 
   const showNotification = (message, severity) => {
     setNotificationMessage(message);
     setNotificationSeverity(severity);
     setNotificationOpen(true);
   };
-
 
   const fetchData = async () => {
     try {
@@ -90,7 +86,6 @@ function EditCarrerWYS() {
   };
 
   const handleUpdate = async () => {
-
     if (!updatedHeading || !updatedContent) {
       showNotification("This feild is required", "error");
       return;
@@ -111,7 +106,6 @@ function EditCarrerWYS() {
     }
   };
 
-
   const handleDelete = async () => {
     try {
       const response = await deleteCareerWYS(selectedCareer.id);
@@ -127,7 +121,6 @@ function EditCarrerWYS() {
   };
 
   const handleAdd = async () => {
-
     if (!newHeading || !newContent) {
       showNotification("This feild is required", "error");
       return;
@@ -149,19 +142,26 @@ function EditCarrerWYS() {
     }
   };
 
-
-
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
     <div>
-      <h2>Career Information</h2>
-      <Button variant="contained" color="primary" onClick={handleAddClick}>
-        Add Career
-      </Button>
-      <TableContainer component={Paper}>
+      <Typography variant="h5" component="h5">
+        Edit Carrer What You'll See
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddClick}
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+        >
+          Add Career
+        </Button>
+      </div>
+      <TableContainer style={{ marginTop: "10px" }} component={Paper}>
         <Table>
           <TableHead>
             <TableRow>

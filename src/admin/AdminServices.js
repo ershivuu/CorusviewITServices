@@ -2,10 +2,20 @@ import axios from "axios";
 import { API_URL } from "../config/config";
 const BASE_URL = API_URL;
 
+
+export const getJobOpeningRoles = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getJobOpeningRole`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact information:", error);
+    throw error;
+  }
+};
 // Get Home Heading data
 export const fetchMainTableData = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/main_table`);
+    const response = await axios.get(`${BASE_URL}/HomePage`);
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -16,7 +26,7 @@ export const fetchMainTableData = async () => {
 // put Home Heading data
 export const updateMainTableData = async (id, newData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/main_table`, newData);
+    const response = await axios.put(`${BASE_URL}/HomePage`, newData);
     return response.data;
   } catch (error) {
     throw error;
@@ -42,7 +52,6 @@ export const updateServiceData = async (id, newData) => {
     throw error;
   }
 };
-
 // add Service Data
 export const addServiceData = async (formData) => {
   try {
@@ -60,7 +69,7 @@ export const addServiceData = async (formData) => {
 // Delete Services data
 export const deleteServiceData = async (id) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/our_services/${id}`);
+    const response = await axios.delete(`${BASE_URL}/deleteServiceData/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(`Failed to delete service: ${error.message}`);
@@ -215,7 +224,7 @@ export const updateOurValuesById = async (id, updatedData) => {
 // Get Service Head Data
 export const fetchServicesHead = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/servicesHead`);
+    const response = await axios.get(`${BASE_URL}/services_details`);
     return response.data; // Assuming API returns an object with services_heading and services_content
   } catch (error) {
     throw new Error(`Failed to fetch Services Head data: ${error.message}`);
@@ -223,12 +232,36 @@ export const fetchServicesHead = async () => {
 };
 
 // Put  Service Head Data
-export const updateServicesHead = async (updatedData) => {
+export const updateServicesHead = async (detailsId, updatedData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/servicesHead`, updatedData);
+    const response = await axios.put(
+      `${BASE_URL}/services_details/${detailsId}`,
+      updatedData
+    );
     return response.data;
   } catch (error) {
     throw new Error(`Failed to update services head data: ${error.message}`);
+  }
+};
+
+// get only our  services heading
+
+export const fetchOnlyOurServiceHead = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getOurServicesHeading`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to fetch services headings: ${error.message}`);
+  }
+};
+
+// add services head data
+export const addServicesHead = async (newData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/services_details`, newData);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to add services details: ${error.message}`);
   }
 };
 
@@ -254,13 +287,22 @@ export const updateProblemHead = async (updatedHeading) => {
 
 // Get Service  all Problem Data
 
+// export const fetchProblems = async () => {
+//   try {
+//     const response = await axios.get(`${BASE_URL}/problems`);
+//     return response.data.problems; // Assuming problems array is directly under 'problems' key in API response
+//   } catch (error) {
+//     console.error("Error fetching problems:", error);
+//     throw error; // You can handle errors as needed in your application
+//   }
+// };
+
 export const fetchProblems = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/problems`);
-    return response.data.problems; // Assuming problems array is directly under 'problems' key in API response
+    return response.data; // Assuming API returns an array of problems
   } catch (error) {
-    console.error("Error fetching problems:", error);
-    throw error; // You can handle errors as needed in your application
+    throw Error("Error fetching problems"); // Handle errors in your component
   }
 };
 
@@ -323,7 +365,7 @@ export const updateSolutionHeading = async (newHeading) => {
 export const fetchAllSolutions = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/solutions`);
-    return response.data.solutions; // Return only the 'solutions' array from the response
+    return response; // Return only the 'solutions' array from the response
   } catch (error) {
     throw new Error("Error fetching solutions: " + error.message);
   }
@@ -574,7 +616,6 @@ export const deleteContactFormEntry = async (id) => {
 
 export const fetchJobOpenings = async (role) => {
   try {
-   
     const response = await axios.get(`${BASE_URL}/jobOpenings`, {
       params: { role }, // Pass role as query parameter
     });
@@ -585,11 +626,19 @@ export const fetchJobOpenings = async (role) => {
   }
 };
 
-
 // Get Job roles data
 export const fetchJobRoles = async () => {
   try {
-    const response = await axios.get("http://192.168.1.5:5000/jobRoles");
+    const response = await axios.get(`${BASE_URL}/jobRoles`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching job roles:", error);
+    throw error;
+  }
+};
+export const addJobRole = async (newRole) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/jobRoles`, newRole);
     return response.data;
   } catch (error) {
     console.error("Error fetching job roles:", error);
@@ -612,7 +661,7 @@ export const updateJobOpening = async (id, updatedJob) => {
 };
 
 // Add Job Opening data
-export const addJobOpening = async () => {
+export const addJobOpening = async (formData) => {
   try {
     const response = await axios.post(`${BASE_URL}/jobOpenings`, formData, {
       headers: {
@@ -621,12 +670,10 @@ export const addJobOpening = async () => {
     });
     return response.data; // Assuming your API returns data in response
   } catch (error) {
-    console.error('Error fetching job openings:', error);
-    throw error;  // Propagate the error back to the component
+    console.error("Error adding job opening:", error);
+    throw error; // Propagate the error back to the component
   }
 };
-
-
 
 // Delete Job Opening data
 export const deleteJobOpening = async (jobId) => {
@@ -677,8 +724,7 @@ export const fetchFooterData = async () => {
   }
 };
 
-
-// put footer data 
+// put footer data
 export const updateFooterData = async (id, updatedData) => {
   try {
     const response = await axios.put(`${API_URL}/footer`, updatedData);
@@ -701,7 +747,10 @@ export const fetchProducts = async () => {
 // edit Products data
 export const updateProducts = async (id, updatedProducts) => {
   try {
-    const response = await axios.put(`${BASE_URL}/products/${id}`, updatedProducts);
+    const response = await axios.put(
+      `${BASE_URL}/products/${id}`,
+      updatedProducts
+    );
     return response.data; // Return the updated job data if needed
   } catch (error) {
     console.error(`Error updating job opening with ID ${id}:`, error);
@@ -714,17 +763,55 @@ export const deleteProducts = async (ProductsId) => {
     const response = await axios.delete(`${BASE_URL}/products/${ProductsId}`);
     return response.data; // Assuming the API returns data upon successful deletion
   } catch (error) {
-    throw new Error('Error deleting job opening:', error);
+    throw new Error("Error deleting job opening:", error);
   }
 };
 
-// add Products data 
+// add Products data
 export const createProducts = async (data) => {
   try {
     const response = await axios.post(`${BASE_URL}/products`, data);
     return response.data;
   } catch (error) {
+    throw error;
+  }
+};
 
+// AdminServices.js or wherever getApplicants is defined
+export const getApplicants = async (role) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/applicants`, {
+      params: { role }, // Pass role as query parameter
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching applicants:", error);
+    throw error;
+  }
+};
+
+// export applicants to excel
+export const getExportApplicants = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/export/applicants`, {
+      responseType: "blob", // important to handle the file response
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error exporting applicants:", error);
+    throw error;
+  }
+};
+
+// delete apply now form data
+export const deleteApplicants = async (applicantId) => {
+  try {
+    const response = await axios.delete(
+      `${BASE_URL}/applicants/${applicantId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting applicant:", error);
     throw error;
   }
 };

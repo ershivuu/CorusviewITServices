@@ -14,19 +14,17 @@ import {
   Button,
   Select,
   MenuItem,
-  Input,
   TextField,
+  Typography,
   Box,
-  IconButton,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   fetchCareerImages,
   updateCareerImage,
   uploadCareerImages,
   deleteCareerImage,
 } from "../../AdminServices";
-// import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteIcon from "@mui/icons-material/Delete";
 import Notification from "../../../Notification/Notification";
 
 function EditCarrerImages() {
@@ -42,6 +40,21 @@ function EditCarrerImages() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
+
+  // State to track if each file field is filled
+  const [fileFieldsFilled, setFileFieldsFilled] = useState({
+    img_1: false,
+    img_2: false,
+    img_3: false,
+    img_4: false,
+    img_5: false,
+    img_6: false,
+    img_7: false,
+    img_8: false,
+  });
+
+  // State to disable save button in Edit dialog
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -60,10 +73,13 @@ function EditCarrerImages() {
   const handleEditOpen = (data) => {
     setSelectedImageId(data.id);
     setOpenDialog(true);
+    setSelectedOption(""); // Reset selectedOption when dialog opens
   };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+    // Reset save button state when option changes
+    setSaveButtonDisabled(true);
   };
 
   const handleFileChange = (event, fieldName) => {
@@ -76,6 +92,7 @@ function EditCarrerImages() {
         "File size exceeds 20 MB. Please choose a smaller file."
       );
       setNotificationOpen(true);
+      setSaveButtonDisabled(true);
       return;
     }
 
@@ -87,6 +104,7 @@ function EditCarrerImages() {
         "Unsupported file format. Please choose a JPG, JPEG, or PNG file."
       );
       setNotificationOpen(true);
+      setSaveButtonDisabled(true);
       return;
     }
 
@@ -95,10 +113,32 @@ function EditCarrerImages() {
       ...prevFiles,
       [fieldName]: file,
     }));
+
+    // Mark the field as filled
+    setFileFieldsFilled((prevFields) => ({
+      ...prevFields,
+      [fieldName]: true,
+    }));
+
+    // Enable save button if all conditions are met
+    setSaveButtonDisabled(false);
   };
 
   const handleDialogClose = () => {
     setOpenDialog(false);
+    // Reset fileFieldsFilled and selectedFiles on dialog close
+    setFileFieldsFilled({
+      img_1: false,
+      img_2: false,
+      img_3: false,
+      img_4: false,
+      img_5: false,
+      img_6: false,
+      img_7: false,
+      img_8: false,
+    });
+    setSelectedFiles({});
+    setSaveButtonDisabled(true);
   };
 
   const handleSaveChanges = async () => {
@@ -119,13 +159,11 @@ function EditCarrerImages() {
       setNotificationSeverity("success");
       setNotificationMessage(response.message); // Use API response message
       setNotificationOpen(true);
-      // Optionally, update state or display a success message
     } catch (error) {
       console.error("Error updating career image:", error);
       setNotificationSeverity("error");
       setNotificationMessage("Error updating career image.");
       setNotificationOpen(true);
-      // Handle error as needed
     }
     fetchData();
     setOpenDialog(false);
@@ -133,6 +171,18 @@ function EditCarrerImages() {
 
   const handleAddDialogClose = () => {
     setOpenAddDialog(false);
+    // Reset fileFieldsFilled and selectedFiles on dialog close
+    setFileFieldsFilled({
+      img_1: false,
+      img_2: false,
+      img_3: false,
+      img_4: false,
+      img_5: false,
+      img_6: false,
+      img_7: false,
+      img_8: false,
+    });
+    setSelectedFiles({});
   };
 
   const handleAddOpen = () => {
@@ -151,13 +201,11 @@ function EditCarrerImages() {
       setNotificationSeverity("success");
       setNotificationMessage(response.message); // Use API response message
       setNotificationOpen(true);
-      // Optionally, update state or display a success message
     } catch (error) {
       console.error("Error adding career images:", error);
       setNotificationSeverity("error");
       setNotificationMessage("Error adding career images.");
       setNotificationOpen(true);
-      // Handle error as needed
     }
 
     fetchData();
@@ -181,13 +229,11 @@ function EditCarrerImages() {
       setNotificationSeverity("success");
       setNotificationMessage(response.message); // Use API response message
       setNotificationOpen(true);
-      // Optionally, update state or display a success message
     } catch (error) {
       console.error("Error deleting career image:", error);
       setNotificationSeverity("error");
       setNotificationMessage("Error deleting career image.");
       setNotificationOpen(true);
-      // Handle error as needed
     }
     fetchData();
     handleDeleteClose();
@@ -197,21 +243,35 @@ function EditCarrerImages() {
     setNotificationOpen(false);
   };
 
-  const isAddImagesDisabled = Object.values(selectedFiles).some(
-    (file) =>
-      file.size > 20 * 1024 * 1024 ||
-      !["image/jpeg", "image/jpg", "image/png"].includes(file.type)
-  );
+  // Disable Add Images button until all fields are filled
+  const addImagesDisabled =
+    !fileFieldsFilled.img_1 ||
+    !fileFieldsFilled.img_2 ||
+    !fileFieldsFilled.img_3 ||
+    !fileFieldsFilled.img_4 ||
+    !fileFieldsFilled.img_5 ||
+    !fileFieldsFilled.img_6 ||
+    !fileFieldsFilled.img_7 ||
+    !fileFieldsFilled.img_8;
+
   return (
     <div>
-      <h2>Career Images</h2>
+      <Typography variant="h5" component="h5">
+        Edit Carrer Image
+      </Typography>
 
-      {/* Button to add images */}
-      <Button variant="contained" color="primary" onClick={handleAddOpen}>
-        Add Image
-      </Button>
+      <div style={{ float: "right" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddOpen}
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+        >
+          Add Image
+        </Button>
+      </div>
 
-      <TableContainer component={Paper}>
+      <TableContainer style={{ marginTop: "10px" }} component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
@@ -289,20 +349,15 @@ function EditCarrerImages() {
                   />
                 </TableCell>
                 <TableCell>
-                  <Button
-                    variant="outlined"
-                    onClick={() => handleEditOpen(item)}
-                  >
-                    Edit
-                  </Button>
+                  <Button onClick={() => handleEditOpen(item)}>Edit</Button>
                 </TableCell>
                 <TableCell>
-                  <IconButton
-                    color="secondary"
+                  <Button
+                    color="error"
                     onClick={() => handleDeleteOpen(item.id)}
                   >
-                    <DeleteIcon />
-                  </IconButton>
+                    DELETE
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -344,10 +399,8 @@ function EditCarrerImages() {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDialogClose} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleSaveChanges} color="primary">
+          <Button onClick={handleDialogClose}>Cancel</Button>
+          <Button onClick={handleSaveChanges} disabled={saveButtonDisabled}>
             Save
           </Button>
         </DialogActions>
@@ -410,14 +463,8 @@ function EditCarrerImages() {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleAddDialogClose} color="secondary">
-            Cancel
-          </Button>
-          <Button
-            onClick={handleAddImages}
-            color="primary"
-            disabled={isAddImagesDisabled}
-          >
+          <Button onClick={handleAddDialogClose}>Cancel</Button>
+          <Button onClick={handleAddImages} disabled={addImagesDisabled}>
             Add Images
           </Button>
         </DialogActions>
@@ -430,12 +477,8 @@ function EditCarrerImages() {
           <p>Are you sure you want to delete this image?</p>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDeleteClose} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleDeleteConfirm} color="primary">
-            Delete
-          </Button>
+          <Button onClick={handleDeleteClose}>Cancel</Button>
+          <Button onClick={handleDeleteConfirm}>Delete</Button>
         </DialogActions>
       </Dialog>
 

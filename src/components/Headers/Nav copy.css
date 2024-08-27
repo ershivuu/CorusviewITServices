@@ -1,0 +1,233 @@
+.header-body {
+  background-color: var(--header-bg-color);
+  height: 120px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header-child {
+  background-color: #f3f9e9;
+  height: 70px;
+  width: 884px;
+  max-width: 884px;
+  margin: auto;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.work-with-us-btn {
+  background-color: white;
+  color: #375350;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 50px;
+  padding-inline: 40px;
+  height: 50px;
+  margin-top: 10px;
+  margin-right: -180px;
+  transition: 0.2s ease;
+}
+.work-with-us-btn span {
+  position: absolute;
+  font-size: 80px;
+  margin-left: 5px;
+  top: 0;
+  margin-top: -20px;
+}
+.work-with-us-btn:hover {
+  background-color: #375350;
+  color: white;
+}
+
+@keyframes dotbtn {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 2;
+  }
+  100% {
+    scale: 1;
+  }
+}
+.header-logo {
+  height: 30px;
+  width: 200px;
+  margin: 20px;
+}
+summary {
+  float: right;
+}
+details div {
+  background-color: green;
+}
+.hamburger {
+  width: 18px;
+  height: 15px;
+  margin-top: 22px;
+}
+
+.dropdown button {
+  background-color: transparent !important;
+  border: none;
+  color: transparent !important;
+}
+.dropdown-menu {
+  width: 100vw;
+  max-width: 884px;
+
+  border: none !important;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 30px !important;
+  margin-left: -830px;
+}
+.dropdown-menu li {
+  display: inline;
+  margin: 30px;
+}
+
+.navigations {
+  color: grey;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.service-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.service-dropdown button {
+  color: grey !important;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.service-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 250px;
+  text-transform: capitalize;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  border-radius: 20px;
+}
+
+.service-dropdown-content a {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.service-dropdown-content a:hover {
+  background-color: #f3f9e9;
+}
+
+.service-dropdown:hover .service-dropdown-content {
+  display: block;
+}
+.services-list-mobile {
+  display: none;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  flex-direction: column !important;
+  gap: 10px;
+}
+.mobile-list {
+  margin-top: -20px;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 320px) {
+  /* Styles for smaller smartphones */
+  .header-child {
+    margin-inline: 10px;
+  }
+  .work-with-us-btn {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* Styles for larger smartphones */
+  .dropdown-menu {
+    width: 100vw;
+    padding: 20px;
+  }
+  .dropdown-menu li {
+    display: block;
+    margin: 10px;
+  }
+  .header-child {
+    margin-inline: 10px;
+  }
+
+  .services-list-mobile {
+    display: block;
+  }
+  .work-with-us-btn {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  /* Styles for tablets */
+  .dropdown-menu li {
+    display: inline;
+    margin: 20px;
+  }
+  .header-child {
+    margin-inline: 10px;
+  }
+  .work-with-us-btn {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .dropdown-menu {
+    width: 97.9vw;
+    padding: 20px;
+  }
+  .dropdown-menu li {
+    display: inline;
+    margin: 20px;
+  }
+  .header-child {
+    margin-inline: 10px;
+  }
+  .work-with-us-btn {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+  /* Styles for larger desktops and laptops */
+}
+@media screen and (min-width: 2500px) {
+  .dropdown-menu {
+    margin-left: -690% !important;
+  }
+}

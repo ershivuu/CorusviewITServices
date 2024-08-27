@@ -13,6 +13,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Typography
 } from "@mui/material";
 import { fetchCareerHead, updateCareerHead } from "../../AdminServices";
 import Notification from "../../../Notification/Notification"; // Adjust path as per your file structure
@@ -29,18 +30,16 @@ function EditCarrerHead() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("error"); // Default severity is error
-
+  const fetchData = async () => {
+    try {
+      const data = await fetchCareerHead();
+      setCareerHead(data);
+    } catch (error) {
+      console.error("Error fetching career head data:", error);
+      // Handle errors as needed
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchCareerHead();
-        setCareerHead(data);
-      } catch (error) {
-        console.error("Error fetching career head data:", error);
-        // Handle errors as needed
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -105,8 +104,10 @@ function EditCarrerHead() {
 
   return (
     <div>
-      <h2>Career Head Details</h2>
-      <TableContainer component={Paper}>
+      <Typography variant="h5" component="h5">
+      Edit Carrer Head
+    </Typography>
+      <TableContainer component={Paper} style={{marginTop:"10px"}}>
         <Table>
           <TableHead>
             <TableRow>
@@ -122,7 +123,7 @@ function EditCarrerHead() {
               <TableCell>{careerHead.carrer_heading}</TableCell>
               <TableCell>{careerHead.carrer_content}</TableCell>
               <TableCell>
-                <Button variant="outlined" onClick={handleEditOpen}>
+                <Button  onClick={handleEditOpen}>
                   Edit
                 </Button>
               </TableCell>

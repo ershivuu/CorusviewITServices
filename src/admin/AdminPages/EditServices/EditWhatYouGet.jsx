@@ -12,13 +12,19 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Typography,
   TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import {
   fetchWhatYouGetServices,
   updateWhatYouGetService,
   deleteWhatYouGetService,
   addWhatYouGetService,
+  fetchOnlyOurServiceHead,
 } from "../../AdminServices"; // Adjust the import path as per your project structure
 import Notification from "../../../Notification/Notification"; // Adjust the import path as per your project structure
 
@@ -31,23 +37,30 @@ function EditWhatYouGet() {
   const [newHeading, setNewHeading] = useState("");
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false); // State for delete confirmation dialog
   const [deleteServiceId, setDeleteServiceId] = useState(null); // State to hold the service ID to delete
+  const [ourServicesHeadings, setOurServicesHeadings] = useState([]);
 
   // Notification state
   const [openNotification, setOpenNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("success");
 
-  useEffect(() => {
-    const getServices = async () => {
-      try {
-        const data = await fetchWhatYouGetServices();
-        setServices(data);
-      } catch (error) {
-        console.error("Error fetching services:", error);
-        // Handle errors as needed
-      }
-    };
+  const getServices = async () => {
+    try {
+      const data = await fetchWhatYouGetServices();
+      setServices(data);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
+  };
 
+  const fetchOurServiceHeadings = async () => {
+    try {
+      const data = await fetchOnlyOurServiceHead();
+      setOurServicesHeadings(data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    fetchOurServiceHeadings();
     getServices();
   }, []);
 
@@ -56,26 +69,24 @@ function EditWhatYouGet() {
     setEditedHeading(service.heading);
     setOpenEditDialog(true);
   };
-
   const handleCloseEditDialog = () => {
     setOpenEditDialog(false);
     setSelectedService(null);
     setEditedHeading("");
   };
 
-  const handleSaveChanges = async () => {
+  const handleUpdate = async () => {
     try {
       const updatedData = {
+        service_id: selectedService.service_id,
         heading: editedHeading,
       };
       const response = await updateWhatYouGetService(
-        selectedService.id,
+        selectedService.wyg_id,
         updatedData
       );
-      // Refresh the services list after successful update
-      await fetchAndSetServices();
+      getServices();
       handleCloseEditDialog();
-      // Show success notification
       handleNotification(response.message, "success");
     } catch (error) {
       console.error("Error updating service:", error);
@@ -93,7 +104,8 @@ function EditWhatYouGet() {
     try {
       const response = await deleteWhatYouGetService(deleteServiceId);
       // Refresh the services list after successful deletion
-      await fetchAndSetServices();
+
+      getServices();
       handleCloseDeleteDialog(); // Close the delete confirmation dialog
       // Show success notification
       handleNotification(response.message, "success");
@@ -109,16 +121,6 @@ function EditWhatYouGet() {
     setDeleteServiceId(null); // Clear the delete service ID
   };
 
-  const fetchAndSetServices = async () => {
-    try {
-      const data = await fetchWhatYouGetServices();
-      setServices(data);
-    } catch (error) {
-      console.error("Error fetching services:", error);
-      // Handle errors as needed
-    }
-  };
-
   const handleAddClick = () => {
     setOpenAddDialog(true);
   };
@@ -130,18 +132,23 @@ function EditWhatYouGet() {
 
   const handleAddService = async () => {
     try {
+      // Ensure selectedService is not null before proceeding
+      if (!selectedService) {
+        handleNotification("Please select a service", "error");
+        return;
+      }
+
       const newService = {
+        service_id: selectedService.id, // Assuming 'id' is the correct property of selectedService
         heading: newHeading,
       };
       const response = await addWhatYouGetService(newService);
-      // Refresh the services list after successful addition
-      await fetchAndSetServices();
+      await getServices(); // Refresh the services list after adding a new service
       handleCloseAddDialog();
-      // Show success notification
+
       handleNotification(response.message, "success");
     } catch (error) {
       console.error("Error adding service:", error);
-      // Handle error as needed
       handleNotification("Error adding service", "error");
     }
   };
@@ -157,16 +164,16 @@ function EditWhatYouGet() {
   };
 
   const handleEditedHeadingChange = (e) => {
-    if (e.target.value.length >= 30) {
-      handleNotification("Cannot update with more than 30 characters", "error");
+    if (e.target.value.length >= 50) {
+      handleNotification("Cannot update with more than 50 characters", "error");
     } else {
       setEditedHeading(e.target.value);
     }
   };
 
   const handleNewHeadingChange = (e) => {
-    if (e.target.value.length >= 30) {
-      handleNotification("Cannot insert more than 30 characters", "error");
+    if (e.target.value.length >= 50) {
+      handleNotification("Cannot insert more than 50 characters", "error");
     } else {
       setNewHeading(e.target.value);
     }
@@ -174,35 +181,46 @@ function EditWhatYouGet() {
 
   return (
     <div>
-      <h2>Services What You Get</h2>
-      <Button
-        onClick={handleAddClick}
-        variant="contained"
-        color="primary"
-        style={{ marginBottom: "1rem" }}
-      >
-        Add Service
-      </Button>
-      <TableContainer component={Paper}>
+      <Typography variant="h5" component="h5">
+        Edit What You Will Get
+      </Typography>
+      <div style={{ float: "right" }}>
+        <Button
+          onClick={handleAddClick}
+          variant="contained"
+          color="primary"
+          style={{ marginBottom: "1rem", marginTop: "10px" }}
+        >
+          Add Service
+        </Button>
+      </div>
+      <TableContainer component={Paper} style={{ marginTop: "10px" }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Heading</TableCell>
+              <TableCell>S no.</TableCell>
+              <TableCell>Our Services Heading</TableCell>
+              <TableCell>Service Heading</TableCell>
+
               <TableCell>Edit</TableCell>
               <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {services.map((service, index) => (
-              <TableRow key={service.id}>
+              <TableRow key={service.wyg_id}>
                 <TableCell>{index + 1}</TableCell>
+                <TableCell>{service.our_services_heading}</TableCell>
                 <TableCell>{service.heading}</TableCell>
+
                 <TableCell>
                   <Button onClick={() => handleEditClick(service)}>Edit</Button>
                 </TableCell>
                 <TableCell>
-                  <Button onClick={() => handleDeleteClick(service.id)}>
+                  <Button
+                    color="error"
+                    onClick={() => handleDeleteClick(service.wyg_id)}
+                  >
                     Delete
                   </Button>
                 </TableCell>
@@ -223,20 +241,19 @@ function EditWhatYouGet() {
             fullWidth
             value={editedHeading}
             onChange={handleEditedHeadingChange}
-            inputProps={{ maxLength: 30 }}
-            error={editedHeading.length > 30}
+            inputProps={{ maxLength: 50 }}
+            error={editedHeading.length > 50}
             helperText={
-              editedHeading.length > 30 ? "Cannot exceed 30 characters" : ""
+              editedHeading.length > 50 ? "Cannot exceed 50 characters" : ""
             }
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseEditDialog}>Cancel</Button>
           <Button
-            onClick={handleSaveChanges}
-            variant="contained"
+            onClick={handleUpdate}
             color="primary"
-            disabled={editedHeading.length > 30}
+            disabled={editedHeading.length > 50}
           >
             Save
           </Button>
@@ -247,17 +264,32 @@ function EditWhatYouGet() {
       <Dialog open={openAddDialog} onClose={handleCloseAddDialog}>
         <DialogTitle>Add New Service</DialogTitle>
         <DialogContent>
+          <FormControl fullWidth>
+            <InputLabel>Select Our Service Heading</InputLabel>
+            <Select
+              value={selectedService}
+              onChange={(e) => setSelectedService(e.target.value)}
+              fullWidth
+              name="selectedOurService"
+            >
+              {ourServicesHeadings.map((service) => (
+                <MenuItem key={service.id} value={service}>
+                  {service.heading}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             autoFocus
             margin="dense"
             label="Heading"
             fullWidth
             value={newHeading}
-            onChange={handleNewHeadingChange}
-            inputProps={{ maxLength: 30 }}
-            error={newHeading.length > 30}
+            onChange={(e) => setNewHeading(e.target.value)}
+            inputProps={{ maxLength: 50 }}
+            error={newHeading.length > 50}
             helperText={
-              newHeading.length > 30 ? "Cannot exceed 30 characters" : ""
+              newHeading.length > 50 ? "Cannot exceed 50 characters" : ""
             }
           />
         </DialogContent>
@@ -265,9 +297,8 @@ function EditWhatYouGet() {
           <Button onClick={handleCloseAddDialog}>Cancel</Button>
           <Button
             onClick={handleAddService}
-            variant="contained"
             color="primary"
-            disabled={newHeading.length > 30}
+            disabled={newHeading.length > 50 || !selectedService}
           >
             Add
           </Button>
@@ -284,11 +315,7 @@ function EditWhatYouGet() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDeleteDialog}>Cancel</Button>
-          <Button
-            onClick={handleConfirmDelete}
-            variant="contained"
-            color="secondary"
-          >
+          <Button onClick={handleConfirmDelete} color="error">
             Delete
           </Button>
         </DialogActions>

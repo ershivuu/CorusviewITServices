@@ -19,10 +19,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import Notification from "../../../Notification/Notification"; // Adjust the path as per your project structure
 
-const MAX_HEADING_LENGTH = 20;
-const MAX_CONTENT_LENGTH = 100;
+const MAX_HEADING_LENGTH = 25;
+const MAX_CONTENT_LENGTH = 5000;
 
 function EditServices() {
   const [servicesData, setServicesData] = useState([]);
@@ -68,10 +69,6 @@ function EditServices() {
   // Success message state
   const [successMessage, setSuccessMessage] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     try {
       const data = await fetchOurServicesData();
@@ -80,6 +77,9 @@ function EditServices() {
       setError(error.message);
     }
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleOpenEditDialog = (service) => {
     setEditedService({ ...service, icon_img: null }); // Reset icon_img state for editing
@@ -136,7 +136,7 @@ function EditServices() {
         }
       }
     } else if (name === "heading") {
-      if (value.length > MAX_HEADING_LENGTH) {
+      if (value.length >= MAX_HEADING_LENGTH) {
         setHeadingError(
           `Heading cannot exceed ${MAX_HEADING_LENGTH} characters.`
         );
@@ -149,7 +149,7 @@ function EditServices() {
         setHeadingErrorNotification(null); // Clear heading error notification if no errors
       }
     } else if (name === "content") {
-      if (value.length > MAX_CONTENT_LENGTH) {
+      if (value.length >= MAX_CONTENT_LENGTH) {
         setContentError(
           `Content cannot exceed ${MAX_CONTENT_LENGTH} characters.`
         );
@@ -191,34 +191,25 @@ function EditServices() {
         }
       }
     } else if (name === "heading") {
-      if (value.length > MAX_HEADING_LENGTH) {
+      if (value.length >= MAX_HEADING_LENGTH) {
         setEditHeadingError(
-          `Heading cannot exceed ${MAX_HEADING_LENGTH} characters.`
-        );
-        setEditHeadingErrorNotification(
           `Heading cannot exceed ${MAX_HEADING_LENGTH} characters.`
         );
       } else {
         setEditedService({ ...editedService, heading: value });
-        setEditHeadingError(null); // Clear heading error if no errors
-        setEditHeadingErrorNotification(null); // Clear heading error notification if no errors
+        setEditHeadingError(null);
       }
     } else if (name === "content") {
-      if (value.length > MAX_CONTENT_LENGTH) {
+      if (value.length >= MAX_CONTENT_LENGTH) {
         setEditContentError(
-          `Content cannot exceed ${MAX_CONTENT_LENGTH} characters.`
-        );
-        setEditContentErrorNotification(
           `Content cannot exceed ${MAX_CONTENT_LENGTH} characters.`
         );
       } else {
         setEditedService({ ...editedService, content: value });
-        setEditContentError(null); // Clear content error if no errors
-        setEditContentErrorNotification(null); // Clear content error notification if no errors
+        setEditContentError(null);
       }
     }
   };
-
   const handleSubmitAdd = async () => {
     try {
       // Validate if any field is empty
@@ -232,7 +223,7 @@ function EditServices() {
       if (!newService.heading) {
         setHeadingError("Heading is required.");
         return; // Stop submission if heading is empty
-      } else if (newService.heading.length > MAX_HEADING_LENGTH) {
+      } else if (newService.heading.length >= MAX_HEADING_LENGTH) {
         setHeadingError(
           `Heading cannot exceed ${MAX_HEADING_LENGTH} characters.`
         );
@@ -259,7 +250,7 @@ function EditServices() {
       formData.append("heading", newService.heading);
       formData.append("content", newService.content);
 
-     const response = await addServiceData(formData);
+      const response = await addServiceData(formData);
       fetchData(); // Refresh data after addition
       handleCloseAddDialog();
       setSuccessMessage(response.message); // Set success message
@@ -274,7 +265,7 @@ function EditServices() {
       if (!editedService.heading) {
         setEditHeadingError("Heading is required.");
         return;
-      } else if (editedService.heading.length > MAX_HEADING_LENGTH) {
+      } else if (editedService.heading.length >= MAX_HEADING_LENGTH) {
         setEditHeadingError(
           `Heading cannot exceed ${MAX_HEADING_LENGTH} characters.`
         );
@@ -315,7 +306,7 @@ function EditServices() {
   const handleDelete = async () => {
     try {
       if (serviceToDelete) {
-       const response = await deleteServiceData(serviceToDelete.id);
+        const response = await deleteServiceData(serviceToDelete.id);
         fetchData(); // Refresh data after deletion
         setOpenDeleteDialog(false);
         setSuccessMessage(response.message); // Set success message
@@ -341,16 +332,20 @@ function EditServices() {
   return (
     <>
       <Box>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleOpenAddDialog}
-          style={{ marginBottom: "1rem" }}
-        >
-          Add Service
-        </Button>
+        <Typography variant="h5" component="h5">
+          Edit Sevices
+        </Typography>
+        <div style={{ float: "right" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleOpenAddDialog}
+            style={{ marginBottom: "1rem", marginTop: "10px" }}
+          >
+            Add Service
+          </Button>
+        </div>
 
-        {/* Success Notification */}
         {successMessage && (
           <Notification
             open={true}
@@ -361,7 +356,7 @@ function EditServices() {
         )}
 
         <TableContainer component={Paper}>
-          <Table>
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
@@ -467,6 +462,8 @@ function EditServices() {
               name="content"
               value={newService.content}
               onChange={handleAddChange}
+              multiline
+              rows={4}
               // error={!!contentError}
               // helperText={contentError}
             />
@@ -544,6 +541,8 @@ function EditServices() {
               name="content"
               value={editedService.content}
               onChange={handleEditChange}
+              multiline
+              rows={4}
               // error={!!editContentError}
               // helperText={editContentError}
             />
